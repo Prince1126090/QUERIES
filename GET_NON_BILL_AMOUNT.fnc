@@ -36,7 +36,7 @@ BEGIN
     tRemainSur:=tAsurcharge-tCsurcharge;
     
     
-    iBalance:=tRemainAmount||'#'||tRemainSur;
+    iBalance:=NVL(tRemainAmount,'0')||'#'||NVL(tRemainSur,'0');
     
     return iBalance;
     
