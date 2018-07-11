@@ -1,0 +1,30 @@
+
+select t1.monthYear, t1.NH, t2.MH from
+( SELECT CONCAT(cast(YEAR(updated_at)as char),'-',LPAD(cast(MONTH(updated_at) as char),2,'0')) AS monthYear,
+COUNT(*) as NH, 1 AS s1
+FROM mjivitacr_test.Household
+WHERE status = 1 and  (updated_at between'2016-04-22' AND '2020-02-27')
+GROUP BY CONCAT(cast(YEAR(updated_at)as char),'-',LPAD(cast(MONTH(updated_at) as char),2,'0'))
+) as t1 left join
+( SELECT CONCAT(cast(YEAR(updated_at)as char),'-',LPAD(cast(MONTH(updated_at) as char),2,'0')) AS monthYear,
+COUNT(*) as MH, 2 AS s2
+FROM mjivitacr_test.Household
+WHERE status = 2 and  (updated_at between'2016-04-22' AND '2020-02-27')
+GROUP BY CONCAT(cast(YEAR(updated_at)as char),'-',LPAD(cast(MONTH(updated_at) as char),2,'0'))
+) as t2
+on t1.monthYear = t2.monthYear
+UNION
+select t3.monthYear, t3.NH, t4.MH from
+( SELECT CONCAT(cast(YEAR(updated_at)as char),'-',LPAD(cast(MONTH(updated_at) as char),2,'0')) AS monthYear,
+COUNT(*) as NH, 1 AS s1
+FROM mjivitacr_test.Household
+WHERE status = 1 and  (updated_at between'2016-04-22' AND '2020-02-27')
+GROUP BY CONCAT(cast(YEAR(updated_at)as char),'-',LPAD(cast(MONTH(updated_at) as char),2,'0'))
+) as t3 right join
+( SELECT CONCAT(cast(YEAR(updated_at)as char),'-',LPAD(cast(MONTH(updated_at) as char),2,'0')) AS monthYear,
+COUNT(*) as MH, 2 AS s2
+FROM mjivitacr_test.Household
+WHERE status = 2 and  (updated_at between'2016-04-22' AND '2020-02-27')
+GROUP BY CONCAT(cast(YEAR(updated_at)as char),'-',LPAD(cast(MONTH(updated_at) as char),2,'0'))
+) as t4
+on t3.monthYear = t4.monthYear
