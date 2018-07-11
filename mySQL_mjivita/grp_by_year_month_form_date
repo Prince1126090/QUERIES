@@ -1,3 +1,4 @@
+#1=new household
 
 SELECT CONCAT(cast(YEAR(updated_at)as char),'-',LPAD(cast(MONTH(updated_at) as char),2,'0')) AS monthYear,
 COUNT(*)
@@ -5,3 +6,11 @@ FROM mjivitacr_test.Household
 WHERE status = 1 and  (updated_at between'2016-04-22' AND '2020-02-27')
 GROUP BY CONCAT(cast(YEAR(updated_at)as char),'-',LPAD(cast(MONTH(updated_at) as char),2,'0'))
 
+
+#2=moved household
+
+SELECT CONCAT(cast(YEAR(updated_at)as char),'-',LPAD(cast(MONTH(updated_at) as char),2,'0')) AS monthYear,
+COUNT(*)
+FROM mjivitacr_test.Household
+WHERE status = 2 and  (updated_at between'2016-04-22' AND '2020-02-27')
+GROUP BY CONCAT(cast(YEAR(updated_at)as char),'-',LPAD(cast(MONTH(updated_at) as char),2,'0'))
