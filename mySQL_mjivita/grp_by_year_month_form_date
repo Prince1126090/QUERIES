@@ -29,3 +29,11 @@ COUNT(*) as quantity
 FROM mjivitacr_test.Household
 WHERE status = 1 and  (updated_at between'2016-04-29' AND '2020-02-27')
 GROUP BY CONCAT(YEAR(updated_at),'-',LPAD(MONTH(updated_at),2,'0'))
+
+#final new registered household day wise
+SELECT CONCAT(YEAR(updated_at),'.',LPAD(MONTH(updated_at),2,'0'),
+'.',LPAD(dayofmonth(updated_at),2,'0')) AS yearMonth,
+COUNT(*) as quantity
+FROM mjivitacr_test.Household
+WHERE status = 1 and  (updated_at between'2016-04-29' AND '2020-02-27')
+GROUP BY CONCAT(YEAR(updated_at),'-',LPAD(MONTH(updated_at),2,'0'),'-',LPAD(dayofmonth(updated_at),2,'0'))
