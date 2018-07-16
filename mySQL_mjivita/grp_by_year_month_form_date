@@ -105,3 +105,22 @@ GROUP BY CONCAT(YEAR(updated_at),
         '-',
         LPAD(DAYOFMONTH(updated_at), 2, '0'))
 
+#for schedule week wise
+SELECT 
+    CONCAT('JWeek - ', jw.jweekId), SUM(hh.quantity)
+FROM
+    JWeek jw,
+    (SELECT 
+        CONCAT(YEAR(updated_at), '-', LPAD(MONTH(updated_at), 2, '0'), '-', LPAD(DAYOFMONTH(updated_at), 2, '0')) AS yearMonth,
+            COUNT(*) AS quantity
+    FROM
+        Schedule s
+    WHERE
+        status = 'ACTIVE'
+            AND formToGenerate_id = 32
+            AND (updated_at BETWEEN '2016/04/22' AND '2020/02/28')
+    GROUP BY CONCAT(YEAR(updated_at), '-', LPAD(MONTH(updated_at), 2, '0'), '-', LPAD(DAYOFMONTH(updated_at), 2, '0'))) AS hh
+WHERE
+    STR_TO_DATE(hh.yearMonth, '%Y-%m-%d') BETWEEN jw.fromDate AND jw.toDate
+GROUP BY jw.jweekId
+
