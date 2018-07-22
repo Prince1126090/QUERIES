@@ -1,11 +1,11 @@
-CREATE OR REPLACE FUNCTION getObsValue (rId integer, formField text) 
+CREATE OR REPLACE FUNCTION getObsValue (rId text, formField text) 
 RETURNS text
 AS $$
   DECLARE json_object json;
   DECLARE item json;
   DECLARE val text;
   BEGIN
-    SELECT E.json::json into json_object from core.event E where E.id = rId;
+    SELECT E.json::json into json_object from core.event E where E.json->>'baseEntityId' = rId;
     FOR item IN SELECT * FROM json_array_elements((json_object->>'obs')::json)
     LOOP
         IF (item->>'formSubmissionField') = formField 
@@ -17,6 +17,6 @@ AS $$
   END;
   $$ LANGUAGE 'plpgsql';
   
-select getObsValue(17, 'pregnant');
+select getObsValue('e1569500-3b50-44de-af8b-02f3c414274c', 'pregnant');
 
-select getObsValue(17, 'age');
+select getObsValue('e1569500-3b50-44de-af8b-02f3c414274c', 'age');
