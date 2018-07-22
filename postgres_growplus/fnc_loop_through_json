@@ -1,0 +1,17 @@
+CREATE OR REPLACE FUNCTION parse_json () 
+RETURNS text
+AS $$
+  DECLARE json_object json;
+  DECLARE item json;
+  BEGIN
+    SELECT E.json::json into json_object from core.event E where id = 17;
+    RAISE NOTICE 'Parsing %', json_object->>'eventType';
+    FOR item IN SELECT * FROM json_array_elements((json_object->>'obs')::json)
+    LOOP
+       RAISE NOTICE 'Parsing Item % %', item->>'formSubmissionField', item->>'entityType';
+       
+    END LOOP;
+    return 'AAA';
+  END;
+  $$ LANGUAGE 'plpgsql';
+select parse_json();
