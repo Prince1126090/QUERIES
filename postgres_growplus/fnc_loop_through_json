@@ -1,17 +1,22 @@
-CREATE OR REPLACE FUNCTION parse_json () 
+CREATE OR REPLACE FUNCTION getObsValue (rId integer, formField text) 
 RETURNS text
 AS $$
   DECLARE json_object json;
   DECLARE item json;
+  DECLARE val text;
   BEGIN
-    SELECT E.json::json into json_object from core.event E where id = 17;
-    RAISE NOTICE 'Parsing %', json_object->>'eventType';
+    SELECT E.json::json into json_object from core.event E where E.id = rId;
     FOR item IN SELECT * FROM json_array_elements((json_object->>'obs')::json)
     LOOP
-       RAISE NOTICE 'Parsing Item % %', item->>'formSubmissionField', (item->>'values')::json->>0;
-       
+        IF (item->>'formSubmissionField') = formField 
+        THEN
+        val = (item->>'values')::json->>0;
+        END IF;
     END LOOP;
-    return 'AAA';
+    return val;
   END;
   $$ LANGUAGE 'plpgsql';
-select parse_json();
+  
+select getObsValue(17, 'pregnant');
+
+select getObsValue(17, 'age');
