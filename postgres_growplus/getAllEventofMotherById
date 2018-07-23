@@ -1,0 +1,3 @@
+select * from core."viewJsonDataConversionOfEvent"
+where entity_type ='mother' and
+base_entity_id = 'e1569500-3b50-44de-af8b-02f3c414274c' 
