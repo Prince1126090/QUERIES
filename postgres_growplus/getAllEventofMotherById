@@ -1,3 +1,14 @@
-select * from core."viewJsonDataConversionOfEvent"
+select id, event_type, is_pregnant,E.*  from core."viewJsonDataConversionOfEvent" E
 where entity_type ='mother' and
-base_entity_id = 'e1569500-3b50-44de-af8b-02f3c414274c' 
+base_entity_id = '083a7163-efc9-41bd-99cc-db5fc15971ec' 
+
+
+
+select distinct(event_type) from core."viewJsonDataConversionOfEvent"
+where entity_type ='mother' 
+
+select distinct(base_entity_id) 
+from core."viewJsonDataConversionOfEvent"
+where entity_type ='mother' 
+
+
