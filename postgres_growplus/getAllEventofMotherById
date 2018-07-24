@@ -11,4 +11,34 @@ select distinct(base_entity_id)
 from core."viewJsonDataConversionOfEvent"
 where entity_type ='mother' 
 
+---- july 24------
+
+
+select id, event_type, is_pregnant,E.*  from core."viewJsonDataConversionOfEvent" E
+where entity_type ='mother' and
+base_entity_id = '106518e7-5a33-4ed1-b784-e0122d3962b0' 
+
+select id,E.*  from core.event E
+where json->> 'entityType' ='mother' and
+json->> 'eventType' like '%Counselling%' and
+json->> 'baseEntityId' = '106518e7-5a33-4ed1-b784-e0122d3962b0' 
+
+select E.*  from core."viewJsonDataConversionOfEvent" E
+where entity_type ='mother' and
+event_type = 'Woman Member Follow Up'
+
+select E.*  from core."viewJsonDataConversionOfEvent" E
+where event_type = 'Pregnant Woman Counselling'
+
+select distinct(event_type) from core."viewJsonDataConversionOfEvent"
+where entity_type = 'mother' 
+
+select distinct(base_entity_id) 
+from core."viewJsonDataConversionOfEvent"
+where entity_type ='mother' 
+
+select E.*  from core."viewJsonDataConversionOfClient" E
+where first_name like '%mina%'
+order by id desc
+
 
