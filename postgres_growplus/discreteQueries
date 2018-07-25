@@ -42,3 +42,15 @@ where first_name like '%mina%'
 order by id desc
 
 
+
+---- july 25 ----
+
+select E.*  from core."viewJsonDataConversionOfEvent" E
+where entity_type ='child' 
+and event_type like '%Registration%'
+
+and base_entity_id = '106518e7-5a33-4ed1-b784-e0122d3962b0' 
+
+select id,E.*  from core.event E
+where json->> 'entityType' ='child' and
+json->> 'eventType' like '%Registration%'
