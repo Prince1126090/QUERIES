@@ -54,3 +54,9 @@ and base_entity_id = '106518e7-5a33-4ed1-b784-e0122d3962b0'
 select id,E.*  from core.event E
 where json->> 'entityType' ='child' and
 json->> 'eventType' like '%Registration%'
+
+
+---- july 30 -----
+
+select * from core.child_growth 
+where base_entity_id = '1884083d-d2d9-41be-bb69-666083c1b7f0'
