@@ -60,3 +60,28 @@ json->> 'eventType' like '%Registration%'
 
 select * from core.child_growth 
 where base_entity_id = '1884083d-d2d9-41be-bb69-666083c1b7f0'
+
+
+----- july 31 ----
+
+CREATE OR REPLACE FUNCTION core.refresh_materialized_views() RETURNS VARCHAR AS $LABEL$
+DECLARE 
+v_result integer;
+BEGIN
+
+refresh materialized view core."viewJsonDataConversionOfClient" with data;
+
+refresh materialized view core."viewJsonDataConversionOfEvent" with data;
+
+refresh materialized view core."viewJsonDataConversionOfWeight" with data;
+
+
+RETURN ('Success');
+
+END;
+$LABEL$ LANGUAGE plpgsql
+SECURITY DEFINER;
+
+
+
+select * from core.refresh_materialized_views();
