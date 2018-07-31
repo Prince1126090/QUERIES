@@ -1,0 +1,93 @@
+StachOverflow :
+https://stackoverflow.com/questions/29437650/how-can-i-ensure-that-a-materialized-view-is-always-up-to-date
+
+
+
+
+
+I'll need to invoke REFRESH MATERIALIZED VIEW on each change to the tables involved, right?
+
+Yes, PostgreSQL by itself will never call it automatically, you need to do it some way.
+
+How should I go about doing this?
+
+Many ways to achieve this. Before giving some examples, keep in mind that REFRESH MATERIALIZED VIEW command does block the view in AccessExclusive mode, so while it is working, you can't even do SELECT on the table.
+
+Although, if you are in version 9.4 or newer, you can give it the CONCURRENTLY option:
+
+REFRESH MATERIALIZED VIEW CONCURRENTLY my_mv;
+This will acquire an ExclusiveLock, and will not block SELECT queries, but may have a bigger overhead (depends on the amount of data changed, if few rows have changed, then it might be faster). Although you still can't run two REFRESH commands concurrently.
+
+Refresh manually
+It is an option to consider. Specially in cases of data loading or batch updates (e.g. a system that only loads tons of information/data after long periods of time) it is common to have operations at end to modify or process the data, so you can simple include a REFRESH operation in the end of it.
+
+Scheduling the REFRESH operation
+The first and widely used option is to use some scheduling system to invoke the refresh, for instance, you could configure the like in a cron job:
+
+*/30 * * * * psql -d your_database -c "REFRESH MATERIALIZED VIEW CONCURRENTLY my_mv"
+And then your materialized view will be refreshed at each 30 minutes.
+
+Considerations
+This option is really good, specially with CONCURRENTLY option, but only if you can accept the data not being 100% up to date all the time. Keep in mind, that even with or without CONCURRENTLY, the REFRESH command does need to run the entire query, so you have to take the time needed to run the inner query before considering the time to schedule the REFRESH.
+
+Refreshing with a trigger
+Another option is to call the REFRESH MATERIALIZED VIEW in a trigger function, like this:
+
+CREATE OR REPLACE FUNCTION tg_refresh_my_mv()
+RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+    REFRESH MATERIALIZED VIEW CONCURRENTLY my_mv;
+    RETURN NULL;
+END;
+$$;
+Then, in any table that involves changes on the view, you do:
+
+CREATE TRIGGER tg_refresh_my_mv AFTER INSERT OR UPDATE OR DELETE
+ON table_name
+FOR EACH STATEMENT EXECUTE PROCEDURE tg_refresh_my_mv();
+Considerations
+It has some critical pitfalls for performance and concurrency:
+
+Any INSERT/UPDATE/DELETE operation will have to execute the query (which is possible slow if you are considering MV);
+Even with CONCURRENTLY, one REFRESH still blocks another one, so any INSERT/UPDATE/DELETE on the involved tables will be serialized.
+The only situation I can think that as a good idea is if the changes are really rare.
+
+Refresh using LISTEN/NOTIFY
+The problem with the previous option is that it is synchronous and impose a big overhead at each operation. To ameliorate that, you can use a trigger like before, but that only calls a NOTIFY operation:
+
+CREATE OR REPLACE FUNCTION tg_refresh_my_mv()
+RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+    NOTIFY refresh_mv, 'my_mv';
+    RETURN NULL;
+END;
+$$;
+So then you can build an application that keep connected and uses LISTEN operation to identify the need to call REFRESH. One nice project that you can use to test this is pgsidekick, with this project you can use shell script to do LISTEN, so you can schedule the REFRESH as:
+
+pglisten --listen=refresh_mv --print0 | xargs -0 -n1 -I? psql -d your_database -c "REFRESH MATERIALIZED VIEW CONCURRENTLY ?;"
+Or use pglater (also inside pgsidekick) to make sure you don't call REFRESH very often. For example, you can use the following trigger to make it REFRESH, but within 1 minute (60 seconds):
+
+CREATE OR REPLACE FUNCTION tg_refresh_my_mv()
+RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+    NOTIFY refresh_mv, '60 REFRESH MATERIALIZED VIEW CONCURRENLTY my_mv';
+    RETURN NULL;
+END;
+$$;
+So it will not call REFRESH in less the 60 seconds apart, and also if you NOTIFY many times in less than 60 seconds, the REFRESH will be triggered only once.
+
+Considerations
+As the cron option, this one also is good only if you can bare with a little stale data, but this has the advantage that the REFRESH is called only when really needed, so you have less overhead, and also the data is updated more closer to when needed.
+
+
+
+//keeping as reference
+// july 31, 2018
+
+
+
+
+
+
+
+
