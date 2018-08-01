@@ -85,3 +85,31 @@ SECURITY DEFINER;
 
 
 select * from core.refresh_materialized_views();
+
+---- august 1 ----
+CREATE OR REPLACE FUNCTION core.refresh_materialized_views() RETURNS INT AS $$
+DECLARE 
+v_result integer;
+successCount INT;
+BEGIN
+RAISE NOTICE 'Refreshing viewJsonDataConversionOfClient';
+refresh materialized view core."viewJsonDataConversionOfClient" with data;
+RAISE NOTICE 'Refreshing viewJsonDataConversionOfEvent';
+refresh materialized view core."viewJsonDataConversionOfEvent" with data;
+RAISE NOTICE 'Refreshing viewJsonDataConversionOfWeight';
+refresh materialized view core."viewJsonDataConversionOfWeight" with data;
+RAISE NOTICE 'Refreshing childView';
+refresh materialized view core."childView" with data;
+RAISE NOTICE 'Refreshing wonamView';
+refresh materialized view core."wonamView" with data;
+
+successCount= 5;
+RETURN successCount;
+
+END;
+$$ LANGUAGE plpgsql
+SECURITY DEFINER;
+
+
+
+select * from core.refresh_materialized_views();
