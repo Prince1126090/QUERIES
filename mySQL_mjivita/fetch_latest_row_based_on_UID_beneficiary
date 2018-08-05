@@ -1,0 +1,66 @@
+SELECT a.id, a.UID, a.updated_at
+FROM mjivitacr_test.Beneficiary as a,
+(
+    SELECT  UID, max(updated_at) as updated_at
+    FROM mjivitacr_test.Beneficiary
+    Where DTYPE = 'Woman'
+	and household_id IS NOT NULL
+    GROUP BY UID
+    limit 10
+) as b 
+where a.updated_at = b.updated_at 
+AND a.UID = b.UID
+order by a.UID desc
+
+
+----august 5 ----
+SELECT a.id, a.UID, a.updated_at
+FROM mjivitacr_test.Beneficiary as a,
+(
+    SELECT  UID, max(updated_at) as updated_at
+    FROM mjivitacr_test.Beneficiary
+    Where DTYPE = 'Woman'
+	and household_id IS NOT NULL
+    GROUP BY UID
+    limit 0,10
+) as b 
+where a.updated_at = b.updated_at 
+AND a.UID = b.UID
+order by a.UID desc
+
+
+
+select * from mjivitacr_test.Beneficiary b 
+Where DTYPE = 'Woman' and 
+b.household_id IS NOT NULL and
+b.status != 'INACTIVE' and
+(b.UID like '%977978%' or
+b.name like '%977978%' or
+b.husbandName like '%977978%' or
+b.nID like '%977978%' or
+b.bID like '%977978%' )
+order by b.updated_at desc
+
+# works for now
+SELECT a.id, a.UID, a.updated_at, a.*
+FROM mjivitacr_test.Beneficiary AS a,
+(
+    select UID, max(updated_at) AS updated_at FROM mjivitacr_test.Beneficiary
+	Where DTYPE = 'Woman' AND 
+	household_id IS NOT NULL AND
+	(UID LIKE '%977%' OR
+	name LIKE '%977%' OR
+	husbandName LIKE '%977%' OR
+	nID LIKE '%977%' OR
+	bID LIKE '%977%' )
+    GROUP BY UID
+	ORDER BY updated_at DESC
+    LIMIT 0,10
+) AS c
+WHERE a.updated_at = c.updated_at 
+AND a.UID = c.UID
+AND a.status NOT IN ('INACTIVE',
+					'OUT_OF_JIVITA',
+                    'WOMAN_DIED',
+                    'DELETED')
+ORDER BY a.updated_at DESC
