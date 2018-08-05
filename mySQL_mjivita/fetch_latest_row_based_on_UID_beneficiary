@@ -64,3 +64,22 @@ AND a.status NOT IN ('INACTIVE',
                     'WOMAN_DIED',
                     'DELETED')
 ORDER BY a.updated_at DESC
+
+
+#find beneficiary to edit
+SELECT a.*
+FROM Beneficiary AS a, 
+( select UID,
+ max(updated_at) AS updated_at 
+ FROM Beneficiary
+ Where DTYPE = 'Woman' AND
+ household_id IS NOT NULL AND
+ UID = 977977 
+ ) AS c
+ WHERE a.updated_at = c.updated_at 
+ AND a.UID = c.UID
+ AND a.status NOT IN ('INACTIVE',
+ 'OUT_OF_JIVITA', 
+ 'WOMAN_DIED',
+ 'DELETED') 
+ LIMIT 1
