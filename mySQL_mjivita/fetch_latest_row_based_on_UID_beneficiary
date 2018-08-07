@@ -83,3 +83,18 @@ FROM Beneficiary AS a,
  'WOMAN_DIED',
  'DELETED') 
  LIMIT 1
+
+
+---- august 7----
+
+#query for default beneficiary-list
+
+select * from mjivitacr_test.Beneficiary b
+Where DTYPE = 'Woman'
+AND b.household_id IS NOT NULL
+AND b.status NOT IN ('INACTIVE',
+'OUT_OF_JIVITA',
+'WOMAN_DIED',
+'DELETED')
+order by b.updated_at desc
+Limit 0,10;
