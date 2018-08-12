@@ -1,0 +1,12 @@
+---- august 12 ----
+SELECT base_entity_id,growth_status,event_date
+FROM core.child_growth cg1
+WHERE  
+base_entity_id = '734eb1f8-97d3-42c5-82a4-275c2b45f1a8'
+AND NOT EXISTS (
+  SELECT *
+  FROM core.child_growth cg2
+  WHERE cg1.base_entity_id = cg2.base_entity_id
+    AND cg1.event_date < cg2.event_date
+  ) 
+  order by event_date desc
