@@ -75,3 +75,16 @@ SELECT DISTINCT c.id as id
    JOIN core.event e ON c.json->'baseEntityId' = e.json->'baseEntityId'
    WHERE e.json->>'eventType' LIKE '%Registration%'
    AND gs.base_entity_id = c.json->>'baseEntityId'
+
+
+-- return latest gorwth status of an indivudual child--
+
+SELECT base_entity_id,growth_status,event_date
+FROM core.child_growth cg1
+WHERE  NOT EXISTS (
+  SELECT *
+  FROM core.child_growth cg2
+  WHERE cg1.base_entity_id = cg2.base_entity_id
+    AND cg1.event_date < cg2.event_date
+  )
+  AND cg1.base_entity_id = '734eb1f8-97d3-42c5-82a4-275c2b45f1a8'
