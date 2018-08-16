@@ -1,0 +1,24 @@
+---- august 16 ----
+SELECT first_name, count(*) FROM core."viewJsonDataConversionOfClient"
+group by first_name
+order by count(*) desc
+
+SELECT first_name,division,district,gender, count(*)  FROM core."viewJsonDataConversionOfClient"
+group by first_name, division, district,gender
+having count(*) > 1
+
+----scale this query to find duplicate records based on different columns ----
+SELECT A.* 
+FROM core."viewJsonDataConversionOfClient" A
+Join
+(SELECT first_name,division,district,gender, count(*)  FROM core."viewJsonDataConversionOfClient"
+group by first_name, division, district,gender
+having count(*) > 1) B
+ON A.first_name = B.first_name
+AND A.division = B.division
+AND A.district = B.district
+AND A.gender = B.gender
+order by first_name, division, district, gender
+
+
+
