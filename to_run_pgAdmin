@@ -1,0 +1,16 @@
+
+to run pgAdmin:
+
+go to software/pgadmin4
+
+1:
+source bin/activate
+2:
+python lib/python2.7/site-packages/pgadmin4/pgAdmin4.py
+
+browser: localhost:5050/
+
+
+in opensrp-web/src/main/resources/hibernate.properties
+jdbc:postgresql://192.168.22.55/opensrp?createDatabaseIfNotExist=true
+
