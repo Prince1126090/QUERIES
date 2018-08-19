@@ -1,0 +1,13 @@
+SELECT A.* ,
+DENSE_RANK() OVER (ORDER BY   A.first_name ,  A.division ,  A.district) AS RowFilter 
+FROM core."viewJsonDataConversionOfClient" A  
+Join  
+(SELECT first_name , division , district , count(*)  
+ FROM core."viewJsonDataConversionOfClient"  
+ group by first_name , division , district 
+ having count(*) > 1) B  
+ ON  
+ A.first_name =  B.first_name AND  
+ A.division =  B.division AND  
+ A.district =  B.district 
+ order by first_name , division , district
