@@ -113,3 +113,7 @@ SECURITY DEFINER;
 
 
 select * from core.refresh_materialized_views();
+
+---- august 27, 2018 ----
+SELECT DISTINCT(view_name) 
+FROM core."duplicate_matching_criteria_definition"
