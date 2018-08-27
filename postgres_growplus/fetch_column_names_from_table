@@ -1,0 +1,6 @@
+---- august 27, 2018----
+
+SELECT column_name
+FROM information_schema.columns
+WHERE table_schema = 'core'
+  AND table_name   = 'duplicate_matching_criteria_definition'
