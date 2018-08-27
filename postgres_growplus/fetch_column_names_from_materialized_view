@@ -1,0 +1,26 @@
+---- august 27, 2018----
+
+---- attname-> columnName, format_type -> dataType ----
+SELECT a.attname,
+       pg_catalog.format_type(a.atttypid, a.atttypmod),
+       a.attnotnull
+FROM pg_attribute a
+  JOIN pg_class t on a.attrelid = t.oid
+  JOIN pg_namespace s on t.relnamespace = s.oid
+WHERE a.attnum > 0 
+  AND NOT a.attisdropped
+  AND t.relname = 'viewJsonDataConversionOfEvent'
+  AND s.nspname = 'core'
+ORDER BY a.attnum;
+
+
+----fetch only column name ----
+SELECT a.attname
+FROM pg_attribute a
+  JOIN pg_class t on a.attrelid = t.oid
+  JOIN pg_namespace s on t.relnamespace = s.oid
+WHERE a.attnum > 0 
+  AND NOT a.attisdropped
+  AND t.relname = 'viewJsonDataConversionOfClient'
+  AND s.nspname = 'core'
+ORDER BY a.attnum;
