@@ -1,0 +1,4 @@
+
+to run tomcat: 
+sudo $CATALINA_HOME/bin/startup.sh
+sudo $CATALINA_HOME/bin/shutdown.sh
