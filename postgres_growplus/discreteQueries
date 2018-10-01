@@ -117,3 +117,8 @@ select * from core.refresh_materialized_views();
 ---- august 27, 2018 ----
 SELECT DISTINCT(view_name) 
 FROM core."duplicate_matching_criteria_definition"
+
+---- october 1, 2018 ----
+select facility_worker_type_id, count(*) from core.facility_worker
+where facility_id  = 1236
+group by facility_worker_type_id
