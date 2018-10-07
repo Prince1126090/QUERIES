@@ -122,3 +122,8 @@ FROM core."duplicate_matching_criteria_definition"
 select facility_worker_type_id, count(*) from core.facility_worker
 where facility_id  = 1236
 group by facility_worker_type_id
+
+---- october 7, 2018----
+select first_name from core."viewJsonDataConversionOfClient"
+where entity_type in ('ec_member', 'ec_woman')
+and first_name ilike '%di%'
