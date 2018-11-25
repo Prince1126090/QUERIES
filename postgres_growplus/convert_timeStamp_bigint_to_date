@@ -1,0 +1,25 @@
+----  nov 25, 2018----
+SELECT DISTINCT ON (case_id)
+       id, provider, case_id, start_date,
+       time_stamp, TO_CHAR(TO_TIMESTAMP(time_stamp / 1000), 'DD/MM/YYYY HH24:MI:SS') as dateFromTimeStamp,
+       visit_code  -- , category, date -- add any other column (expression) from the same row
+FROM   action a
+where a.case_id in (
+	'5289bb21-a4c8-45fd-8c58-b8a9aa260b17',
+'3cda2fa5-1c5c-4c34-9f93-30496cac7069',
+'a1049632-e7c4-48fa-a0ad-282a6bc0d72d',
+'c01b60d8-d332-4b2d-a91b-44cc5a9144c9',
+'8daf10d6-ad6e-442f-be5d-3881c8b92ffe',
+'e1a00bc4-fbf0-4fd1-a1a6-f269ed6e7d39',
+'d613b2d8-5953-4abd-8ffc-e3d5e265acdb',
+'2e6606be-413e-43b1-aae6-75d3419cad63',
+'e1c2e5ce-35be-4d97-8912-e321e16fbae2',
+'155148fd-8447-4a38-a9fa-2739e75f5cf4',
+'58951996-7e4d-4f3e-b1f9-0e06d6fcb693',
+'ac5f7760-d39f-4a10-b7d3-4cdf78dd08de',
+'cdc6068a-1868-40d3-a8c7-b147f16fa7b9',
+'088789af-0950-4881-bb54-fced6035a6ae',
+'963f0454-8d72-418c-b41e-255f288ae0e1'
+)
+and a.visit_code like '%pncrv%'
+ORDER BY a.case_id, a.id;
