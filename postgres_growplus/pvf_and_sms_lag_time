@@ -1,0 +1,14 @@
+SELECT count(B.benefitiary_id)
+FROM test_schema.pvf_and_sms_lag_time A, test_schema.id_opensrpId_map B
+where A.benefitiary_id = B.benefitiary_id;
+
+SELECT C.case_id
+FROM test_schema.data_from_postgres C, test_schema.id_opensrpId_map B
+where trim(C.case_id)  = trim(B.opensrp_id);
+
+
+SELECT A.*, C.*
+FROM test_schema.pvf_and_sms_lag_time A, test_schema.id_opensrpId_map B, test_schema.data_from_postgres C
+where A.benefitiary_id = B.benefitiary_id
+and trim(C.case_id)  = trim(B.opensrp_id);
+
