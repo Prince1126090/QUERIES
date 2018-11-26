@@ -132,4 +132,16 @@ and H.ngoFlag= 0
 and B.isMigratedToOpenSRP = 1
 order by id;
 
+--schedule--
 
+SELECT count(*) FROM jivita_sep.Schedule
+where created_at between '2018-07-1' and '2018-10-30'
+and formToGenerate_id = 32
+and status = 'DONE'
+;
+
+SELECT * FROM jivita_sep.Schedule
+where created_at between '2018-07-1' and '2018-10-30'
+and formToGenerate_id = 32
+and status = 'DONE'
+;
