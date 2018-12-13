@@ -1,0 +1,448 @@
+
+ALTER TABLE [DHAKA_DIV].[dbo].[hh_info] ALTER COLUMN DIVN VARCHAR (50) NOT NULL;
+
+update   [DHAKA_DIV].[dbo].[hh_info] set DIVN ='DHAKA' where DIVN='1'
+
+
+
+USE [DHAKA_DIV]
+GO
+/****** Object:  StoredProcedure [dbo].[TEST]    Script Date: 9/25/2018 5:07:40 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[DIV]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @LocName nvarchar(100); 
+ 
+  declare @_id varchar(100); 
+  DECLARE @divisionCursor as CURSOR;
+  SET @divisionCursor =  CURSOR FOR SELECT dev_id,UPPER(name) FROM [DHAKA_DIV].[dbo].[tbl_division];
+
+  OPEN @divisionCursor;
+
+  FETCH NEXT FROM @divisionCursor INTO @_id, @LocName  
+
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+
+IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_DIV].[dbo].[hh_info] set DIVN =@LocName  where DIVN=@_id
+
+      FETCH NEXT FROM @divisionCursor INTO @_id, @LocName   
+  END 
+  CLOSE @divisionCursor;
+
+	
+END
+ 
+ EXEC [dbo].[DIV];
+
+
+
+
+
+USE [DHAKA_DIV]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[DIST]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @LocName nvarchar(100); 
+ 
+  declare @_id varchar(100); 
+ 
+  DECLARE @districtCursor as CURSOR;
+  SET @districtCursor =  CURSOR FOR SELECT dist_id,UPPER(name) FROM [DHAKA_DIV].[dbo].[tbl_district];
+  OPEN @districtCursor;
+  FETCH NEXT FROM @districtCursor INTO @_id, @LocName  
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+  IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_DIV].[dbo].[hh_info] set ZILA =@LocName  where ZILA=@_id
+      FETCH NEXT FROM @districtCursor INTO @_id, @LocName   
+  END 
+  CLOSE @districtCursor;
+END
+ 
+ EXEC [dbo].[DIST];
+
+
+USE [DHAKA_DIV]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[THANA]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @LocName nvarchar(100); 
+ 
+  declare @_id varchar(100); 
+  DECLARE @UpazilaCursor as CURSOR;
+  SET @UpazilaCursor =  CURSOR FOR SELECT than_id,UPPER(name) FROM [DHAKA_DIV].[dbo].[tbl_thana];
+  OPEN @UpazilaCursor;
+  FETCH NEXT FROM @UpazilaCursor INTO @_id, @LocName  
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+  IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_DIV].[dbo].[hh_info] set UPZA =@LocName  where UPZA=@_id
+      FETCH NEXT FROM @UpazilaCursor INTO @_id, @LocName   
+  END 
+  CLOSE @UpazilaCursor;  
+
+END
+ 
+ EXEC [dbo].[THANA];
+
+
+
+-- December 12, 2018 --
+
+-- for division (member) --
+ALTER TABLE [DHAKA_DIV].[dbo].[mem_info] ALTER COLUMN DIVN VARCHAR (50) NOT NULL;
+
+USE [DHAKA_DIV]
+GO
+/****** Object:  StoredProcedure [dbo].[TEST]    Script Date: 9/25/2018 5:07:40 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[MEM_DIV]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @LocName nvarchar(100); 
+ 
+  declare @_id varchar(100); 
+  DECLARE @divisionCursor as CURSOR;
+  SET @divisionCursor =  CURSOR FOR SELECT dev_id,UPPER(name) FROM [DHAKA_DIV].[dbo].[tbl_division];
+
+  OPEN @divisionCursor;
+
+  FETCH NEXT FROM @divisionCursor INTO @_id, @LocName  
+
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+
+IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_DIV].[dbo].[mem_info] set DIVN =@LocName  where DIVN=@_id
+
+      FETCH NEXT FROM @divisionCursor INTO @_id, @LocName   
+  END 
+  CLOSE @divisionCursor;
+
+	
+END
+ 
+ EXEC [dbo].[MEM_DIV];
+-- end: division (member)--
+
+-- for: district (member) --
+
+ALTER TABLE [DHAKA_DIV].[dbo].[mem_info] ALTER COLUMN ZILA VARCHAR (50) NOT NULL;
+
+USE [DHAKA_DIV]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[MEM_DIST]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @LocName nvarchar(100); 
+ 
+  declare @_id varchar(100); 
+ 
+  DECLARE @districtCursor as CURSOR;
+  SET @districtCursor =  CURSOR FOR SELECT dist_id,UPPER(name) FROM [DHAKA_DIV].[dbo].[tbl_district];
+  OPEN @districtCursor;
+  FETCH NEXT FROM @districtCursor INTO @_id, @LocName  
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+  IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_DIV].[dbo].[mem_info] set ZILA =@LocName  where ZILA=@_id
+      FETCH NEXT FROM @districtCursor INTO @_id, @LocName   
+  END 
+  CLOSE @districtCursor;
+END
+ 
+ EXEC [dbo].[MEM_DIST];
+--end : district (member) --
+ 
+--for: thana/upazila (member) --
+
+ALTER TABLE [DHAKA_DIV].[dbo].[mem_info] ALTER COLUMN UPZA VARCHAR (50) NOT NULL;
+
+USE [DHAKA_DIV]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[MEM_THANA]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @LocName nvarchar(100); 
+ 
+  declare @_id varchar(100); 
+  DECLARE @UpazilaCursor as CURSOR;
+  SET @UpazilaCursor =  CURSOR FOR SELECT than_id,UPPER(name) FROM [DHAKA_DIV].[dbo].[tbl_thana];
+  OPEN @UpazilaCursor;
+  FETCH NEXT FROM @UpazilaCursor INTO @_id, @LocName  
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+  IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_DIV].[dbo].[mem_info] set UPZA =@LocName  where UPZA=@_id
+      FETCH NEXT FROM @UpazilaCursor INTO @_id, @LocName   
+  END 
+  CLOSE @UpazilaCursor;  
+
+END
+ 
+ EXEC [dbo].[MEM_THANA];
+--end: thana/upazila (member) --
+
+--for: union(member) --
+ ALTER TABLE [DHAKA_DIV].[dbo].[mem_info] ALTER COLUMN UN VARCHAR (50) NOT NULL;
+
+ update   [DHAKA_DIV].[dbo].[mem_info] set UN='BAIRATI';
+--end: union(member) --
+
+--for: ward (member) --
+ ALTER TABLE [DHAKA_DIV].[dbo].[mem_info] ALTER COLUMN WRD_CB VARCHAR (50) NOT NULL;
+
+ update   [DHAKA_DIV].[dbo].[mem_info] set WRD_CB ='BAIRATI: WARD 3';
+--end: ward (member) --
+
+-- for: Gender (member) --
+ update   [DHAKA_DIV].[dbo].[mem_info] set Gender='M'
+ where Gender='1';
+ update   [DHAKA_DIV].[dbo].[mem_info] set Gender='F'
+ where Gender='2';
+-- end: Gender (member) --
+
+-- for: EduQualification (member) --
+ALTER TABLE [DHAKA_DIV].[dbo].[mem_info] ALTER COLUMN EduQualification VARCHAR (50);
+
+
+USE [DHAKA_DIV]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[MEM_EDU]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @eduClass nvarchar(100); 
+ 
+  declare @eduCode varchar(100); 
+  DECLARE @educationCursor as CURSOR;
+  SET @educationCursor =  CURSOR FOR SELECT education_code,UPPER(name) FROM [DHAKA_DIV].[dbo].[education_code];
+
+  OPEN @educationCursor;
+
+  FETCH NEXT FROM @educationCursor INTO @eduCode, @eduClass 
+
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+
+IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_DIV].[dbo].[mem_info] set EduQualification =@eduClass  where EduQualification=@eduCode
+
+      FETCH NEXT FROM @educationCursor INTO @eduCode, @eduClass   
+  END 
+  CLOSE @educationCursor;
+
+END
+ 
+ EXEC [dbo].[MEM_EDU];
+
+-- end: EduQualification (member) --
+
+-- for: Religion (member) --
+update   [DHAKA_DIV].[dbo].[mem_info] set  Religion='Muslim'
+ where Religion='1';
+
+ update   [DHAKA_DIV].[dbo].[mem_info] set  Religion='Hindu'
+ where Religion='2';
+
+ update   [DHAKA_DIV].[dbo].[mem_info] set  Religion='Others'
+ where Religion='3';
+-- end: Religion (member) --
+
+-- for: maritalStatus (member) --
+update   [DHAKA_DIV].[dbo].[mem_info] set  MaritalStatus='Married'
+ where MaritalStatus='1';
+
+update   [DHAKA_DIV].[dbo].[mem_info] set  MaritalStatus='Unmarried'
+ where MaritalStatus='2';
+-- end: maritalStatus (member) --
+
+-- for: RelationshipWithHH --
+-- Does not work
+--the relationName in the relationship table is saved in bangla
+--after update RelationshipWithHH field in the mem_info table shows strange values (?????/????)
+ALTER TABLE [DHAKA_DIV].[dbo].[mem_info] ALTER COLUMN RelationshipWithHH NVARCHAR (255);
+
+
+USE [DHAKA_DIV]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[MEM_RELATION_WITH_HH]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @relationName nvarchar(100); 
+ 
+  declare @relationCode varchar(100); 
+  DECLARE @relationCursor as CURSOR;
+  SET @relationCursor =  CURSOR FOR SELECT relation_code,relation_name FROM [DHAKA_DIV].[dbo].[relationship_code];
+
+  OPEN @relationCursor;
+
+  FETCH NEXT FROM @relationCursor INTO @relationCode, @relationName 
+
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+
+IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_DIV].[dbo].[mem_info] set RelationshipWithHH =@relationName  where RelationshipWithHH=@relationCode
+
+      FETCH NEXT FROM @relationCursor INTO @relationCode, @relationName   
+  END 
+  CLOSE @relationCursor;
+
+END
+ 
+ EXEC [dbo].[MEM_RELATION_WITH_HH];
+
+-- end: RelationshipWithHH --
+
+--for: occupation (member)--
+ALTER TABLE [DHAKA_DIV].[dbo].[mem_info] ALTER COLUMN Occupation VARCHAR (50) ;
+
+update   [DHAKA_DIV].[dbo].[mem_info] set Occupation='Judge';
+--end: occupation (member)--
+
+--for: check how many members has valid household(household form the household table)--
+SELECT  count(*)
+  FROM [DHAKA_DIV].[dbo].[mem_info]
+  where [HouseHoldInfo_ROW_INDEX] in (
+  SELECT distinct [ROW_INDEX]
+	  FROM [DHAKA_DIV].[dbo].[hh_info]
+  );
+--end: check how many members has valid household--
+
+-- December 13, 2018 --
+--for: member with valid household--
+SELECT  *
+  FROM [DHAKA_DIV].[dbo].[mem_info]
+  where [HouseHoldInfo_ROW_INDEX]  in (
+  SELECT distinct [ROW_INDEX]
+	  FROM [DHAKA_DIV].[dbo].[hh_info] 
+  )
+  and [FullName_English] is not NULL
+  and [FullName_English] !='';
+--end: member with valid household--
+
+--for: ward and union (household) --
+update   [DHAKA_DIV].[dbo].[hh_info] set UN='BAIRATI';
+update   [DHAKA_DIV].[dbo].[hh_info] set WRD_CB ='BAIRATI: WARD 3';
+--end: ward and union (household) --
