@@ -1,0 +1,3 @@
+sudo chmod -R 777 /var/www/html/
+
+here '/var/www/html/' is the folder in the file system

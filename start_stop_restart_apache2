@@ -1,0 +1,7 @@
+Use the following systemctl command on Debian Linux version 8.x+ or Ubuntu Linux version Ubuntu 15.04+ or above:
+## Start command ##
+systemctl start apache2.service
+## Stop command ##
+systemctl stop apache2.service
+## Restart command ##
+systemctl restart apache2.service
