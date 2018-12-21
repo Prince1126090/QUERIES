@@ -1,3 +1,129 @@
+----December 21, 2018----
+CREATE MATERIALIZED VIEW core."viewJsonDataConversionOfEvent"
+TABLESPACE pg_default
+AS
+ SELECT event.id,
+    event.json ->> '_id'::text AS _id,
+    event.json ->> 'baseEntityId'::text AS base_entity_id,
+    (event.json ->> 'dateCreated'::text)::timestamp without time zone AS date_created,
+    event.json ->> 'dateEdited'::text AS date_edited,
+    event.json ->> 'duration'::text AS duration,
+    event.json ->> 'entityType'::text AS entity_type,
+    (event.json ->> 'eventDate'::text)::date AS event_date,
+    event.json ->> 'eventType'::text AS event_type,
+    event.json ->> 'locationId'::text AS location_id,
+    event.json ->> 'obs'::text AS observations,
+    event.json ->> 'providerId'::text AS provider_id,
+    event.json ->> 'serverVersion'::text AS server_version,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) = 'Lactating Woman Counselling'::text THEN core.getobsvalue(event.id, 'breastfeeding'::character varying)::character varying
+            ELSE NULL::character varying
+        END AS breastfeeding,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) = 'Lactating Woman Counselling'::text THEN core.getobsvalue(event.id, 'additional_liquids_other_than_breastmilk'::character varying)::character varying
+            ELSE NULL::character varying
+        END AS additional_liquids_other_than_breastmilk,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) = 'Lactating Woman Counselling'::text THEN core.getobsvalue(event.id, 'complimentary_amount'::character varying)::character varying
+            ELSE NULL::character varying
+        END AS complimentary_amount,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) = 'Lactating Woman Counselling'::text THEN core.getobsvalue(event.id, 'lactating_counselling_actions_decided_previous_meeting'::character varying)::character varying
+            ELSE NULL::character varying
+        END AS lactating_counselling_actions_decided_previous_meeting,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) = 'Vaccination'::text THEN (((event.json -> 'obs'::text) -> 1) -> 'values'::text) ->> 0
+            ELSE NULL::text
+        END AS vaccination_name,
+        CASE
+            WHEN (event.json ->> 'entityType'::text) = 'child'::text THEN (((event.json -> 'obs'::text) -> 1) -> 'values'::text) ->> 0
+            ELSE NULL::text
+        END AS birth_weight,
+        CASE
+            WHEN (event.json ->> 'entityType'::text) = 'child'::text THEN (((event.json -> 'obs'::text) -> 3) -> 'values'::text) ->> 0
+            ELSE NULL::text
+        END AS mother_name,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) = 'New Woman Member Registration'::text OR (event.json ->> 'eventType'::text) = 'Woman Member Follow Up'::text THEN core.getobsvalue(event.id, 'pregnant'::character varying)::character varying
+            ELSE NULL::character varying
+        END AS is_pregnant,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) = 'New Woman Member Registration'::text THEN core.getobsvalue(event.id, 'edd'::character varying)
+            ELSE NULL::text
+        END AS edd,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) = 'New Woman Member Registration'::text THEN core.getobsvalue(event.id, 'lmp'::character varying)
+            ELSE NULL::text
+        END AS lmp,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) ~~ '%Counselling%'::text THEN core.getobsvalue(event.id, 'pregnant_counselling_actions_for_next_meeting'::character varying)
+            ELSE NULL::text
+        END AS pregnant_counselling_actions_for_next_meeting,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) = 'Woman Member Follow Up'::text THEN core.getobsvalue(event.id, 'Visit_date'::character varying)
+            ELSE NULL::text
+        END AS follow_up_date,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) = 'Woman Member Follow Up'::text THEN core.getobsvalue(event.id, 'Date_Of_next_appointment'::character varying)
+            ELSE NULL::text
+        END AS date_of_next_appointment,
+    event.json ->> 'version'::text AS version,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) ~~ '%Counselling%'::text THEN (((event.json -> 'obs'::text) -> 1) -> 'values'::text) ->> 0
+            ELSE NULL::text
+        END AS woman_are_followed_counseling,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) ~~ '%Member%'::text THEN core.getobsvalue(event.id, 'member_Reg_Date'::character varying)
+            ELSE NULL::text
+        END AS member_registration_date,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) ~~ '%Member%'::text THEN core.getobsvalue(event.id, 'Mother_Guardian_First_Name_english'::character varying)
+            ELSE NULL::text
+        END AS mother_guardian_name,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) ~~ '%Member%'::text THEN core.getobsvalue(event.id, 'Father_Guardian_First_Name_english'::character varying)
+            ELSE NULL::text
+        END AS father_guardian_name,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) ~~ '%Member%'::text THEN core.getobsvalue(event.id, 'age'::character varying)
+            ELSE NULL::text
+        END AS age,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) ~~ '%Member%'::text THEN core.getobsvalue(event.id, 'relation_with_household_head'::character varying)
+            ELSE NULL::text
+        END AS relation_with_household_head,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) ~~ '%Member%'::text THEN core.getobsvalue(event.id, 'disability'::character varying)
+            ELSE NULL::text
+        END AS disability,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) ~~ '%Member%'::text THEN core.getobsvalue(event.id, 'educational_qualification'::character varying)
+            ELSE NULL::text
+        END AS educational_qualification,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) ~~ '%Member%'::text THEN core.getobsvalue(event.id, 'occupation'::character varying)
+            ELSE NULL::text
+        END AS occupation,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) ~~ '%Member%'::text THEN core.getobsvalue(event.id, 'blood_group'::character varying)
+            ELSE NULL::text
+        END AS blood_group,
+        CASE
+            WHEN (event.json ->> 'eventType'::text) ~~ '%Member%'::text THEN core.getobsvalue(event.id, 'illness_information'::character varying)
+            ELSE NULL::text
+        END AS illness_information
+   FROM core.event
+WITH DATA;
+
+ALTER TABLE core."viewJsonDataConversionOfEvent"
+    OWNER TO postgres;
+
+GRANT ALL ON TABLE core."viewJsonDataConversionOfEvent" TO postgres;
+GRANT ALL ON TABLE core."viewJsonDataConversionOfEvent" TO opensrp_admin;
+----end: December 21, 2018----
+
+----old ----
+
 CREATE MATERIALIZED VIEW core."viewJsonDataConversionOfEvent"
 AS
 SELECT id
