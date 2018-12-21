@@ -127,3 +127,25 @@ group by facility_worker_type_id
 select first_name from core."viewJsonDataConversionOfClient"
 where entity_type in ('ec_member', 'ec_woman')
 and first_name ilike '%di%'
+
+
+---- december 21, 2018----
+select json->>'entityType' as entity_type,
+json->>'eventType' as event_type,
+core.event.* 
+from core.event 
+where json->>'entityType' like '%member%'
+order by json->'obs' desc
+
+
+select distinct json->>'eventType' as event_type
+from core.event 
+where json->>'entityType' like '%member%'
+
+select distinct json->>'eventType' as event_type
+from core.event 
+where json->>'entityType' ilike '%consultation%'
+
+select Count (*)
+from core.event 
+where json->>'entityType' like '%consultation%'
