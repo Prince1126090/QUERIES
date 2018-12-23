@@ -1,0 +1,301 @@
+/****** Script for SelectTopNRows command from SSMS  ******/
+select *
+FROM [DHAKA_Norshingdi].[dbo].[mem_info]
+  where [UPZA] = '112'
+
+SELECT count(*)
+  FROM [DHAKA_Norshingdi].[dbo].[mem_info]
+  where [UPZA] = '112'
+
+ALTER TABLE [DHAKA_Norshingdi].[dbo].[mem_info] ALTER COLUMN DIVN VARCHAR (50) NOT NULL;
+
+update   [DHAKA_Norshingdi].[dbo].[mem_info] set DIVN ='DHAKA' where DIVN='1'
+
+SELECT distinct [ZILA]
+  FROM [DHAKA_Norshingdi].[dbo].[mem_info]
+  where [UPZA] = '112'
+
+ALTER TABLE [DHAKA_Norshingdi].[dbo].[mem_info] ALTER COLUMN ZILA VARCHAR (50) NOT NULL;
+
+update   [DHAKA_Norshingdi].[dbo].[mem_info] set ZILA ='Norshingdi' 
+ where [ZILA] = '15'
+
+ select *
+FROM [DHAKA_Norshingdi].[dbo].[mem_info]
+  where [UPZA] = '112'
+
+
+--for: thana/upazila (member) --
+
+ALTER TABLE [DHAKA_Norshingdi].[dbo].[mem_info] ALTER COLUMN UPZA VARCHAR (50) NOT NULL;
+
+USE [DHAKA_Norshingdi]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[MEM_THANA]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @LocName nvarchar(100); 
+ 
+  declare @_id varchar(100); 
+  DECLARE @UpazilaCursor as CURSOR;
+  SET @UpazilaCursor =  CURSOR FOR SELECT than_id,UPPER(name) FROM [DHAKA_Norshingdi].[dbo].[tbl_thana];
+  OPEN @UpazilaCursor;
+  FETCH NEXT FROM @UpazilaCursor INTO @_id, @LocName  
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+  IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_Norshingdi].[dbo].[mem_info] set UPZA =@LocName  where UPZA=@_id
+	 and UPZA= '112'
+      FETCH NEXT FROM @UpazilaCursor INTO @_id, @LocName   
+  END 
+  CLOSE @UpazilaCursor;  
+
+END
+ 
+ EXEC [dbo].[MEM_THANA];
+--end: thana/upazila (member) --
+
+--for union (member)--
+ALTER TABLE [DHAKA_Norshingdi].[dbo].[mem_info] ALTER COLUMN UN VARCHAR (50) NOT NULL;
+
+update   [DHAKA_Norshingdi].[dbo].[mem_info] set UN ='AYUBPUR' 
+where [UPZA] = 'SHIBPUR'
+and [UN]='1'
+--end: union (member)--
+
+--for ward (member)--
+UPDATE [DHAKA_Norshingdi].[dbo].[mem_info] 
+set WRD_CB = concat(UN,' : WARD',WRD_CB)
+where [UPZA] = 'SHIBPUR'
+and [UN]='AYUBPUR'
+and [WRD_CB] in ('2','3','4','5','6','7','8','9')
+--end: ward(member)--
+
+--select--
+select *
+FROM [DHAKA_Norshingdi].[dbo].[mem_info]
+where [UPZA] = 'SHIBPUR'
+and [UN]='AYUBPUR'
+and [FullName_English] is not NULL
+--end: select--
+
+--for: relationship with household head(member)--
+SELECT *
+  FROM [DHAKA_Norshingdi].[dbo].[relationship_code]
+
+  ALTER TABLE [DHAKA_Norshingdi].[dbo].[relationship_code]
+  ADD relation_name_english NVARCHAR (255);
+
+update [DHAKA_Norshingdi].[dbo].[relationship_code]
+set relation_name_english = 'Household Head'
+where [relation_code]='1'
+
+update [DHAKA_Norshingdi].[dbo].[relationship_code]
+set relation_name_english = 'Husband / Wife'
+where [relation_code]='2'
+
+update [DHAKA_Norshingdi].[dbo].[relationship_code]
+set relation_name_english = 'Child'
+where [relation_code]='3'
+
+update [DHAKA_Norshingdi].[dbo].[relationship_code]
+set relation_name_english = 'Father / Mother'
+where [relation_code]='4'
+
+update [DHAKA_Norshingdi].[dbo].[relationship_code]
+set relation_name_english = 'Others'
+where [relation_code]='9'
+--end: relationship with household head
+
+
+-- for: RelationshipWithHH (member) --
+-- works only after adding and extra field called relation_name_english
+
+ALTER TABLE [DHAKA_Norshingdi].[dbo].[mem_info] ALTER COLUMN RelationshipWithHH NVARCHAR (255);
+
+
+USE [DHAKA_Norshingdi]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[MEM_RELATION_WITH_HH]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @relationName nvarchar(100); 
+ 
+  declare @relationCode varchar(100); 
+  DECLARE @relationCursor as CURSOR;
+  SET @relationCursor =  CURSOR FOR SELECT relation_code,relation_name_english FROM [DHAKA_Norshingdi].[dbo].[relationship_code];
+
+  OPEN @relationCursor;
+
+  FETCH NEXT FROM @relationCursor INTO @relationCode, @relationName 
+
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+
+IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_Norshingdi].[dbo].[mem_info] set RelationshipWithHH =@relationName  where RelationshipWithHH=@relationCode
+
+      FETCH NEXT FROM @relationCursor INTO @relationCode, @relationName   
+  END 
+  CLOSE @relationCursor;
+
+END
+ 
+ EXEC [dbo].[MEM_RELATION_WITH_HH];
+
+-- end: RelationshipWithHH --
+
+--for : educationCode (member)--
+
+SELECT *
+  FROM [DHAKA_Norshingdi].[dbo].[education_code]
+
+  
+  ALTER TABLE [DHAKA_Norshingdi].[dbo].[education_code]
+  ADD education_name_english NVARCHAR (255);
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Passed class 1'
+where [education_code]='0'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = concat('Class ',education_code)
+where [education_code] in( '1', '2', '3', '4', '5', '6', '7', '8', '9')
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'SSC or Equivalent'
+where [education_code]='10'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'HSC or Equivalent'
+where [education_code]='11'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Bachelor or Equivalent'
+where [education_code]='12'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Master or Equivalent'
+where [education_code]='13'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Doctor/ Engineer/ Agriculturalist'
+where [education_code]='14'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Diploma'
+where [education_code]='15'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Vocational'
+where [education_code]='16'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Others'
+where [education_code]='99'
+--end: educationCode--
+
+--for: union(HH)--
+ALTER TABLE [DHAKA_Norshingdi].[dbo].[hh_info] ALTER COLUMN UN VARCHAR (50) NOT NULL;
+
+update   [DHAKA_Norshingdi].[dbo].[hh_info] set UN ='AYUBPUR' 
+where [UPZA] = '112'
+and [UN]='1'
+--end: union(HH)
+
+--for: Ward (HH)--
+ALTER TABLE [DHAKA_Norshingdi].[dbo].[hh_info] ALTER COLUMN WRD_CB VARCHAR (50) NOT NULL;
+
+update   [DHAKA_Norshingdi].[dbo].[hh_info] 
+set WRD_CB =CONCAT(UN,' : ',WRD_CB) 
+where [UPZA] = '112'
+and [UN]='AYUBPUR'
+
+update   [DHAKA_Norshingdi].[dbo].[hh_info] 
+set WRD_CB =replace(WRD_CB,'AYUBPUR : ','AYUBPUR : WARD - ') 
+where [UPZA] = '112'
+and [UN]='AYUBPUR'
+--end: Ward(hh)--
+
+--ward (member)--
+update   [DHAKA_Norshingdi].[dbo].[mem_info] 
+set WRD_CB =replace(WRD_CB,'AYUBPUR : WARD','AYUBPUR : WARD - ') 
+where [UPZA] = 'SHIBPUR'
+and [UN]='AYUBPUR'
+--end: ward(member)--
+
+-- for: EduQualification (member) --
+ALTER TABLE [DHAKA_Norshingdi].[dbo].[mem_info] ALTER COLUMN EduQualification VARCHAR (50);
+
+
+USE [DHAKA_Norshingdi]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[MEM_EDU]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @eduClass nvarchar(100); 
+ 
+  declare @eduCode varchar(100); 
+  DECLARE @educationCursor as CURSOR;
+  SET @educationCursor =  CURSOR FOR SELECT education_code,UPPER(education_name_english) FROM [DHAKA_Norshingdi].[dbo].[education_code];
+
+  OPEN @educationCursor;
+
+  FETCH NEXT FROM @educationCursor INTO @eduCode, @eduClass 
+
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+
+IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_Norshingdi].[dbo].[mem_info] set EduQualification =@eduClass  where EduQualification=@eduCode
+
+      FETCH NEXT FROM @educationCursor INTO @eduCode, @eduClass   
+  END 
+  CLOSE @educationCursor;
+
+END
+ 
+ EXEC [dbo].[MEM_EDU];
+
+-- end: EduQualification (member) --
+

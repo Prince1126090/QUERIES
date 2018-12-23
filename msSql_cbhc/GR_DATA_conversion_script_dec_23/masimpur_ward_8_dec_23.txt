@@ -1,0 +1,128 @@
+---- For Household (ward 8)----
+
+SELECT *
+  FROM [DHAKA_Norshingdi].[dbo].[hh_info]
+  where [UPZA] = '112'
+  and [UN]= '7'
+  and [WRD_CB]='8'
+
+  ALTER TABLE [DHAKA_Norshingdi].[dbo].[hh_info] ALTER COLUMN UN VARCHAR (50) NOT NULL;
+
+update   [DHAKA_Norshingdi].[dbo].[hh_info] set UN ='MASIMPUR' 
+where [UPZA] = '112'
+  and [UN]= '7'
+  and [WRD_CB]='8'
+
+update   [DHAKA_Norshingdi].[dbo].[hh_info] 
+set WRD_CB =CONCAT(UN,':Ward ',WRD_CB) 
+where [UPZA] = '112'
+and [UN]= 'MASIMPUR'
+and [WRD_CB]='8'
+
+
+SELECT *
+  FROM [DHAKA_Norshingdi].[dbo].[hh_info]
+  where [UPZA] = '112'
+  and [UN]= 'MASIMPUR'
+  and [WRD_CB]='MASIMPUR:Ward 8'
+
+SELECT *
+FROM [DHAKA_Norshingdi].[dbo].[mem_info]
+where [UPZA] = 'SHIBPUR'
+  and [UN]= '7'
+  and [WRD_CB]='8'
+
+
+
+
+update [DHAKA_Norshingdi].[dbo].[mem_info]
+set [RelationshipWithHH]= 'Household_Head'
+where [RelationshipWithHH]= 'Household Head'
+and[UPZA] = 'SHIBPUR'
+and [UN]= '7'
+and [WRD_CB]='8'
+
+update [DHAKA_Norshingdi].[dbo].[mem_info]
+set [RelationshipWithHH]= 'Husband_or_Wife'
+where [RelationshipWithHH]= 'Husband / Wife'
+and[UPZA] = 'SHIBPUR'
+and [UN]= '7'
+and [WRD_CB]='8'
+
+update [DHAKA_Norshingdi].[dbo].[mem_info]
+set [RelationshipWithHH]= 'Son'
+where [RelationshipWithHH]= 'Child'
+and[UPZA] = 'SHIBPUR'
+and [UN]= '7'
+and [WRD_CB]='8'
+
+update [DHAKA_Norshingdi].[dbo].[mem_info]
+set [RelationshipWithHH]= 'father'
+where [RelationshipWithHH]= 'Father / Mother'
+and[UPZA] = 'SHIBPUR'
+and [UN]= '7'
+and [WRD_CB]='8'
+
+update [DHAKA_Norshingdi].[dbo].[mem_info]
+set [RelationshipWithHH]= 'Others_Relative'
+where [RelationshipWithHH]= 'Others'
+and[UPZA] = 'SHIBPUR'
+and [UN]= '7'
+and [WRD_CB]='8'
+
+
+SELECT HH.*, MEM.[FullName_English]
+  FROM [DHAKA_Norshingdi].[dbo].[hh_info] HH, 
+  [DHAKA_Norshingdi].[dbo].[mem_info] MEM
+  where HH.[UPZA] = '112'
+  and HH.[UN]= 'MASIMPUR'
+  and HH.[WRD_CB]='MASIMPUR:Ward 8'
+  and HH.[ROW_INDEX]= MEM.[HouseHoldInfo_ROW_INDEX]
+  and MEM.[RelationshipWithHH]= 'Household_Head'
+
+---- end: Household----
+
+----for: Member (ward 4)----
+update [DHAKA_Norshingdi].[dbo].[mem_info]
+  set [UN]= 'MASIMPUR'
+  where [UPZA] = 'SHIBPUR'
+  and [UN]= '7'
+
+ update   [DHAKA_Norshingdi].[dbo].[mem_info] 
+set WRD_CB =CONCAT(UN,':Ward ',WRD_CB) 
+where [UPZA] = 'SHIBPUR'
+and [UN]= 'MASIMPUR'
+
+
+SELECT *
+FROM [DHAKA_Norshingdi].[dbo].[mem_info]
+where [UPZA] = 'SHIBPUR'
+  and [UN]= 'MASIMPUR'
+  and [WRD_CB]='MASIMPUR:Ward 4'
+
+
+SELECT *
+FROM [DHAKA_Norshingdi].[dbo].[mem_info]
+where [UPZA] = 'SHIBPUR'
+  and [UN]= 'MASIMPUR'
+  and [WRD_CB]='MASIMPUR:Ward 3'
+  and [FullName_English] is not NULL
+  and [FullName_English] !=''
+
+update [DHAKA_Norshingdi].[dbo].[mem_info]
+set [UN]= 'BAGHABA'
+where [UPZA] = 'SHIBPUR'
+and [UN]= '2'
+
+
+SELECT *
+FROM [DHAKA_Norshingdi].[dbo].[mem_info]
+where [UPZA] = 'SHIBPUR'
+  and [UN]= 'BAGHABA'
+  and [WRD_CB]='BAGHABA:Ward 4'
+  and [FullName_English] is not NULL
+  and [FullName_English] !=''
+  and [RelationshipWithHH] not in ('0', '5', '7')
+
+
+--end: member----
