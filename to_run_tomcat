@@ -25,3 +25,6 @@ sudo kill -9 8710
 to show log of tomcat:
 asha@asha-HP-ProBook-4440s:~$ 
 tail -f /home/asha/web/apache-tomcat-7.0.84/logs/catalina.out 
+
+to show how many instances of tomcat is running:
+ps -ef | grep "tomcat"
