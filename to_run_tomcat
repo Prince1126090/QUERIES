@@ -2,3 +2,26 @@
 to run tomcat: 
 sudo $CATALINA_HOME/bin/startup.sh
 sudo $CATALINA_HOME/bin/shutdown.sh
+
+OR
+
+asha@asha-HP-ProBook-4440s:~/web/apache-tomcat-7.0.84/bin$
+
+start tomcat:
+./startup.sh
+
+Stop tomcat:
+./shutdown.sh
+
+
+-----------------------------------------------------------
+
+show which process/ servers are running on which port:
+sudo netstat -ntlp
+
+to kill a process:
+sudo kill -9 8710
+
+to show log of tomcat:
+asha@asha-HP-ProBook-4440s:~$ 
+tail -f /home/asha/web/apache-tomcat-7.0.84/logs/catalina.out 
