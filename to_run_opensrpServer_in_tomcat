@@ -1,0 +1,26 @@
+---- january 7, 2019 ----
+
+1. run activemq
+sudo service activemq start
+
+(to stop:
+sudo service activemq stop
+to restart: 
+sudo service activemq restart
+)
+
+2. run redis
+sudo service redis_6379 start
+redis-cli
+
+(to stop:
+sudo service redis_6379 stop
+)
+
+3.
+create .war by running maven command:
+(go to the project forlder where pom.xml exists)
+mvn clean install -Dmaven.test.skip=true
+
+deploy the .war file in tomcat
+(see document 'to_run_tomcat' for commands to run tomcat)
