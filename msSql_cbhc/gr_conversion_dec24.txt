@@ -1,0 +1,33 @@
+SELECT HH.*, MEM.[FullName_English]
+  FROM [DHAKA_Norshingdi].[dbo].[hh_info] HH, 
+  [DHAKA_Norshingdi].[dbo].[mem_info] MEM
+  where HH.[UPZA] = '112'
+  and HH.[UN]= 'MASIMPUR'
+  and HH.[WRD_CB]='MASIMPUR:Ward 9'
+  and HH.[ROW_INDEX]= MEM.[HouseHoldInfo_ROW_INDEX]
+  and MEM.[RelationshipWithHH]= 'Household_Head'
+  order by [ROW_INDEX]
+
+
+SELECT distinct([RelationshipWithHH])
+FROM [DHAKA_Norshingdi].[dbo].[mem_info]
+where [UPZA] = 'SHIBPUR'
+  and [UN]= 'MASIMPUR'
+  and [WRD_CB]='MASIMPUR:Ward 9'
+
+
+SELECT *
+FROM [DHAKA_Norshingdi].[dbo].[hh_info]
+where [UPZA] = '112'
+  and [UN]= 'MASIMPUR'
+  and [WRD_CB]='MASIMPUR:Ward 9'
+
+SELECT *
+FROM [DHAKA_Norshingdi].[dbo].[mem_info]
+where [UPZA] = 'SHIBPUR'
+  and [UN]= 'MASIMPUR'
+  and [WRD_CB]='MASIMPUR:Ward 9'
+  and [FullName_English] is not NULL
+  and [FullName_English] !=''
+  and [RelationshipWithHH] not in ('0', '5', '7')
+  order by [HouseHoldInfo_ROW_INDEX] asc
