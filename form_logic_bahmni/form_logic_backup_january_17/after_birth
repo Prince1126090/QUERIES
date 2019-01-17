@@ -1,0 +1,32 @@
+form event:
+function(form) { 
+ form.getById(11).setHidden(true);  
+ form.getById(12).setHidden(true);    
+form.getById(25).setHidden(true);  
+form.getById(26).setHidden(true);
+form.getById(18).setHidden(true);  
+form.getById(21).setHidden(true);  
+
+form.getById(31).setHidden(true); 
+form.getById(34).setHidden(true); 
+form.getById(39).setHidden(true); 
+form.getById(40).setHidden(true); 
+form.getById(47).setHidden(true); 
+form.getById(48).setHidden(true); 
+
+}
+end: form event
+
+rest of the form -> similar to : before birth
+
+refer:
+function(form) {
+console.log(form.getById(49).getValue());
+
+if (form.getById(49).getValue()==='অন্যান্য স্বাস্থ্য সেবা কেন্দ্র') {
+       form.getById(48).setHidden(false);    
+   }else{
+	form.getById(48).setHidden(true);
+   }
+}
+end: refer
