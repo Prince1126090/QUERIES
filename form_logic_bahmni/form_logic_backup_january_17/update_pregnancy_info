@@ -1,0 +1,27 @@
+form event:
+function(form) { 
+ form.getById(2).setHidden(true);
+ form.getById(3).setHidden(true);
+
+}
+end: form event
+
+pregnancy type:
+function(form) {
+   if (form.getById(1).getValue() === undefined) {
+        form.getById(2).setHidden(true);
+        form.getById(3).setHidden(true); 
+   }
+   console.log(form.getById(1).getValue());
+    if (form.getById(1).getValue() === 'প্রসব পূর্ব') {
+        form.getById(2).setHidden(false); 
+	form.getById(3).setHidden(true);
+   } else if (form.getById(1).getValue() === 'প্রসবোত্তর') {
+        form.getById(3).setHidden(false);
+	form.getById(2).setHidden(true); 
+   }else{
+        form.getById(2).setHidden(true);
+        form.getById(3).setHidden(true); 
+   }
+}
+end: pregnancy type
