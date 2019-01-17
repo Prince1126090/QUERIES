@@ -1,0 +1,75 @@
+form event:
+function(form) {
+ form.getById(10).setHidden(true);
+ form.getById(11).setHidden(true);
+form.getById(25).setHidden(true);
+ form.getById(26).setHidden(true);
+ form.getById(30).setHidden(true);
+form.getById(32).setHidden(true);
+form.getById(37).setHidden(true);
+form.getById(38).setHidden(true);
+form.getById(40).setHidden(true);
+form.getById(42).setHidden(true);
+   
+}
+end: form event
+
+sign of illness:
+function(form) {
+console.log(form.getById(29).getValue());
+
+if (form.getById(29).getValue()==='অন্যান্য লক্ষন') {
+       form.getById(30).setHidden(false);    
+   }else{
+	form.getById(30).setHidden(true);
+   }
+}
+end: sign of illness
+
+probable disease:
+function(form) {
+console.log(form.getById(31).getValue());
+
+if (form.getById(31).getValue()==='অন্যান্য সম্ভাব্য রোগ') {
+       form.getById(32).setHidden(false);    
+   }else{
+	form.getById(32).setHidden(true);
+   }
+}
+end: probable disease
+
+medicine:
+function(form) {
+   if (form.getById(36).getValue()) {
+       form.getById(37).setHidden(false); 
+       form.getById(38).setHidden(false);
+      }else{
+       form.getById(37).setHidden(true); 
+       form.getById(38).setHidden(true);
+      }
+}
+end: medicine
+
+health education:
+function(form) {
+console.log(form.getById(39).getValue());
+
+if (form.getById(39).getValue()==='অন্যান্য স্বাস্থ্য শিক্ষা') {
+       form.getById(40).setHidden(false);    
+   }else{
+	form.getById(40).setHidden(true);
+   }
+}
+end: health education
+
+refer:
+function(form) {
+console.log(form.getById(41).getValue());
+
+if (form.getById(41).getValue()==='অন্যান্য স্বাস্থ্য সেবা কেন্দ্র') {
+       form.getById(42).setHidden(false);    
+   }else{
+	form.getById(42).setHidden(true);
+   }
+}
+end: refer
