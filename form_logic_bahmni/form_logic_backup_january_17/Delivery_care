@@ -1,0 +1,16 @@
+form-event:
+function(form) {
+form.getById(10).setHidden(true);
+}
+end: form event
+
+place of delivery:
+function(form) {
+console.log(form.getById(9).getValue());
+   if (form.getById(9).getValue()==='বাড়িতে') {
+       form.getById(10).setHidden(false);    
+   }else{
+	form.getById(10).setHidden(true);
+   }
+}
+end: place of delivery
