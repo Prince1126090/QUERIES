@@ -1,0 +1,146 @@
+function(form) {
+form.getById(10).setHidden(true);
+form.getById(11).setHidden(true);
+}
+
+---- january 8, 2019----
+delivery sheba:
+
+function(form) {
+console.log(form.getById(33).getValue());
+   if (form.getById(33).getValue()==='পরিমাপ করা হয় নি') {
+       form.getById(34).setHidden(false);    
+   }else{
+	form.getById(34).setHidden(true);
+   }
+}
+
+
+function(form) {
+console.log(form.getById(45).getValue());
+   if (form.getById(45).getValue()==='অন্যান্য স্বাস্থ্য শিক্ষা') {
+       form.getById(47).setHidden(false);    
+   }else{
+	form.getById(47).setHidden(true);
+   }
+}
+
+
+function(form) {
+console.log(form.getById(45).getValue());
+}
+
+
+
+child (0-2 months) health care:
+
+function(form) {
+    if (form.getById(37).getValue()) {
+        form.getById(38).setHidden(true);
+    }else{
+	form.getById(38).setHidden(false);
+   }
+}
+
+
+function(form) {
+   if (form.getById(38).getValue()) {
+       form.getById(37).setHidden(true); 
+      }else{
+       form.getById(37).setHidden(false); 
+      }
+}
+
+
+function(form) {
+    if (form.getById(9).getValue()) {
+        form.getById(8).setHidden(true);
+    }else{
+	form.getById(8).setHidden(false);
+   }
+}
+
+
+function(form) {
+   if (form.getById(46).getValue()) {
+       form.getById(45).setHidden(true); 
+      }else{
+       form.getById(45).setHidden(false); 
+      }
+}
+
+function(form) {
+   if (form.getById(46).getValue()) {
+       form.getById(45).setHidden(false); 
+       form.getById(47).setHidden(false);
+      }else{
+       form.getById(39).setHidden(true); 
+       form.getById(40).setHidden(true);
+      }
+}
+
+
+function(form) { 
+console.log(form);
+ form.getById(23).setHidden(true);
+ form.getById(24).setHidden(true);
+}
+
+
+function(form) {
+console.log(form.getById(80).getValue());
+if (form.getById(80).getValue()) {
+       form.getById(82).setHidden(true); 
+      }else{
+       form.getById(82).setHidden(false); 
+      }
+
+if (form.getById(80).getValue()==='অন্যান্য স্বাস্থ্য শিক্ষা') {
+       form.getById(81).setHidden(false);    
+   }else{
+	form.getById(81).setHidden(true);
+   }
+}
+
+
+
+function(form) {
+console.log(form.getById(80).getValue());
+
+if (form.getById(80).getValue()==='অন্যান্য স্বাস্থ্য শিক্ষা') {
+       form.getById(81).setHidden(false);    
+   }else{
+	form.getById(81).setHidden(true);
+   }
+}
+
+
+
+function(form) {
+console.log(form.getById(41).getValue());
+
+if (form.getById(41).getValue()==='অন্যান্য স্বাস্থ্য সেবা কেন্দ্র') {
+       form.getById(42).setHidden(false);    
+   }else{
+	form.getById(42).setHidden(true);
+   }
+}
+
+
+function(form) {
+   if (form.getById(1).getValue() === undefined) {
+        form.getById(2).setHidden(true);
+        form.getById(3).setHidden(true); 
+   }
+   console.log(form.getById(1).getValue());
+    if (form.getById(1).getValue() === 'প্রসব পূর্ব') {
+        form.getById(2).setHidden(false); 
+	form.getById(3).setHidden(true);
+   } else if (form.getById(1).getValue() === 'প্রসবোত্তর') {
+        form.getById(3).setHidden(false);
+	form.getById(2).setHidden(true); 
+   }else{
+        form.getById(2).setHidden(true);
+        form.getById(3).setHidden(true); 
+   }
+}

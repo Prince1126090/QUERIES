@@ -1,0 +1,35 @@
+Blood pressure:
+
+systolic backup:
+function(form) {
+    if (form.getById(67).getValue()) {
+        form.getById(71).setHidden(true);
+        form.getById(69).setHidden(false);
+        form.getById(70).setHidden(false);
+    }else{
+	form.getById(71).setHidden(false);
+        form.getById(69).setHidden(true);
+        form.getById(70).setHidden(true);
+   }
+
+}
+end: systolic backup
+
+function(form) {
+    if (form.getById(67).getValue()) {
+        form.getById(71).setHidden(true);
+        form.getById(69).setHidden(false);
+        form.getById(70).setHidden(false);
+	var systolic = Number(form.getById(67).getValue());
+	if(systolic >= 110 || systolic <= 140){
+		form.getById(70).setValue('Yes');	
+	}else{
+		form.getById(70).setValue('No');
+	}
+    }else{
+	form.getById(71).setHidden(false);
+        form.getById(69).setHidden(true);
+        form.getById(70).setHidden(true);
+   }
+
+}

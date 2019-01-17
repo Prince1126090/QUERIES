@@ -1,0 +1,66 @@
+blod pressure
+function(form) {
+   if (form.getById(67).getValue()) {
+       form.getById(71).setHidden(true);
+       form.getById(69).setHidden(false);
+       form.getById(70).setHidden(false);
+   }else{
+    form.getById(71).setHidden(false);
+       form.getById(69).setHidden(true);
+       form.getById(70).setHidden(true);
+  }
+
+  if (form.getById(71).getValue()) {
+   form.getById(67).setHidden(true);
+   form.getById(68).setHidden(true);
+   form.getById(69).setHidden(true);
+   form.getById(70).setHidden(true);
+  }else{
+   form.getById(67).setHidden(false);
+   form.getById(68).setHidden(false);
+   form.getById(69).setHidden(false);
+   form.getById(70).setHidden(false);
+  }
+
+}
+
+medicine:
+function(form) {
+   if (form.getById(37).getValue()) {
+       form.getById(38).setHidden(false);
+       form.getById(39).setHidden(false);
+   }else{    
+       form.getById(38).setHidden(true);
+       form.getById(39).setHidden(true);
+  }
+}
+
+
+supar:
+function(form) {
+console.log(form.getById(41).getValue());
+   if (form.getById(41).getValue()==='না') {
+       form.getById(42).setHidden(false);    
+   }else{
+    form.getById(42).setHidden(true);
+  }
+}
+
+function(form) {
+
+   if (form.getById(41).getValue()==='রেফার করা হয়নি') {
+       form.getById(42).setHidden(true);    
+   }else{
+    form.getById(42).setHidden(false);
+  }
+}
+
+anc form:
+function(form) {
+console.log(form);
+form.getById(69).setHidden(true);
+form.getById(70).setHidden(true);
+form.getById(38).setHidden(true);
+form.getById(39).setHidden(true);
+
+}

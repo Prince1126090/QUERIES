@@ -1,0 +1,131 @@
+form event:
+
+function(form) { 
+console.log(form);
+ form.getById(23).setHidden(true);
+ form.getById(24).setHidden(true);
+form.getById(29).setHidden(true);
+form.getById(32).setHidden(true);
+form.getById(34).setHidden(true);
+}
+
+end: form event
+
+height:
+
+function(form) {
+   if (form.getById(8).getValue()) {
+       form.getById(9).setHidden(true); 
+      }else{
+       form.getById(9).setHidden(false); 
+      }
+}
+
+cannot measure:
+function(form) {
+   if (form.getById(9).getValue()) {
+       form.getById(8).setHidden(true); 
+      }else{
+       form.getById(8).setHidden(false); 
+      }
+}
+
+end: height
+
+MUAC:
+
+function(form) {
+   if (form.getById(11).getValue()) {
+       form.getById(12).setHidden(true); 
+      }else{
+       form.getById(12).setHidden(false); 
+      }
+}
+
+cannot measure:
+function(form) {
+   if (form.getById(12).getValue()) {
+       form.getById(11).setHidden(true); 
+      }else{
+       form.getById(11).setHidden(false); 
+      }
+}
+
+end: MUAC
+
+illness:
+
+function(form) {
+console.log(form.getById(28).getValue());
+if (form.getById(28).getValue()) {
+       form.getById(30).setHidden(true); 
+      }else{
+       form.getById(30).setHidden(false); 
+      }
+
+if (form.getById(28).getValue()==='অন্যান্য অসুখ') {
+       form.getById(29).setHidden(false);    
+   }else{
+	form.getById(29).setHidden(true);
+   }
+}
+
+not any of above:
+function(form) {
+   if (form.getById(30).getValue()) {
+       form.getById(28).setHidden(true); 
+      }else{
+       form.getById(28).setHidden(false); 
+      }
+}
+end:illness
+
+Medicine:
+function(form) {
+   if (form.getById(22).getValue()) {
+       form.getById(23).setHidden(false); 
+       form.getById(24).setHidden(false);
+      }else{
+       form.getById(23).setHidden(true); 
+       form.getById(24).setHidden(true);
+      }
+}
+end:medicine
+
+health education:
+function(form) {
+console.log(form.getById(31).getValue());
+if (form.getById(31).getValue()) {
+       form.getById(33).setHidden(true); 
+      }else{
+       form.getById(33).setHidden(false); 
+      }
+
+if (form.getById(31).getValue()==='অন্যান্য স্বাস্থ্য শিক্ষা') {
+       form.getById(32).setHidden(false);    
+   }else{
+	form.getById(32).setHidden(true);
+   }
+}
+
+not any of above:
+function(form) {
+   if (form.getById(33).getValue()) {
+       form.getById(31).setHidden(true); 
+      }else{
+       form.getById(31).setHidden(false); 
+      }
+}
+end: health education
+
+Reference:
+function(form) {
+console.log(form.getById(35).getValue());
+
+if (form.getById(35).getValue()==='অন্যান্য স্বাস্থ্য সেবা কেন্দ্র') {
+       form.getById(34).setHidden(false);    
+   }else{
+	form.getById(34).setHidden(true);
+   }
+}
+end:reference
