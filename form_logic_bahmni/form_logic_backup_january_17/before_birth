@@ -1,0 +1,137 @@
+form-event:
+function(form) { 
+console.log(form);
+ form.getById(69).setHidden(true);  
+ form.getById(70).setHidden(true);    
+ form.getById(38).setHidden(true);
+ form.getById(39).setHidden(true);
+form.getById(74).setHidden(true);
+form.getById(77).setHidden(true);
+form.getById(81).setHidden(true);
+form.getById(83).setHidden(true);
+form.getById(85).setHidden(true);
+
+}
+end: form event
+
+height:
+function(form) {
+    if (form.getById(44).getValue()) {
+        form.getById(45).setHidden(true);
+    }else{
+	form.getById(45).setHidden(false);
+   }
+}
+
+not measured:
+function(form) {
+    if (form.getById(45).getValue()) {
+        form.getById(44).setHidden(true);
+    }else{
+	form.getById(44).setHidden(false);
+   }
+}
+end: height
+
+Weight -> similar to height
+
+blood pressure:
+systolic:
+function(form) {
+    if (form.getById(67).getValue()) {
+        form.getById(71).setHidden(true);
+        form.getById(69).setHidden(false);
+        form.getById(70).setHidden(false);
+	var systolic = Number(form.getById(67).getValue());
+	if(systolic >= 110 || systolic <= 140){
+		form.getById(70).setValue('Yes');	
+	}else{
+		form.getById(70).setValue('No');
+	}
+    }else{
+	form.getById(71).setHidden(false);
+        form.getById(69).setHidden(true);
+        form.getById(70).setHidden(true);
+   }
+
+}
+
+not measured:
+function(form) {
+     if (form.getById(71).getValue()) {
+    form.getById(67).setHidden(true);
+    form.getById(68).setHidden(true);
+    form.getById(69).setHidden(true);
+    form.getById(70).setHidden(true);
+   }else{
+    form.getById(67).setHidden(false);
+    form.getById(68).setHidden(false);
+    form.getById(69).setHidden(false);
+    form.getById(70).setHidden(false);
+   }
+
+end: blood pressure
+
+urine sugar:
+function(form) {
+console.log(form.getById(73).getValue());
+   if (form.getById(73).getValue()==='পরিমাপ করা হয় নি') {
+       form.getById(74).setHidden(false);    
+   }else{
+	form.getById(74).setHidden(true);
+   }
+}
+end: urine sugar
+
+Albumin -> similar to urine sugar
+
+medicine:
+function(form) {
+    if (form.getById(37).getValue()) {        
+        form.getById(38).setHidden(false);
+        form.getById(39).setHidden(false);
+    }else{	
+        form.getById(38).setHidden(true);
+        form.getById(39).setHidden(true);
+   }
+}
+end: medicine
+
+health education:
+function(form) {
+console.log(form.getById(80).getValue());
+if (form.getById(80).getValue()) {
+       form.getById(82).setHidden(true); 
+      }else{
+       form.getById(82).setHidden(false); 
+      }
+
+if (form.getById(80).getValue()==='অন্যান্য স্বাস্থ্য শিক্ষা') {
+       form.getById(81).setHidden(false);    
+   }else{
+	form.getById(81).setHidden(true);
+   }
+}
+
+none of above:
+function(form) {
+    if (form.getById(82).getValue()) {
+        form.getById(80).setHidden(true);
+    }else{
+	form.getById(80).setHidden(false);
+   }
+}
+end: health checkup
+
+reason to refer:
+function(form) {
+console.log(form.getById(84).getValue());
+   if (form.getById(84).getValue()==='অন্যান্য রেফার') {
+       form.getById(83).setHidden(false);    
+   }else{
+	form.getById(83).setHidden(true);
+   }
+}
+end: reason to refer
+
+
