@@ -1,0 +1,212 @@
+function(form) { 
+ console.log(form);
+ form.getById(24).setHidden(true);
+ form.getById(89).setHidden(true);  
+ form.getById(92).setHidden(true);    
+ form.getById(129).setHidden(true);
+ form.getById(101).setHidden(true);
+ form.getById(104).setHidden(true);
+ form.getById(112).setHidden(true);
+ form.getById(78).setHidden(true);
+ form.getById(113).setHidden(true);
+ form.getById(114).setHidden(true);
+ form.getById(36).setHidden(true);
+
+ form.getById(80).setHidden(true);
+ 
+ form.getById(108).setHidden(true);
+ form.getById(138).setHidden(true);
+
+}
+
+
+Health care given? ->
+
+function(form) {
+console.log(form.getById(134).getValue());
+if (form.getById(134).getValue()==='হ্যাঁ') {
+	 form.getById(24).setHidden(false);
+	 form.getById(89).setHidden(false);  
+	 form.getById(92).setHidden(false);    
+	 form.getById(129).setHidden(false);
+	 form.getById(101).setHidden(false);
+	 form.getById(104).setHidden(false);
+	 form.getById(112).setHidden(false);
+	 form.getById(114).setHidden(false);
+	 form.getById(36).setHidden(false); 
+
+         form.getById(38).setHidden(true);
+         form.getById(39).setHidden(true); 
+	 form.getById(103).setHidden(true); 
+	 form.getById(106).setHidden(true); 
+	 form.getById(132).setHidden(true);  
+   }else{
+	 form.getById(24).setHidden(true);
+	 form.getById(89).setHidden(true);  
+	 form.getById(92).setHidden(true);    
+	 form.getById(129).setHidden(true);
+	 form.getById(101).setHidden(true);
+	 form.getById(104).setHidden(true);
+	 form.getById(112).setHidden(true);
+	 form.getById(78).setHidden(true);
+	 form.getById(113).setHidden(true);
+	 form.getById(114).setHidden(true);
+	 form.getById(36).setHidden(true);
+   }
+}
+
+weight:
+function(form) {
+   if (form.getById(90).getValue()) {
+       form.getById(91).setHidden(true); 
+      }else{
+       form.getById(91).setHidden(false); 
+      }
+}
+end: weight
+
+medicine:
+function(form) {
+   if (form.getById(37).getValue()) {
+       form.getById(38).setHidden(false); 
+       form.getById(39).setHidden(false);
+      }else{
+       form.getById(38).setHidden(true); 
+       form.getById(39).setHidden(true);
+      }
+}
+end: medicine
+
+
+urine sugar:
+function(form) {
+console.log(form.getById(102).getValue());
+   if (form.getById(102).getValue()==='পরিমাপ করা হয় নি') {
+       form.getById(103).setHidden(false);    
+   }else{
+	form.getById(103).setHidden(true);
+   }
+}
+end: urine sugar
+
+Albumin -> similar to urine sugar
+
+
+danger sign / tika:
+function(form) {
+console.log(form.getById(112).getValue());
+
+if (form.getById(112).getValue()==='হ্যাঁ') {
+       form.getById(78).setHidden(false);  
+   }else{
+       form.getById(78).setHidden(true);  
+   }
+}
+end: danger sign / tika
+
+
+
+
+blood pressure:
+
+systolic:
+function(form) {
+    if (form.getById(130).getValue() || form.getById(131).getValue()) {
+        form.getById(133).setHidden(true);
+    }else{
+	form.getById(133).setHidden(false);
+   }
+}
+end: systolic
+
+
+diastolic:
+function(form) {
+    if (form.getById(130).getValue() || form.getById(131).getValue()) {
+        form.getById(133).setHidden(true);
+    }else{
+	form.getById(133).setHidden(false);
+   }
+
+    if (form.getById(130).getValue() && form.getById(131).getValue()) {
+        var systolic = Number(form.getById(130).getValue());
+        var diastolic = Number(form.getById(131).getValue());
+	if(diastolic < 80){
+		if(systolic < 120){
+		form.getById(132).setValue('স্বাভাবিক রক্তচাপ');
+		}else if(systolic >= 120 && systolic <= 129){
+		form.getById(132).setValue('বেশী রক্তচাপ');
+		}
+	}else if(diastolic >= 80 && diastolic <= 89){
+		if(systolic >= 130 && systolic <= 139){
+		form.getById(132).setValue('উচ্চ রক্তচাপ');
+		}
+	}else if(diastolic >= 90 && diastolic <= 120){
+		if(systolic >= 140 && systolic <= 180){
+		form.getById(132).setValue('তীব্র রক্তচাপপ');
+		}
+	}else if(diastolic > 120){
+		if(systolic > 180){
+		form.getById(132).setValue('মারাত্মক রক্তচাপ');
+		}
+	}
+    }
+}
+
+not measured:
+function(form) {
+     if (form.getById(133).getValue()) {
+    form.getById(130).setHidden(true);
+    form.getById(131).setHidden(true);
+   }else{
+    form.getById(130).setHidden(false);
+    form.getById(131).setHidden(false);
+   }
+}
+
+end: blood pressure
+
+end: Health care given?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+health education given? ->
+function(form) {
+console.log(form.getById(135).getValue());
+
+if (form.getById(135).getValue()==='হ্যাঁ') {
+       form.getById(80).setHidden(false);  
+   }else{
+       form.getById(80).setHidden(true);  
+   }
+}
+
+end: health education given?
+
+refer? ->
+
+function(form) {
+console.log(form.getById(136).getValue());
+
+if (form.getById(136).getValue()==='হ্যাঁ') {
+       form.getById(108).setHidden(false); 
+       form.getById(138).setHidden(false);  
+   }else{
+       form.getById(108).setHidden(true); 
+       form.getById(138).setHidden(true); 
+   }
+}
+
+end: refer

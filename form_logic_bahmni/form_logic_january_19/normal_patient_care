@@ -1,0 +1,63 @@
+
+Health care given? ->
+
+function(form) {
+console.log(form.getById(43).getValue());
+
+if (form.getById(43).getValue()==='হ্যাঁ') {
+       form.getById(29).setHidden(false); 
+       form.getById(31).setHidden(false); 
+       form.getById(35).setHidden(false); 
+
+       form.getById(37).setHidden(true);
+       form.getById(38).setHidden(true);   
+   }else{
+       form.getById(29).setHidden(true); 
+       form.getById(31).setHidden(true); 
+       form.getById(35).setHidden(true); 
+   }
+}
+
+medicine:
+function(form) {
+   if (form.getById(36).getValue()) {
+       form.getById(37).setHidden(false); 
+       form.getById(38).setHidden(false);
+      }else{
+       form.getById(37).setHidden(true); 
+       form.getById(38).setHidden(true);
+      }
+}
+end: medicine
+
+end: Health care given?
+
+health education given? ->
+function(form) {
+console.log(form.getById(44).getValue());
+
+if (form.getById(44).getValue()==='হ্যাঁ') {
+       form.getById(39).setHidden(false);  
+   }else{
+       form.getById(39).setHidden(true);  
+   }
+}
+
+end: health education given?
+
+refer? ->
+
+function(form) {
+console.log(form.getById(45).getValue());
+
+if (form.getById(45).getValue()==='হ্যাঁ') {
+       form.getById(46).setHidden(false); 
+       form.getById(47).setHidden(false);  
+   }else{
+       form.getById(46).setHidden(true); 
+       form.getById(47).setHidden(true); 
+   }
+}
+
+end: refer
+

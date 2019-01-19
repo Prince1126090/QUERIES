@@ -1,0 +1,56 @@
+function(form) { 
+ console.log(form);
+ form.getById(6).setHidden(true);
+
+ form.getById(12).setHidden(true);
+ 
+ form.getById(11).setHidden(true);
+ form.getById(13).setHidden(true);
+
+}
+
+Health care given? ->
+
+function(form) {
+console.log(form.getById(1).getValue());
+if (form.getById(1).getValue()==='হ্যাঁ') {
+	 form.getById(6).setHidden(false); 
+   }else{
+	 form.getById(6).setHidden(true);
+   }
+}
+
+end: health care given?
+
+
+
+
+
+health education given? ->
+function(form) {
+console.log(form.getById(9).getValue());
+
+if (form.getById(9).getValue()==='হ্যাঁ') {
+       form.getById(12).setHidden(false);  
+   }else{
+       form.getById(12).setHidden(true);  
+   }
+}
+
+end: health education given?
+
+refer? ->
+
+function(form) {
+console.log(form.getById(10).getValue());
+
+if (form.getById(10).getValue()==='হ্যাঁ') {
+       form.getById(11).setHidden(false); 
+       form.getById(13).setHidden(false);  
+   }else{
+       form.getById(11).setHidden(true); 
+       form.getById(13).setHidden(true); 
+   }
+}
+
+end: refer
