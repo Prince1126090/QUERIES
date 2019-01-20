@@ -1,0 +1,163 @@
+function(form) { 
+ form.getById(13).setHidden(true);
+ form.getById(14).setHidden(true);
+ form.getById(15).setHidden(true);
+ form.getById(19).setHidden(true);
+ form.getById(20).setHidden(true);
+ form.getById(46).setHidden(true);
+ form.getById(49).setHidden(true);
+ form.getById(50).setHidden(true);
+ form.getById(54).setHidden(true);
+ form.getById(57).setHidden(true);
+
+ form.getById(31).setHidden(true);
+
+ form.getById(60).setHidden(true);
+ form.getById(64).setHidden(true);
+}
+
+
+
+
+Health care given? ->
+
+for: age calc
+function(form) {
+console.log(JSON.stringify(form.patient.birthdate, null, 4));
+  var one_day=1000*60*60*24;
+  var today= new Date();
+  var birthday = form.patient.birthdate ;
+
+  var date1_ms = birthday.getTime();
+  var date2_ms = today.getTime();
+
+  var difference_ms = date2_ms - date1_ms;
+  var ageInDay = Math.round(difference_ms/one_day);
+
+
+
+console.log(form.getById(61).getValue());
+if (form.getById(61).getValue()==='হ্যাঁ') {
+	 form.getById(13).setHidden(false);
+	 form.getById(14).setHidden(false);
+	 form.getById(15).setHidden(false);
+	 form.getById(46).setHidden(false);
+	 form.getById(49).setHidden(false);
+	 form.getById(50).setHidden(false);
+	 form.getById(54).setHidden(false);
+	 form.getById(57).setHidden(false); 
+
+         form.getById(52).setHidden(true);
+         form.getById(53).setHidden(true);
+	
+	 if(ageInDay <60 || ageInDay >720){
+		form.getById(19).setHidden(true);
+		form.getById(20).setHidden(true);
+	}else if(ageInDay >=180 && ageInDay <= 209){
+		form.getById(19).setHidden(false);
+	}else if(ageInDay >=210 && ageInDay <= 720){
+		form.getById(20).setHidden(false);
+	}   
+   }else{
+	 form.getById(13).setHidden(true);
+	 form.getById(14).setHidden(true);
+	 form.getById(15).setHidden(true);
+	 form.getById(19).setHidden(true);
+	 form.getById(20).setHidden(true);
+	 form.getById(46).setHidden(true);
+	 form.getById(49).setHidden(true);
+	 form.getById(50).setHidden(true);
+	 form.getById(54).setHidden(true);
+	 form.getById(57).setHidden(true);
+   }
+}
+
+end: age calc
+
+function(form) {
+console.log(form.getById(61).getValue());
+if (form.getById(61).getValue()==='হ্যাঁ') {
+	 form.getById(13).setHidden(false);
+	 form.getById(14).setHidden(false);
+	 form.getById(15).setHidden(false);
+	 form.getById(19).setHidden(false);
+	 form.getById(20).setHidden(false);
+	 form.getById(46).setHidden(false);
+	 form.getById(49).setHidden(false);
+	 form.getById(50).setHidden(false);
+	 form.getById(54).setHidden(false);
+	 form.getById(57).setHidden(false); 
+
+         form.getById(52).setHidden(true);
+         form.getById(53).setHidden(true);   
+   }else{
+	 form.getById(13).setHidden(true);
+	 form.getById(14).setHidden(true);
+	 form.getById(15).setHidden(true);
+	 form.getById(19).setHidden(true);
+	 form.getById(20).setHidden(true);
+	 form.getById(46).setHidden(true);
+	 form.getById(49).setHidden(true);
+	 form.getById(50).setHidden(true);
+	 form.getById(54).setHidden(true);
+	 form.getById(57).setHidden(true);
+   }
+}
+
+weight:
+function(form) {
+   if (form.getById(55).getValue()) {
+       form.getById(56).setHidden(true); 
+      }else{
+       form.getById(56).setHidden(false); 
+      }
+   var num = Number(form.getById(55).getValue());
+   if(num >99){
+                form.getById(55).setValue(Math.trunc(num/10));
+	}
+}
+end: weight
+
+medicine:
+function(form) {
+   if (form.getById(51).getValue()) {
+       form.getById(52).setHidden(false); 
+       form.getById(53).setHidden(false);
+      }else{
+       form.getById(52).setHidden(true); 
+       form.getById(53).setHidden(true);
+      }
+}
+end: medicine
+
+end: Health care given?
+
+health education given? ->
+function(form) {
+console.log(form.getById(62).getValue());
+
+if (form.getById(62).getValue()==='হ্যাঁ') {
+       form.getById(31).setHidden(false);  
+   }else{
+       form.getById(31).setHidden(true);  
+   }
+}
+
+end: health education given?
+
+refer? ->
+
+function(form) {
+console.log(form.getById(63).getValue());
+
+if (form.getById(63).getValue()==='হ্যাঁ') {
+       form.getById(60).setHidden(false); 
+       form.getById(64).setHidden(false);  
+   }else{
+       form.getById(60).setHidden(true); 
+       form.getById(64).setHidden(true); 
+   }
+}
+
+end: refer
+

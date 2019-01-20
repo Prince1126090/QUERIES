@@ -1,0 +1,124 @@
+function(form) { 
+console.log(form);
+ form.getById(16).setHidden(true);
+ form.getById(17).setHidden(true);
+ form.getById(18).setHidden(true);  
+ form.getById(39).setHidden(true);
+ form.getById(44).setHidden(true); 
+ form.getById(57).setHidden(true); 
+ form.getById(60).setHidden(true);
+ form.getById(63).setHidden(true);
+ form.getById(69).setHidden(true);  
+ form.getById(71).setHidden(true);
+ form.getById(72).setHidden(true);
+
+form.getById(52).setHidden(true);
+
+form.getById(70).setHidden(true);
+form.getById(77).setHidden(true);
+}
+
+
+Health care given? ->
+
+function(form) {
+console.log(form.getById(73).getValue());
+if (form.getById(73).getValue()==='হ্যাঁ') {
+	 form.getById(16).setHidden(false);
+	 form.getById(17).setHidden(false);
+	 form.getById(18).setHidden(false);  
+	 form.getById(39).setHidden(false);
+	 form.getById(44).setHidden(false); 
+	 form.getById(57).setHidden(false); 
+	 form.getById(60).setHidden(false);
+	 form.getById(63).setHidden(false);
+	 form.getById(69).setHidden(false);
+	 form.getById(72).setHidden(false); 
+
+         form.getById(41).setHidden(true);
+         form.getById(42).setHidden(true);   
+   }else{
+	 form.getById(16).setHidden(true);
+	 form.getById(17).setHidden(true);
+	 form.getById(18).setHidden(true);  
+	 form.getById(39).setHidden(true);
+	 form.getById(44).setHidden(true); 
+	 form.getById(57).setHidden(true); 
+	 form.getById(60).setHidden(true);
+	 form.getById(63).setHidden(true);
+	 form.getById(69).setHidden(true);  
+	 form.getById(71).setHidden(true);
+	 form.getById(72).setHidden(true);
+   }
+}
+
+weight:
+function(form) {
+   if (form.getById(58).getValue()) {
+       form.getById(59).setHidden(true); 
+      }else{
+       form.getById(59).setHidden(false); 
+      }
+   var num = Number(form.getById(58).getValue());
+   if(num >99){
+                form.getById(58).setValue(Math.trunc(num/10));
+	}
+}
+end: weight
+
+medicine:
+function(form) {
+   if (form.getById(40).getValue()) {
+       form.getById(41).setHidden(false); 
+       form.getById(42).setHidden(false);
+      }else{
+       form.getById(41).setHidden(true); 
+       form.getById(42).setHidden(true);
+      }
+}
+end: medicine
+
+danger sign:
+function(form) {
+console.log(form.getById(72).getValue());
+
+if (form.getById(72).getValue()==='হ্যাঁ') {
+       form.getById(71).setHidden(false);  
+   }else{
+       form.getById(71).setHidden(true);  
+   }
+}
+end: danger sign
+
+end: Health care given?
+
+
+health education given? ->
+function(form) {
+console.log(form.getById(75).getValue());
+
+if (form.getById(75).getValue()==='হ্যাঁ') {
+       form.getById(52).setHidden(false);  
+   }else{
+       form.getById(52).setHidden(true);  
+   }
+}
+
+end: health education given?
+
+refer? ->
+
+function(form) {
+console.log(form.getById(76).getValue());
+
+if (form.getById(76).getValue()==='হ্যাঁ') {
+       form.getById(70).setHidden(false); 
+       form.getById(77).setHidden(false);  
+   }else{
+       form.getById(70).setHidden(true); 
+       form.getById(77).setHidden(true); 
+   }
+}
+
+end: refer
+
