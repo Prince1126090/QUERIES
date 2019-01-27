@@ -1,0 +1,67 @@
+{
+  "identifiers": {
+    "Patient_Identifier": "GAN203266",
+    "OPENMRS_UUID": "391ec594-5381-4075-9b1d-7608ed19332d"
+  },
+  "clientDatabaseVersion": 1,
+  "isSendToOpenMRS": "yes",
+  "_rev": "v4",
+  "clientApplicationVersion": 1,
+  "baseEntityId": "5858d58e-a187-466e-a9ba-7891418e4476",
+  "dateCreated": "2019-01-22T00:52:00.413+06:00",
+  "_id": "03ecfa3f-f763-4e12-bc83-5b1aa7a5daff",
+  "type": "Client",
+  "serverVersion": 1548576497697,
+  "relationships": {
+    "household": [
+      "3e28c255-e7fa-486c-95d5-bd0d4fc52f2f"
+    ],
+    "mother": [
+      "3e28c255-e7fa-486c-95d5-bd0d4fc52f2f"
+    ]
+  },
+  "deathdateApprox": false,
+  "addresses": [
+    {
+      "addressFields": {
+        "cityVillage": "MITHAMAIN",
+        "country": "BANGLADESH",
+        "address2": "BAIRATI: WARD 3",
+        "address7": "villageTest",
+        "address1": "BAIRATI",
+        "stateProvince": "DHAKA",
+        "countyDistrict": "KISHOREGONJ"
+      },
+      "addressType": "usual_residence"
+    }
+  ],
+  "firstName": "R",
+  "gender": "F",
+  "birthdate": "1995-01-21T12:00:00.000+06:00",
+  "lastName": "Riya",
+  "birthdateApprox": false,
+  "attributes": {
+    "idtype": "noIdentifier",
+    "Religion": "মুসলিম",
+    "fathernameBangla": "এম হামিদ",
+    "familyplanning": "অন্যান্য পদ্ধতি ",
+    "Disease_status": "Antenatal Period",
+    "family_diseases_details": "High Blood Pressure,Diabetes",
+    "ethnicity": "বাঙ্গালী",
+    "spouseNameBangla": "আব্দুর রাহমান",
+    "MaritalStatus": "বিবাহিত",
+    "fatherNameEnglish": "M Hamid",
+    "phoneNumber": "01789123456",
+    "RiskyHabit": "High Salt Intake",
+    "bloodgroup": "A+",
+    "has_disease": "না",
+    "givenNameLocal": " আর রিয়া",
+    "birthPlace": "GAZIPUR ",
+    "occupation": "গৃহকর্ম",
+    "Realtion_With_Household_Head": "স্বামী/স্ত্রী",
+    "disable": "না",
+    "spouseNameEnglish": "Abdur rahman",
+    "motherNameEnglish": "M Munia",
+    "motherNameBangla": "এম মুনিয়া"
+  }
+}
