@@ -9,6 +9,12 @@ function(form) {
  form.getById(9).setHidden(true);
  form.getById(14).setHidden(true);
  form.getById(15).setHidden(true);
+ form.getById(11).setHidden(true);
+ form.getById(12).setHidden(true);
+ form.getById(13).setHidden(true);
+ form.getById(16).setHidden(true);
+ form.getById(17).setHidden(true);
+ form.getById(38).setHidden(true);
 
  form.getById(31).setHidden(true);
  form.getById(32).setHidden(true);
