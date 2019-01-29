@@ -1,13 +1,14 @@
 function(form) { 
  console.log(form);
- form.getById(1).setHidden(true);
- form.getById(55).setHidden(true);  
- form.getById(65).setHidden(true);    
+ form.getById(2).setHidden(true);
+ form.getById(53).setHidden(true);  
+ form.getById(72).setHidden(true);    
  form.getById(14).setHidden(true);
  form.getById(58).setHidden(true);
- form.getById(61).setHidden(true);
+ form.getById(76).setHidden(true);
+ form.getById(77).setHidden(true);
  form.getById(64).setHidden(true);
- form.getById(42).setHidden(true);
+ form.getById(61).setHidden(true);
  form.getById(37).setHidden(true);
 
  form.getById(45).setHidden(true);
@@ -23,44 +24,47 @@ Health care given? ->
 function(form) {
 console.log(form.getById(54).getValue());
 if (form.getById(54).getValue()==='হ্যাঁ') {
-	 form.getById(1).setHidden(false);
-	 form.getById(55).setHidden(false);  
-	 form.getById(65).setHidden(false);    
+	 form.getById(2).setHidden(false);
+	 form.getById(53).setHidden(false);  
+	 form.getById(72).setHidden(false);    
 	 form.getById(14).setHidden(false);
 	 form.getById(58).setHidden(false);
-	 form.getById(61).setHidden(false);
+	 form.getById(76).setHidden(false);
+	 form.getById(77).setHidden(false);
 	 form.getById(64).setHidden(false);
+	 form.getById(61).setHidden(false);
 	 form.getById(37).setHidden(false);
 
          form.getById(39).setHidden(true);
          form.getById(40).setHidden(true); 
-	 form.getById(42).setHidden(true); 
+	 form.getById(75).setHidden(true); 
 	 form.getById(60).setHidden(true); 
 	 form.getById(63).setHidden(true);
-	 form.getById(68).setHidden(true);  
+	 form.getById(80).setHidden(true);  
    }else{
-	 form.getById(1).setHidden(true);
-	 form.getById(55).setHidden(true);  
-	 form.getById(65).setHidden(true);    
+	 form.getById(2).setHidden(true);
+	 form.getById(53).setHidden(true);  
+	 form.getById(72).setHidden(true);    
 	 form.getById(14).setHidden(true);
 	 form.getById(58).setHidden(true);
-	 form.getById(61).setHidden(true);
+	 form.getById(76).setHidden(true);
+	 form.getById(77).setHidden(true);
 	 form.getById(64).setHidden(true);
-	 form.getById(42).setHidden(true);
+	 form.getById(61).setHidden(true);
 	 form.getById(37).setHidden(true);
    }
 }
 
 weight:
 function(form) {
-   if (form.getById(56).getValue()) {
-       form.getById(57).setHidden(true); 
+   if (form.getById(73).getValue()) {
+       form.getById(74).setHidden(true); 
       }else{
-       form.getById(57).setHidden(false); 
+       form.getById(74).setHidden(false); 
       }
-   var num = Number(form.getById(56).getValue());
+   var num = Number(form.getById(73).getValue());
    if(num >999){
-	        form.getById(56).setValue(Math.trunc(num/10));
+	        form.getById(73).setValue(Math.trunc(num/10));
 	}
 }
 end: weight
@@ -97,9 +101,9 @@ function(form) {
 console.log(form.getById(64).getValue());
 
 if (form.getById(64).getValue()==='হ্যাঁ') {
-       form.getById(42).setHidden(false);  
+       form.getById(75).setHidden(false);  
    }else{
-       form.getById(42).setHidden(true);  
+       form.getById(75).setHidden(true);  
    }
 }
 end: danger sign / tika
@@ -111,14 +115,14 @@ blood pressure:
 
 systolic:
 function(form) {
-    if (form.getById(66).getValue() || form.getById(67).getValue()) {
-        form.getById(69).setHidden(true);
+    if (form.getById(78).getValue() || form.getById(79).getValue()) {
+        form.getById(81).setHidden(true);
     }else{
-	form.getById(69).setHidden(false);
+	form.getById(81).setHidden(false);
    }
-   var systolicBp = Number(form.getById(66).getValue());
+   var systolicBp = Number(form.getById(78).getValue());
    if(systolicBp >999){
-                form.getById(66).setValue(Math.trunc(systolicBp/10));
+                form.getById(78).setValue(Math.trunc(systolicBp/10));
    }
 }
 end: systolic
@@ -126,53 +130,40 @@ end: systolic
 
 diastolic:
 function(form) {
-    if (form.getById(66).getValue() || form.getById(67).getValue()) {
-        form.getById(69).setHidden(true);
+    if (form.getById(78).getValue() || form.getById(79).getValue()) {
+        form.getById(81).setHidden(true);
     }else{
-	form.getById(69).setHidden(false);
+	form.getById(81).setHidden(false);
    }
-   var diastolicBp = Number(form.getById(67).getValue());
+   var diastolicBp = Number(form.getById(79).getValue());
    if(diastolicBp >999){
-                form.getById(67).setValue(Math.trunc(diastolicBp/10));
+                form.getById(79).setValue(Math.trunc(diastolicBp/10));
    }
 
-    if (form.getById(66).getValue() && form.getById(67).getValue()) {
-        var systolic = Number(form.getById(66).getValue());
-        var diastolic = Number(form.getById(67).getValue()); 
-	form.getById(68).setHidden(false);
-	form.getById(68).setEnabled(false);
-	if(diastolic < 80){
-		if(systolic < 120){
-		form.getById(68).setValue('স্বাভাবিক রক্তচাপ');
-		}else if(systolic >= 120 && systolic <= 129){
-		form.getById(68).setValue('বেশী রক্তচাপ');
-		}
-	}else if(diastolic >= 80 && diastolic <= 89){
-		if(systolic >= 130 && systolic <= 139){
-		form.getById(68).setValue('উচ্চ রক্তচাপ');
-		}
-	}else if(diastolic >= 90 && diastolic <= 120){
-		if(systolic >= 140 && systolic <= 180){
-		form.getById(68).setValue('তীব্র রক্তচাপ');
-		}
-	}else if(diastolic > 120){
-		if(systolic > 180){
-		form.getById(68).setValue('মারাত্মক রক্তচাপ');
-		}
+    if (form.getById(78).getValue() && form.getById(79).getValue()) {
+        var systolic = Number(form.getById(78).getValue());
+        var diastolic = Number(form.getById(79).getValue()); 
+	form.getById(80).setHidden(false);
+	form.getById(80).setEnabled(false);
+	if(systolic > 119 || diastolic > 79){
+		form.getById(80).setValue('উচ্চ রক্তচাপ');
+	}else{
+		form.getById(80).setValue('স্বাভাবিক রক্তচাপ');
 	}
+
     }else{
-	form.getById(68).setHidden(true);	
+	form.getById(80).setHidden(true);	
 	}
 }
 
 not measured:
 function(form) {
-     if (form.getById(69).getValue()) {
-    form.getById(66).setHidden(true);
-    form.getById(67).setHidden(true);
+     if (form.getById(81).getValue()) {
+    form.getById(78).setHidden(true);
+    form.getById(79).setHidden(true);
    }else{
-    form.getById(66).setHidden(false);
-    form.getById(67).setHidden(false);
+    form.getById(78).setHidden(false);
+    form.getById(79).setHidden(false);
    }
 }
 
