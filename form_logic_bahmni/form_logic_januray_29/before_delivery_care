@@ -11,6 +11,8 @@ function(form) {
  form.getById(141).setHidden(true);
  form.getById(114).setHidden(true);
  form.getById(36).setHidden(true);
+ form.getById(139).setHidden(true);
+ form.getById(113).setHidden(true);
 
  form.getById(80).setHidden(true);
  
