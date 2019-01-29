@@ -1,3 +1,19 @@
+//another approach
+
+
+function(form) { 
+ console.log(form);
+ var hide = function(fieldId){
+ 	form.getById(fieldId).setHidden(true);
+	};
+ var arr = [2,5,6,7,8,9,14,15,11,12,13,17,38,16,31,32,44];
+ for(var i=0; i< arr.length; i++){
+	hide(arr[i]);
+    }
+}
+
+//end: another approach
+
 
 function(form) { 
  console.log(form);
@@ -25,6 +41,7 @@ function(form) {
 
 
 condition of pregnancy:
+
 
 function(form) {
 console.log(form.getById(43).getValue());
