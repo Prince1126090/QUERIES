@@ -1,0 +1,8 @@
+
+
+mvn clean
+
+mvn clean install
+
+to build the project without tests: 
+mvn clean install -Dmaven.test.skip=true
