@@ -2,6 +2,7 @@
 to run pgAdmin:
 
 go to software/pgadmin4
+cd software/pgadmin4
 
 1:
 source bin/activate

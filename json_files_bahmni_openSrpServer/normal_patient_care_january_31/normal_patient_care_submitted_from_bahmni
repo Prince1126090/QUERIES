@@ -1,0 +1,747 @@
+{
+  "locationUuid": "44b2c135-a264-4a86-b7b4-0ffc3a743d39",
+  "patientUuid": "32322ff2-bc74-4589-bc84-4b1b8e37152c",
+  "encounterUuid": null,
+  "visitUuid": null,
+  "providers": [
+    {
+      "uuid": "313c8507-9821-40e4-8a70-71a5c7693d72"
+    }
+  ],
+  "encounterDateTime": null,
+  "extensions": {
+    "mdrtbSpecimen": []
+  },
+  "context": {},
+  "visitType": "Community clinic service",
+  "bahmniDiagnoses": [],
+  "orders": [],
+  "drugOrders": [],
+  "disposition": null,
+  "observations": [
+    {
+      "concept": {
+        "uuid": "f2671938-ffc5-4547-91c0-fcd28b6e29b4",
+        "name": "স্বাস্থ্য সেবা দেওয়া হয়েছে"
+      },
+      "formNamespace": "Bahmni",
+      "formFieldPath": "সাধারন রোগীর সেবা.19/43-0",
+      "voided": false,
+      "value": {
+        "uuid": "a2065636-5326-40f5-aed6-0cc2cca81ccc",
+        "name": {
+          "display": "হ্যাঁ",
+          "uuid": "b5a4d83a-7158-4477-b81c-71144f5a7232",
+          "name": "হ্যাঁ",
+          "locale": "en",
+          "localePreferred": true,
+          "conceptNameType": null,
+          "links": [
+            {
+              "rel": "self",
+              "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/b5a4d83a-7158-4477-b81c-71144f5a7232"
+            },
+            {
+              "rel": "full",
+              "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/b5a4d83a-7158-4477-b81c-71144f5a7232?v=full"
+            }
+          ],
+          "resourceVersion": "1.9"
+        },
+        "names": [
+          {
+            "display": "হ্যাঁ",
+            "uuid": "d546042c-39be-4e40-84d7-1564fc4e4468",
+            "name": "হ্যাঁ",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": "SHORT",
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/d546042c-39be-4e40-84d7-1564fc4e4468"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/d546042c-39be-4e40-84d7-1564fc4e4468?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "S�_",
+            "uuid": "592053f0-8ae8-40bf-a8db-b4df953da82c",
+            "name": "S�_",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/592053f0-8ae8-40bf-a8db-b4df953da82c"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/592053f0-8ae8-40bf-a8db-b4df953da82c?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "Vero",
+            "uuid": "a58421a8-0eb7-45fc-a480-b1a6c8fba036",
+            "name": "Vero",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/a58421a8-0eb7-45fc-a480-b1a6c8fba036"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/a58421a8-0eb7-45fc-a480-b1a6c8fba036?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "Verdadero",
+            "uuid": "3f74ad0b-a743-4ab0-a1a4-dd79d00e3be5",
+            "name": "Verdadero",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/3f74ad0b-a743-4ab0-a1a4-dd79d00e3be5"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/3f74ad0b-a743-4ab0-a1a4-dd79d00e3be5?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "হ্যাঁ",
+            "uuid": "b5a4d83a-7158-4477-b81c-71144f5a7232",
+            "name": "হ্যাঁ",
+            "locale": "en",
+            "localePreferred": true,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/b5a4d83a-7158-4477-b81c-71144f5a7232"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/b5a4d83a-7158-4477-b81c-71144f5a7232?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "Yes",
+            "uuid": "61a32661-febb-4bab-a9e4-dc108891f5ab",
+            "name": "Yes",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": "FULLY_SPECIFIED",
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/61a32661-febb-4bab-a9e4-dc108891f5ab"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/61a32661-febb-4bab-a9e4-dc108891f5ab?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "Vrai",
+            "uuid": "4f21b2f8-0ff2-4fbd-bd90-5908a53e6178",
+            "name": "Vrai",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/4f21b2f8-0ff2-4fbd-bd90-5908a53e6178"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/4f21b2f8-0ff2-4fbd-bd90-5908a53e6178?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "Oui",
+            "uuid": "ccc35d13-03b1-4aca-bd45-9dcb7f87fa18",
+            "name": "Oui",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/ccc35d13-03b1-4aca-bd45-9dcb7f87fa18"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/ccc35d13-03b1-4aca-bd45-9dcb7f87fa18?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "S��",
+            "uuid": "eb3d3d84-544f-49f7-b981-949dde9ba57e",
+            "name": "S��",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/eb3d3d84-544f-49f7-b981-949dde9ba57e"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/eb3d3d84-544f-49f7-b981-949dde9ba57e?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "Sim",
+            "uuid": "07f107b9-92c9-46fd-9d3c-3566c14af4e4",
+            "name": "Sim",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/07f107b9-92c9-46fd-9d3c-3566c14af4e4"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/07f107b9-92c9-46fd-9d3c-3566c14af4e4?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "Verdadeiro",
+            "uuid": "042ce619-0639-4f0f-a267-80a0fba1711e",
+            "name": "Verdadeiro",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/042ce619-0639-4f0f-a267-80a0fba1711e"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/a2065636-5326-40f5-aed6-0cc2cca81ccc/name/042ce619-0639-4f0f-a267-80a0fba1711e?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          }
+        ],
+        "displayString": "হ্যাঁ",
+        "resourceVersion": "2.0",
+        "translationKey": "হ্যাঁ_43"
+      },
+      "interpretation": null,
+      "inactive": false,
+      "groupMembers": []
+    },
+    {
+      "concept": {
+        "uuid": "2cee2850-1a33-4a22-b933-35fbe6409c0e",
+        "name": "রোগের লক্ষণ"
+      },
+      "formNamespace": "Bahmni",
+      "formFieldPath": "সাধারন রোগীর সেবা.19/29-0",
+      "voided": false,
+      "value": {
+        "uuid": "1f0f8ec6-4e15-11e4-8a57-0800271c1b75",
+        "name": {
+          "display": "জ্বর",
+          "uuid": "d922012d-78cc-468c-9839-52f7f460f51e",
+          "name": "জ্বর",
+          "locale": "en",
+          "localePreferred": true,
+          "conceptNameType": null,
+          "links": [
+            {
+              "rel": "self",
+              "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1f0f8ec6-4e15-11e4-8a57-0800271c1b75/name/d922012d-78cc-468c-9839-52f7f460f51e"
+            },
+            {
+              "rel": "full",
+              "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1f0f8ec6-4e15-11e4-8a57-0800271c1b75/name/d922012d-78cc-468c-9839-52f7f460f51e?v=full"
+            }
+          ],
+          "resourceVersion": "1.9"
+        },
+        "names": [
+          {
+            "display": "জ্বর",
+            "uuid": "ccd90688-18b4-407c-affa-f6d529fbc036",
+            "name": "জ্বর",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": "SHORT",
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1f0f8ec6-4e15-11e4-8a57-0800271c1b75/name/ccd90688-18b4-407c-affa-f6d529fbc036"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1f0f8ec6-4e15-11e4-8a57-0800271c1b75/name/ccd90688-18b4-407c-affa-f6d529fbc036?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "Fever",
+            "uuid": "1f102ac0-4e15-11e4-8a57-0800271c1b75",
+            "name": "Fever",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": "FULLY_SPECIFIED",
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1f0f8ec6-4e15-11e4-8a57-0800271c1b75/name/1f102ac0-4e15-11e4-8a57-0800271c1b75"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1f0f8ec6-4e15-11e4-8a57-0800271c1b75/name/1f102ac0-4e15-11e4-8a57-0800271c1b75?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "জ্বর",
+            "uuid": "d922012d-78cc-468c-9839-52f7f460f51e",
+            "name": "জ্বর",
+            "locale": "en",
+            "localePreferred": true,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1f0f8ec6-4e15-11e4-8a57-0800271c1b75/name/d922012d-78cc-468c-9839-52f7f460f51e"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1f0f8ec6-4e15-11e4-8a57-0800271c1b75/name/d922012d-78cc-468c-9839-52f7f460f51e?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          }
+        ],
+        "displayString": "জ্বর",
+        "resourceVersion": "2.0",
+        "translationKey": "জ্বর_29"
+      },
+      "inactive": false,
+      "groupMembers": []
+    },
+    {
+      "concept": {
+        "uuid": "2cee2850-1a33-4a22-b933-35fbe6409c0e",
+        "name": "রোগের লক্ষণ"
+      },
+      "formNamespace": "Bahmni",
+      "formFieldPath": "সাধারন রোগীর সেবা.19/29-0",
+      "voided": false,
+      "value": {
+        "uuid": "37e04caf-e1cb-4438-bc55-3dbfa19cc14a",
+        "name": {
+          "display": "অন্যান্য লক্ষন",
+          "uuid": "ea20fe61-50f9-4c75-aa1f-9d4490d16513",
+          "name": "অন্যান্য লক্ষন",
+          "locale": "en",
+          "localePreferred": true,
+          "conceptNameType": null,
+          "links": [
+            {
+              "rel": "self",
+              "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/37e04caf-e1cb-4438-bc55-3dbfa19cc14a/name/ea20fe61-50f9-4c75-aa1f-9d4490d16513"
+            },
+            {
+              "rel": "full",
+              "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/37e04caf-e1cb-4438-bc55-3dbfa19cc14a/name/ea20fe61-50f9-4c75-aa1f-9d4490d16513?v=full"
+            }
+          ],
+          "resourceVersion": "1.9"
+        },
+        "names": [
+          {
+            "display": "Other_Symptoms",
+            "uuid": "aceebe53-5232-4168-bc8c-c1113b893a48",
+            "name": "Other_Symptoms",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": "FULLY_SPECIFIED",
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/37e04caf-e1cb-4438-bc55-3dbfa19cc14a/name/aceebe53-5232-4168-bc8c-c1113b893a48"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/37e04caf-e1cb-4438-bc55-3dbfa19cc14a/name/aceebe53-5232-4168-bc8c-c1113b893a48?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "অন্যান্য লক্ষন",
+            "uuid": "ea20fe61-50f9-4c75-aa1f-9d4490d16513",
+            "name": "অন্যান্য লক্ষন",
+            "locale": "en",
+            "localePreferred": true,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/37e04caf-e1cb-4438-bc55-3dbfa19cc14a/name/ea20fe61-50f9-4c75-aa1f-9d4490d16513"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/37e04caf-e1cb-4438-bc55-3dbfa19cc14a/name/ea20fe61-50f9-4c75-aa1f-9d4490d16513?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "অন্যান্য লক্ষন",
+            "uuid": "35537b67-7d5c-4eed-a96e-7c74f08fb88b",
+            "name": "অন্যান্য লক্ষন",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": "SHORT",
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/37e04caf-e1cb-4438-bc55-3dbfa19cc14a/name/35537b67-7d5c-4eed-a96e-7c74f08fb88b"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/37e04caf-e1cb-4438-bc55-3dbfa19cc14a/name/35537b67-7d5c-4eed-a96e-7c74f08fb88b?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          }
+        ],
+        "displayString": "অন্যান্য লক্ষন",
+        "resourceVersion": "2.0",
+        "translationKey": "অন্যান্য_লক্ষন_29"
+      },
+      "inactive": false,
+      "groupMembers": []
+    },
+    {
+      "concept": {
+        "uuid": "a725f0d7-067b-492d-a450-4ce7e535c371",
+        "name": "সম্ভাব্য রোগ"
+      },
+      "formNamespace": "Bahmni",
+      "formFieldPath": "সাধারন রোগীর সেবা.19/31-0",
+      "voided": false,
+      "value": {
+        "uuid": "c2bb6edf-18cb-4c7f-ad91-7c8dd561a437",
+        "name": {
+          "display": "উচ্চ রক্তচাপ",
+          "uuid": "38b6a8b8-e02f-41c7-813d-63df201562a6",
+          "name": "উচ্চ রক্তচাপ",
+          "locale": "en",
+          "localePreferred": true,
+          "conceptNameType": null,
+          "links": [
+            {
+              "rel": "self",
+              "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/c2bb6edf-18cb-4c7f-ad91-7c8dd561a437/name/38b6a8b8-e02f-41c7-813d-63df201562a6"
+            },
+            {
+              "rel": "full",
+              "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/c2bb6edf-18cb-4c7f-ad91-7c8dd561a437/name/38b6a8b8-e02f-41c7-813d-63df201562a6?v=full"
+            }
+          ],
+          "resourceVersion": "1.9"
+        },
+        "names": [
+          {
+            "display": "উচ্চ রক্তচাপ",
+            "uuid": "eeabf987-182b-4b7e-bc34-903a7161b19b",
+            "name": "উচ্চ রক্তচাপ",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": "SHORT",
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/c2bb6edf-18cb-4c7f-ad91-7c8dd561a437/name/eeabf987-182b-4b7e-bc34-903a7161b19b"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/c2bb6edf-18cb-4c7f-ad91-7c8dd561a437/name/eeabf987-182b-4b7e-bc34-903a7161b19b?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "উচ্চ রক্তচাপ",
+            "uuid": "38b6a8b8-e02f-41c7-813d-63df201562a6",
+            "name": "উচ্চ রক্তচাপ",
+            "locale": "en",
+            "localePreferred": true,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/c2bb6edf-18cb-4c7f-ad91-7c8dd561a437/name/38b6a8b8-e02f-41c7-813d-63df201562a6"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/c2bb6edf-18cb-4c7f-ad91-7c8dd561a437/name/38b6a8b8-e02f-41c7-813d-63df201562a6?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "High Blood Pressure",
+            "uuid": "98a2f125-8eac-4680-bd08-33572ff023d0",
+            "name": "High Blood Pressure",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": "FULLY_SPECIFIED",
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/c2bb6edf-18cb-4c7f-ad91-7c8dd561a437/name/98a2f125-8eac-4680-bd08-33572ff023d0"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/c2bb6edf-18cb-4c7f-ad91-7c8dd561a437/name/98a2f125-8eac-4680-bd08-33572ff023d0?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          }
+        ],
+        "displayString": "উচ্চ রক্তচাপ",
+        "resourceVersion": "2.0",
+        "translationKey": "উচ্চ_রক্তচাপ_31"
+      },
+      "inactive": false,
+      "groupMembers": []
+    },
+    {
+      "concept": {
+        "uuid": "a725f0d7-067b-492d-a450-4ce7e535c371",
+        "name": "সম্ভাব্য রোগ"
+      },
+      "formNamespace": "Bahmni",
+      "formFieldPath": "সাধারন রোগীর সেবা.19/31-0",
+      "voided": false,
+      "value": {
+        "uuid": "1e3f1870-b252-4808-8edb-f86fad050ebd",
+        "name": {
+          "display": "ডায়াবেটিস",
+          "uuid": "befce65b-9e80-45ec-b8b7-05234cd5cb9c",
+          "name": "ডায়াবেটিস",
+          "locale": "en",
+          "localePreferred": true,
+          "conceptNameType": null,
+          "links": [
+            {
+              "rel": "self",
+              "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1e3f1870-b252-4808-8edb-f86fad050ebd/name/befce65b-9e80-45ec-b8b7-05234cd5cb9c"
+            },
+            {
+              "rel": "full",
+              "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1e3f1870-b252-4808-8edb-f86fad050ebd/name/befce65b-9e80-45ec-b8b7-05234cd5cb9c?v=full"
+            }
+          ],
+          "resourceVersion": "1.9"
+        },
+        "names": [
+          {
+            "display": "Diabetes",
+            "uuid": "fdabcf86-7ac9-4122-96f7-9f84858228fd",
+            "name": "Diabetes",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": "FULLY_SPECIFIED",
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1e3f1870-b252-4808-8edb-f86fad050ebd/name/fdabcf86-7ac9-4122-96f7-9f84858228fd"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1e3f1870-b252-4808-8edb-f86fad050ebd/name/fdabcf86-7ac9-4122-96f7-9f84858228fd?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "ডায়াবেটিস",
+            "uuid": "befce65b-9e80-45ec-b8b7-05234cd5cb9c",
+            "name": "ডায়াবেটিস",
+            "locale": "en",
+            "localePreferred": true,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1e3f1870-b252-4808-8edb-f86fad050ebd/name/befce65b-9e80-45ec-b8b7-05234cd5cb9c"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1e3f1870-b252-4808-8edb-f86fad050ebd/name/befce65b-9e80-45ec-b8b7-05234cd5cb9c?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "ডায়াবেটিস",
+            "uuid": "b7fb233e-0351-427f-beda-f0a91a547079",
+            "name": "ডায়াবেটিস",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": "SHORT",
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1e3f1870-b252-4808-8edb-f86fad050ebd/name/b7fb233e-0351-427f-beda-f0a91a547079"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/1e3f1870-b252-4808-8edb-f86fad050ebd/name/b7fb233e-0351-427f-beda-f0a91a547079?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          }
+        ],
+        "displayString": "ডায়াবেটিস",
+        "resourceVersion": "2.0",
+        "translationKey": "ডায়াবেটিস_31"
+      },
+      "inactive": false,
+      "groupMembers": []
+    },
+    {
+      "concept": {
+        "uuid": "a725f0d7-067b-492d-a450-4ce7e535c371",
+        "name": "সম্ভাব্য রোগ"
+      },
+      "formNamespace": "Bahmni",
+      "formFieldPath": "সাধারন রোগীর সেবা.19/31-0",
+      "voided": false,
+      "value": {
+        "uuid": "0622f52f-0c95-41c1-ab5d-ee9bc335c839",
+        "name": {
+          "display": "যক্ষ্মা",
+          "uuid": "d1183ae6-825f-478b-abd7-225d2a234da5",
+          "name": "যক্ষ্মা",
+          "locale": "en",
+          "localePreferred": true,
+          "conceptNameType": null,
+          "links": [
+            {
+              "rel": "self",
+              "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/0622f52f-0c95-41c1-ab5d-ee9bc335c839/name/d1183ae6-825f-478b-abd7-225d2a234da5"
+            },
+            {
+              "rel": "full",
+              "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/0622f52f-0c95-41c1-ab5d-ee9bc335c839/name/d1183ae6-825f-478b-abd7-225d2a234da5?v=full"
+            }
+          ],
+          "resourceVersion": "1.9"
+        },
+        "names": [
+          {
+            "display": "Tuberculosis",
+            "uuid": "9c02fdc7-0e51-4a1f-a530-586bfed811a9",
+            "name": "Tuberculosis",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": "FULLY_SPECIFIED",
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/0622f52f-0c95-41c1-ab5d-ee9bc335c839/name/9c02fdc7-0e51-4a1f-a530-586bfed811a9"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/0622f52f-0c95-41c1-ab5d-ee9bc335c839/name/9c02fdc7-0e51-4a1f-a530-586bfed811a9?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "যক্ষ্মা",
+            "uuid": "d1183ae6-825f-478b-abd7-225d2a234da5",
+            "name": "যক্ষ্মা",
+            "locale": "en",
+            "localePreferred": true,
+            "conceptNameType": null,
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/0622f52f-0c95-41c1-ab5d-ee9bc335c839/name/d1183ae6-825f-478b-abd7-225d2a234da5"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/0622f52f-0c95-41c1-ab5d-ee9bc335c839/name/d1183ae6-825f-478b-abd7-225d2a234da5?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          },
+          {
+            "display": "যক্ষ্মা",
+            "uuid": "d7784290-e0a0-46af-bcb6-1fa5f66f6a65",
+            "name": "যক্ষ্মা",
+            "locale": "en",
+            "localePreferred": false,
+            "conceptNameType": "SHORT",
+            "links": [
+              {
+                "rel": "self",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/0622f52f-0c95-41c1-ab5d-ee9bc335c839/name/d7784290-e0a0-46af-bcb6-1fa5f66f6a65"
+              },
+              {
+                "rel": "full",
+                "uri": "http://192.168.19.44/openmrs/ws/rest/v1/concept/0622f52f-0c95-41c1-ab5d-ee9bc335c839/name/d7784290-e0a0-46af-bcb6-1fa5f66f6a65?v=full"
+              }
+            ],
+            "resourceVersion": "1.9"
+          }
+        ],
+        "displayString": "যক্ষ্মা",
+        "resourceVersion": "2.0",
+        "translationKey": "যক্ষ্মা_31"
+      },
+      "inactive": false,
+      "groupMembers": []
+    }
+  ],
+  "encounterTypeUuid": "81852aee-3f10-11e4-adec-0800271c1b75"
+}
