@@ -147,3 +147,40 @@ SELECT distinct [WRD_CB]
 	  where [UPZA] = 'SHIBPUR'
 
 --end: ward(member)--
+
+
+--select--
+select distinct([RelationshipWithHH])
+FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+where [UPZA] = 'SHIBPUR'
+and [FullName_English] is not NULL
+--end: select--
+
+--for: relationship with household head(member)--
+SELECT *
+  FROM [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+
+  ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+  ADD relation_name_english NVARCHAR (255);
+
+update [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+set relation_name_english = 'Household_Head'
+where [relation_code]='1'
+
+update [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+set relation_name_english = 'Husband_or_Wife'
+where [relation_code]='2'
+
+update [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+set relation_name_english = 'Son'
+where [relation_code]='3'
+
+update [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+set relation_name_english = 'father'
+where [relation_code]='4'
+
+update [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+set relation_name_english = 'Others_Relative'
+where [relation_code]='9'
+
+--end: relationship with household head
