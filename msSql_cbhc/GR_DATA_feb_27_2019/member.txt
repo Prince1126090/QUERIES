@@ -184,3 +184,53 @@ set relation_name_english = 'Others_Relative'
 where [relation_code]='9'
 
 --end: relationship with household head
+
+
+-- for: RelationshipWithHH (member) --
+-- works only after adding and extra field called relation_name_english
+
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN RelationshipWithHH NVARCHAR (255);
+
+
+USE [DHAKA_Norshingdi_new]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[MEM_RELATION_WITH_HH]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @relationName nvarchar(100); 
+ 
+  declare @relationCode varchar(100); 
+  DECLARE @relationCursor as CURSOR;
+  SET @relationCursor =  CURSOR FOR SELECT relation_code,relation_name_english FROM [DHAKA_Norshingdi_new].[dbo].[relationship_code];
+
+  OPEN @relationCursor;
+
+  FETCH NEXT FROM @relationCursor INTO @relationCode, @relationName 
+
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+
+IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set RelationshipWithHH =@relationName  where RelationshipWithHH=@relationCode
+
+      FETCH NEXT FROM @relationCursor INTO @relationCode, @relationName   
+  END 
+  CLOSE @relationCursor;
+
+END
+ 
+ EXEC [dbo].[MEM_RELATION_WITH_HH];
+
+-- end: RelationshipWithHH --
