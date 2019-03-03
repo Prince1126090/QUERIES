@@ -380,3 +380,26 @@ ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN Occupation VARC
 update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set Occupation='Others (Occupation)';
 --end: occupation (member)--
 
+-- for: Religion (member) --
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN Religion VARCHAR (50) ;
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set  Religion='Muslim'
+ where Religion='1';
+
+ update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set  Religion='Hindu'
+ where Religion='2';
+
+ update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set  Religion='Others (Religion)'
+ where Religion in ('0', '4');
+
+ update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set  Religion='Others (Religion)'
+ where Religion is NULL;
+
+
+ SELECT distinct([Religion])
+  FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+  where [UPZA] = 'SHIBPUR'
+  and [Gender] is null
+  and [FullName_English] is not NULL
+-- end: Religion (member) --
+
