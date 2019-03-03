@@ -1,0 +1,236 @@
+
+SELECT count(*)
+  FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+  where [UPZA] = '112'
+
+
+
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN DIVN VARCHAR (50) NOT NULL;
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set DIVN ='DHAKA' where DIVN='1'
+
+SELECT distinct [ZILA]
+  FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+  where [UPZA] = '112'
+
+
+
+  ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN ZILA VARCHAR (50) NOT NULL;
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set ZILA ='NARSINGDI' 
+ where [ZILA] = '15'
+
+ select *
+FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+  where [UPZA] = '112'
+
+
+--for: thana/upazila (member) --
+
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN UPZA VARCHAR (50) NOT NULL;
+
+USE [DHAKA_Norshingdi_new]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[MEM_THANA]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @LocName nvarchar(100); 
+ 
+  declare @_id varchar(100); 
+  DECLARE @UpazilaCursor as CURSOR;
+  SET @UpazilaCursor =  CURSOR FOR SELECT than_id,UPPER(name) FROM [DHAKA_Norshingdi_new].[dbo].[tbl_thana];
+  OPEN @UpazilaCursor;
+  FETCH NEXT FROM @UpazilaCursor INTO @_id, @LocName  
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+  IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set UPZA =@LocName  where UPZA=@_id
+	 and UPZA= '112'
+      FETCH NEXT FROM @UpazilaCursor INTO @_id, @LocName   
+  END 
+  CLOSE @UpazilaCursor;  
+
+END
+ 
+ EXEC [dbo].[MEM_THANA];
+--end: thana/upazila (member) --
+
+
+--for union (member)--
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN UN VARCHAR (50) NOT NULL;
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set UN ='AYUBPUR' 
+where [UPZA] = 'SHIBPUR'
+and [UN]='1'
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set UN ='BAGHABA' 
+where [UPZA] = 'SHIBPUR'
+and [UN]='02'
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set UN ='CHAK RADHA' 
+where [UPZA] = 'SHIBPUR'
+and [UN]='3
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set UN ='DULALPUR' 
+where [UPZA] = 'SHIBPUR'
+and [UN]='4' 
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set UN ='JOSAR' 
+where [UPZA] = 'SHIBPUR'
+and [UN]='5' 
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set UN ='JOYNAGAR' 
+where [UPZA] = 'SHIBPUR'
+and [UN]='6' 
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set UN ='MASIMPUR' 
+where [UPZA] = 'SHIBPUR'
+and [UN]='7' 
+
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set UN ='PUTIA' 
+where [UPZA] = 'SHIBPUR'
+and [UN]='8'
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set UN ='SADHAR CHAR' 
+where [UPZA] = 'SHIBPUR'
+and [UN]='9'
+
+SELECT 
+    distinct  [UN]
+  FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+ where [UPZA] = 'SHIBPUR'
+
+--end: union (member)--
+
+
+ --for ward (member)--
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN WRD_CB VARCHAR (50) NOT NULL;
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[mem_info] 
+set WRD_CB = '1'
+where [WRD_CB] = '01'
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[mem_info] 
+set WRD_CB = '2'
+where [WRD_CB] = '02'
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[mem_info] 
+set WRD_CB = '3'
+where [WRD_CB] = '03'
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[mem_info] 
+set WRD_CB = concat(UN,':Ward ',WRD_CB)
+where [UPZA] = 'SHIBPUR'
+and [WRD_CB] in ('1','2','3','4','5','6','7','8','9')
+
+
+
+SELECT distinct [WRD_CB]
+      FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+	  where [UPZA] = 'SHIBPUR'
+
+--end: ward(member)--
+
+
+--select--
+select distinct([RelationshipWithHH])
+FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+where [UPZA] = 'SHIBPUR'
+and [FullName_English] is not NULL
+--end: select--
+
+--for: relationship with household head(member)--
+SELECT *
+  FROM [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+
+  ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+  ADD relation_name_english NVARCHAR (255);
+
+update [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+set relation_name_english = 'Household_Head'
+where [relation_code]='1'
+
+update [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+set relation_name_english = 'Husband_or_Wife'
+where [relation_code]='2'
+
+update [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+set relation_name_english = 'Son'
+where [relation_code]='3'
+
+update [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+set relation_name_english = 'father'
+where [relation_code]='4'
+
+update [DHAKA_Norshingdi_new].[dbo].[relationship_code]
+set relation_name_english = 'Others_Relative'
+where [relation_code]='9'
+
+--end: relationship with household head
+
+
+-- for: RelationshipWithHH (member) --
+-- works only after adding and extra field called relation_name_english
+
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN RelationshipWithHH NVARCHAR (255);
+
+
+USE [DHAKA_Norshingdi_new]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[MEM_RELATION_WITH_HH]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @relationName nvarchar(100); 
+ 
+  declare @relationCode varchar(100); 
+  DECLARE @relationCursor as CURSOR;
+  SET @relationCursor =  CURSOR FOR SELECT relation_code,relation_name_english FROM [DHAKA_Norshingdi_new].[dbo].[relationship_code];
+
+  OPEN @relationCursor;
+
+  FETCH NEXT FROM @relationCursor INTO @relationCode, @relationName 
+
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+
+IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set RelationshipWithHH =@relationName  where RelationshipWithHH=@relationCode
+
+      FETCH NEXT FROM @relationCursor INTO @relationCode, @relationName   
+  END 
+  CLOSE @relationCursor;
+
+END
+ 
+ EXEC [dbo].[MEM_RELATION_WITH_HH];
+
+-- end: RelationshipWithHH --
