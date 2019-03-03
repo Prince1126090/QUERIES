@@ -351,4 +351,11 @@ END
 GO
 
  EXEC [dbo].[MEM_EDU];
+ 
+ update [DHAKA_Norshingdi_new].[dbo].[mem_info]
+	set EduQualification = 'CLASS 1'
+	where [EduQualification] is NULL
+	
 --end: procedure for educationCode--
+
+
