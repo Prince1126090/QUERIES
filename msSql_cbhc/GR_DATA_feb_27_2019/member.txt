@@ -250,3 +250,53 @@ set RelationshipWithHH = 'Others_Relative'
 where [RelationshipWithHH] is NULL
 
 -- end : RelationshipWithHH
+
+--for : educationCode (member)--
+
+SELECT *
+  FROM [DHAKA_Norshingdi].[dbo].[education_code]
+
+  
+  ALTER TABLE [DHAKA_Norshingdi].[dbo].[education_code]
+  ADD education_name_english NVARCHAR (255);
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Class 1'
+where [education_code]='0'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = concat('Class ',education_code)
+where [education_code] in( '1', '2', '3', '4', '5', '6', '7', '8', '9')
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'SSC or equivalent'
+where [education_code]='10'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'HSC or equivalent'
+where [education_code]='11'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Hons. or equivalent'
+where [education_code]='12'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Masters or equivalent'
+where [education_code]='13'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Doctor'
+where [education_code]='14'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Technical'
+where [education_code]='15'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Vocational'
+where [education_code]='16'
+
+update [DHAKA_Norshingdi].[dbo].[education_code]
+set education_name_english = 'Others Education'
+where [education_code]='99'
+--end: educationCode--
