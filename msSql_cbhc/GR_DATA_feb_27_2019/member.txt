@@ -374,3 +374,9 @@ SELECT distinct([Gender])
  where Gender='2';
 -- end: Gender (member) --
 
+--for: occupation (member)--
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN Occupation VARCHAR (50) ;
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set Occupation='Others (Occupation)';
+--end: occupation (member)--
+
