@@ -2,11 +2,13 @@
 to run pgAdmin:
 
 go to software/pgadmin4
-cd software/pgadmin4
 
 1:
-source bin/activate
+cd software/pgadmin4
+
 2:
+source bin/activate
+3:
 python lib/python2.7/site-packages/pgadmin4/pgAdmin4.py
 
 browser: localhost:5050/
