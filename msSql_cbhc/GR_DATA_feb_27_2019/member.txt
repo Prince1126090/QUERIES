@@ -359,3 +359,18 @@ GO
 --end: procedure for educationCode--
 
 
+
+-- for: Gender (member) --
+SELECT distinct([Gender])
+  FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+  where [UPZA] = 'SHIBPUR'
+  and [FullName_English] is not NULL
+   and [Gender] is not null
+   
+ update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set Gender='M'
+ where Gender='1';
+ 
+ update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set Gender='F'
+ where Gender='2';
+-- end: Gender (member) --
+
