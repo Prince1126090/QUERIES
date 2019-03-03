@@ -85,7 +85,7 @@ and [UN]='02'
 
 update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set UN ='CHAK RADHA' 
 where [UPZA] = 'SHIBPUR'
-and [UN]='3
+and [UN]='3'
 
 update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set UN ='DULALPUR' 
 where [UPZA] = 'SHIBPUR'
