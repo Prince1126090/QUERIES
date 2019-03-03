@@ -234,3 +234,19 @@ END
  EXEC [dbo].[MEM_RELATION_WITH_HH];
 
 -- end: RelationshipWithHH --
+
+-- for: RelationshipWithHH (March 3, 2018)--
+SELECT distinct([RelationshipWithHH])
+  FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+  where [UPZA] = 'SHIBPUR'
+
+
+update [DHAKA_Norshingdi_new].[dbo].[mem_info]
+set RelationshipWithHH = 'Others_Relative'
+where [RelationshipWithHH] in ('0', '5', '6', '7', '8', '12', '51')
+
+update [DHAKA_Norshingdi_new].[dbo].[mem_info]
+set RelationshipWithHH = 'Others_Relative'
+where [RelationshipWithHH] is NULL
+
+-- end : RelationshipWithHH
