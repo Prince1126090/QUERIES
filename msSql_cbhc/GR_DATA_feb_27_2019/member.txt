@@ -299,4 +299,56 @@ where [education_code]='16'
 update [DHAKA_Norshingdi_new].[dbo].[education_code]
 set education_name_english = 'Others Education'
 where [education_code]='99'
+
 --end: educationCode--
+
+--procedure for educationCode--
+--need to change column type from int to varchar-- 
+
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN EduQualification NVARCHAR (255);
+--end: need to change column type from int to varchar-- 
+
+USE [DHAKA_Norshingdi_new]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[MEM_EDU]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @eduClass nvarchar(100); 
+ 
+  declare @eduCode varchar(100); 
+  DECLARE @educationCursor as CURSOR;
+  SET @educationCursor =  CURSOR FOR SELECT education_code,UPPER(education_name_english) FROM [DHAKA_Norshingdi_new].[dbo].[education_code];
+
+  OPEN @educationCursor;
+
+  FETCH NEXT FROM @educationCursor INTO @eduCode, @eduClass 
+
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+
+IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set EduQualification =@eduClass  where EduQualification=@eduCode
+
+      FETCH NEXT FROM @educationCursor INTO @eduCode, @eduClass   
+  END 
+  CLOSE @educationCursor;
+
+END
+GO
+
+ EXEC [dbo].[MEM_EDU];
+--end: procedure for educationCode--
