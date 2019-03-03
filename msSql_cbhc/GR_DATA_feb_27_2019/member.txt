@@ -427,3 +427,54 @@ update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set  MaritalStatus='Married'
   and [FullName_English] is not NULL
 -- end: maritalStatus (member) --
 
+-- Disease --
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN Diabetes VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set Diabetes ='Diabetes' 
+where [Diabetes] = '1' ;
+
+
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN Hypertension VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set Hypertension ='High Blood Pressure' 
+where [Hypertension] = '1' ;
+
+
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN Cancer VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set Cancer ='Others (Family Disease)' 
+where [Cancer] = '1' ;
+
+
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN RespiratoryDisease VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set RespiratoryDisease ='Respiratory Disease' 
+where [RespiratoryDisease] = '1' ;
+
+
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN PhycologicalDisease VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set PhycologicalDisease ='Psychological Disease' 
+where [PhycologicalDisease] = '1' ;
+
+
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[mem_info] ALTER COLUMN Obesity VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[mem_info] set Obesity ='Obesity' 
+where [Obesity] = '1' ;
+
+SELECT *
+  FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+  where [UPZA] = 'SHIBPUR'
+  and [Gender] is not null
+  and [FullName_English] is not null
+
+SELECT distinct([Obesity])
+  FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+  where [UPZA] = 'SHIBPUR'
+  and [Gender] is not null
+  and [FullName_English] is not null
+  
+-- end: disease--
+
+
