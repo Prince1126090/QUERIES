@@ -139,12 +139,12 @@ end: result of delivery
 birth weight:
 
 function(form) {
-console.log(form.getById(40).getValue());
+console.log(form.getById(53).getValue());
 
-if (form.getById(40).getValue()==='হ্যাঁ') {
-       form.getById(41).setHidden(false);  
+if (form.getById(53).getValue()==='হ্যাঁ') {
+       form.getById(54).setHidden(false);  
    }else{
-       form.getById(41).setHidden(true);  
+       form.getById(54).setHidden(true);  
    }
 }
 
