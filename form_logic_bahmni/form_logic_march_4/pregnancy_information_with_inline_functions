@@ -75,6 +75,26 @@ if (form.getById(46).getValue()==='প্রসব পূর্ব') {
 
 end: condition of pregnancy
 
+type of delivery:
+
+function(form) {
+console.log(form.getById(47).getValue());
+if (form.getById(47).getValue()==='স্বাভাবিক প্রসব') {
+	 form.getById(12).setHidden(false);
+	 form.getById(13).setHidden(false);     
+   }else{
+	 form.getById(12).setHidden(true);
+	 form.getById(13).setHidden(true); 
+   }
+}
+
+end: type of delivery
+
+
+
+
+
+
 
 place of delivery:
 
