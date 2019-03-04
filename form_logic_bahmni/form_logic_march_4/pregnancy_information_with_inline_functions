@@ -116,20 +116,20 @@ end: place of delivery
 result of delivery:
 
 function(form) {
-console.log(form.getById(15).getValue());
-if (form.getById(15).getValue()==='জীবিত জন্ম') {
-	 form.getById(16).setHidden(false);
-	 form.getById(38).setHidden(false);
-	 form.getById(17).setHidden(true); 
-	 form.getById(41).setHidden(true);      
-   }else if (form.getById(15).getValue()==='মৃত বাচ্চার জন্ম') {
-	 form.getById(17).setHidden(false);
-	 form.getById(16).setHidden(true);
-	 form.getById(38).setHidden(true);    
+console.log(form.getById(48).getValue());
+if (form.getById(48).getValue()==='জীবিত জন্ম') {
+	 form.getById(49).setHidden(false);
+	 form.getById(51).setHidden(false);
+	 form.getById(50).setHidden(true); 
+	 form.getById(54).setHidden(true);      
+   }else if (form.getById(48).getValue()==='মৃত জন্ম') {
+	 form.getById(50).setHidden(false);
+	 form.getById(49).setHidden(true);
+	 form.getById(51).setHidden(true);    
    }else{
-	 form.getById(16).setHidden(true);
-	 form.getById(17).setHidden(true);
-	 form.getById(38).setHidden(true); 
+	 form.getById(49).setHidden(true);
+	 form.getById(51).setHidden(true);
+	 form.getById(50).setHidden(true); 
    }
 }
 
