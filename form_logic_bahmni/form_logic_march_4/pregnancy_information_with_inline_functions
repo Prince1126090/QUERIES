@@ -91,11 +91,6 @@ if (form.getById(47).getValue()==='স্বাভাবিক প্রসব')
 end: type of delivery
 
 
-
-
-
-
-
 place of delivery:
 
 function(form) {
@@ -103,7 +98,7 @@ console.log(form.getById(9).getValue());
 if (form.getById(9).getValue()==='বাড়িতে') {
 	 form.getById(11).setHidden(false);
 	 form.getById(56).setHidden(true);
-	 form.getById(56).setHidden(true);      
+	 form.getById(57).setHidden(true);      
    }else if (form.getById(9).getValue()==='কমিউনিটি ক্লিনিক') {
 	 form.getById(11).setHidden(true);
 	 form.getById(56).setHidden(false);
