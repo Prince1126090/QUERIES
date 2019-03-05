@@ -141,6 +141,11 @@ where [UPZA] = 'SHIBPUR'
 and [WRD_CB] in ('1','2','3','4','5','6','7','8','9')
 
 
+UPDATE [DHAKA_Norshingdi_new].[dbo].[mem_info] 
+set WRD_CB = UPPER([WRD_CB])
+where [UPZA] = 'SHIBPUR'
+
+
 
 SELECT distinct [WRD_CB]
       FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
