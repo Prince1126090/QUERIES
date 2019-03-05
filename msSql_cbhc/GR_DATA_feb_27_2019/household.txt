@@ -244,3 +244,14 @@ where [Rich] = '1' ;
 select distinct  [Rich] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
 
 -- end: household fields--
+
+
+
+
+SELECT HH.*, MEM.[FullName_English]
+  FROM [DHAKA_Norshingdi_new].[dbo].[hh_info] HH, 
+  [DHAKA_Norshingdi_new].[dbo].[mem_info] MEM
+  where HH.[THANA_NAME] = 'SHIBPUR'
+  and HH.[ROW_INDEX]= MEM.[HouseHoldInfo_ROW_INDEX]
+  and MEM.[RelationshipWithHH]= 'Household_Head'
+  order by [ROW_INDEX]
