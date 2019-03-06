@@ -250,7 +250,24 @@ select distinct  [Rich] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
 
 -- end: household fields--
 
+-- mobile number--
 
+UPDATE [DHAKA_Norshingdi_new].[dbo].[hh_info] 
+set MobileNumber1 = '0' 
+where [THANA_NAME] = 'SHIBPUR'
+and [MobileNumber1] is null ;
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[hh_info] 
+set MobileNumber2 = '0' 
+where [THANA_NAME] = 'SHIBPUR'
+and [MobileNumber2] is null ;
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[hh_info] 
+set MobileNumber3 = '0' 
+where [THANA_NAME] = 'SHIBPUR'
+and [MobileNumber3] is null;
+
+-- end: mobile number--
 
 
 SELECT HH.*, MEM.[FullName_English]
