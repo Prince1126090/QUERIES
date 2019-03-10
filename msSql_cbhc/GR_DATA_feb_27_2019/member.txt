@@ -483,3 +483,22 @@ SELECT distinct([Obesity])
 -- end: disease--
 
 
+
+SELECT *
+  FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+  where [UPZA] = 'SHIBPUR'
+  and [DOB] is null
+  and [Gender] is not null
+  and [FullName_English] is not null
+  order by [HouseHoldInfo_ROW_INDEX]
+
+
+
+SELECT *
+  FROM [DHAKA_Norshingdi_new].[dbo].[mem_info]
+  where [UPZA] = 'SHIBPUR'
+  and [DOB] is not null
+  and [Gender] is not null
+  and [FullName_English] is not null
+  order by [HouseHoldInfo_ROW_INDEX]
+
