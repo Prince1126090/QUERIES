@@ -4,3 +4,7 @@ where json->> 'entityType' ='mother'
 update core.event E
 set json = json::jsonb - 'providerId' || '{"providerId":""}'::jsonb
 where json->> 'entityType' ='mother'
+
+update core.event E 
+set "json" = jsonb_set("json", '{"providerId"}', '""'::jsonb) 
+where json->> 'entityType' ='mother'
