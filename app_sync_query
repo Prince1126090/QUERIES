@@ -1,0 +1,23 @@
+select c.id, c.json 
+from core.client_metadata cm 
+join core.client c on cm.client_id = c.id 
+join jsonb_array_elements(json->'addresses') as address on true 
+WHERE cm.date_deleted is null 
+and (c.json->>'serverVersion')::BIGINT >= 0 
+and address ->'addressFields' ->> 'address2' IN('JOSAR:Ward 4','AYUBPUR:WARD 4')  LIMIT 300
+
+
+
+
+
+----------------
+test server
+
+select c.id, c.json 
+from core.client_metadata cm 
+join core.client c on cm.client_id = c.id 
+join jsonb_array_elements(json->'addresses') as address on true 
+WHERE cm.date_deleted is null 
+and (c.json->>'serverVersion')::BIGINT >= 0 
+and address ->'addressFields' ->> 'address2' IN('JOYNAGAR:WARD 1')  
+and c.json->>'gender' = 'H'
