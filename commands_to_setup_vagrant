@@ -1,7 +1,29 @@
 
 to setup vagrant- 
 
-1. copy vagrant_2.1.2_x86_64.deb to opt folder
+1. copy vagrant_2.1.2_x86_64.deb to opt folder(from workspace/bahmni-setup)
+
+// to install vagrant and virtual box
 2. run commands -
-   2.1 sudo dpkg -i vagrant_2.1.2_x86_64.deb
-   2.2 sudo apt-get install virtualbox
+   2.1  cd \opt
+	sudo chmod -R 777 vagrant_2.1.2_x86_64.deb
+	sudo dpkg -i vagrant_2.1.2_x86_64.deb
+   2.2  sudo apt-get install virtualbox
+
+//check versions of vagrant and virtualBox
+3. vagrant --version
+   vboxmanage --version
+	
+
+4. cd bahmni
+   git clone https://github.com/Bahmni/bahmni-vagrant.git
+
+5. copy package.box and custom vagrantfile to bahmni/bahmni-vagrant
+   5.1 //# Add this line to point the url to the package.box(///opt -> /home/asha/workspace)
+       config.vm.box_url = "file:/home/asha/workspace/bahmni/bahmni-vagrant/package.box"
+
+   go to Bahmni/bahmni-vagrant -
+   5.2 sudo chmod -R 777 package.box
+   5.3 vagrant up
+
+
