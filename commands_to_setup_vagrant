@@ -1,0 +1,7 @@
+
+to setup vagrant- 
+
+1. copy vagrant_2.1.2_x86_64.deb to opt folder
+2. run commands -
+   2.1 sudo dpkg -i vagrant_2.1.2_x86_64.deb
+   2.2 sudo apt-get install virtualbox
