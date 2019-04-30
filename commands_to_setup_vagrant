@@ -26,4 +26,6 @@ to setup vagrant-
    5.2 sudo chmod -R 777 package.box
    5.3 vagrant up
 
+6. to check if bahmni works or not(in borwser) -> 192.168.33.10/
+
 
