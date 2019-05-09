@@ -1,0 +1,8 @@
+
+select * from core.client
+order by id desc
+
+
+
+select * from core.event
+order by id desc
