@@ -1,0 +1,305 @@
+--for union (household)--
+SELECT *
+  FROM [barishal_Div2804].[dbo].[tbl_union]
+
+-- no need to add column for bangla name --
+ALTER TABLE [barishal_Div2804].[dbo].[tbl_union]
+   ADD name_bangla VARCHAR (255);
+
+ALTER TABLE [barishal_Div2804].[dbo].[tbl_union]
+DROP COLUMN name_bangla;
+-- end: no need to add column for bangla name --
+
+UPDATE
+ [barishal_Div2804].[dbo].[tbl_union]
+SET
+  name = UPPER(name);
+
+--for: procedure_union (hh) --
+
+ALTER TABLE [barishal_Div2804].[dbo].[hh_info] ALTER COLUMN UN VARCHAR (50) NOT NULL;
+
+USE [barishal_Div2804]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[HH_UNION]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @LocName nvarchar(100); 
+  declare @ParentLocId varchar(100);
+  declare @_id varchar(100); 
+
+  DECLARE @UnionCursor as CURSOR;
+  SET @UnionCursor =  CURSOR FOR SELECT  union_id, UPPER(name), than_id 
+  FROM [barishal_Div2804].[dbo].[tbl_union];
+  OPEN @UnionCursor;
+
+  FETCH NEXT FROM @UnionCursor INTO @_id, @LocName, @ParentLocId  
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+  IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [barishal_Div2804].[dbo].[hh_info] set UN = @LocName  where UN = @_id and UPZA = @ParentLocId
+      FETCH NEXT FROM @UnionCursor INTO @_id, @LocName, @ParentLocId    
+  END 
+  CLOSE @UnionCursor;  
+
+END
+ 
+ EXEC [dbo].[HH_UNION];
+--end: procedure_union (hh) --
+
+
+
+
+
+
+SELECT distinct [UN]
+  FROM [barishal_Div2804].[dbo].[hh_info]
+  order by UN
+
+--end: union (household)--
+
+
+--for ward (HH)--
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN WRD_CB VARCHAR (50) NOT NULL;
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[hh_info] 
+set WRD_CB = '1'
+where [WRD_CB] = '01'
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[hh_info] 
+set WRD_CB = '2'
+where [WRD_CB] = '02'
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[hh_info] 
+set WRD_CB = '3'
+where [WRD_CB] = '03'
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[hh_info] 
+set WRD_CB = concat(UN,':WARD ',WRD_CB)
+where [THANA_NAME] = 'SHIBPUR'
+and [WRD_CB] in ('1','2','3','4','5','6','7','8','9')
+
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[hh_info] 
+set WRD_CB = UPPER([WRD_CB])
+where [THANA_NAME] = 'SHIBPUR'
+
+
+
+SELECT distinct [WRD_CB]
+      FROM [DHAKA_Norshingdi_new].[dbo].[hh_info]
+	  where [THANA_NAME] = 'SHIBPUR'
+	  order by [WRD_CB]
+
+--end: ward(HH)--
+
+
+
+-- household fields--
+1. 
+
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN TubewellRed VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set TubewellRed ='red_tube_well' 
+where [TubewellRed] = '1';
+
+select distinct  [TubewellRed] from  [DHAKA_Norshingdi_new].[dbo].[hh_info];
+
+2.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN TubewellGreen VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set TubewellGreen ='Green_tube_well' 
+where [TubewellGreen] = '1';
+
+select distinct  [TubewellGreen] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+3.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN TubewellNotTested VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set TubewellNotTested ='NO_arsenic_test_tube_well' 
+where [TubewellNotTested] = '1' ;
+
+select distinct  [TubewellNotTested] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+4.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN RainWater VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set RainWater ='Rain_water' 
+where [RainWater] = '1' ;
+
+select distinct  [RainWater] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+5.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN RiverCanal VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set RiverCanal ='River_or_canal' 
+where [RiverCanal] = '1' ;
+
+select distinct  [RiverCanal] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+6.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN Tap VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set Tap ='Tap' 
+where [Tap] = '1' ;
+
+select distinct  [Tap] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+7.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN Well VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set Well ='Well_or_indira' 
+where [Well] = '1' ;
+
+select distinct  [Well] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+8.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN Pond VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set Pond ='Pond' 
+where [Pond] = '1' ;
+
+select distinct  [Pond] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+9.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN WaterOthers VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set WaterOthers ='Others_water_source' 
+where [WaterOthers] = '1' ;
+
+select distinct  [WaterOthers] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+10.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN Sanitary VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set Sanitary ='Sanitary' 
+where [Sanitary] = '1' ;
+
+select distinct  [Sanitary] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+11.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN Construction VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set Construction ='Construction' 
+where [Construction] = '1' ;
+
+select distinct  [Construction] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+12.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN UnderConstruction VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set UnderConstruction ='Under_construction' 
+where [UnderConstruction] = '1' ;
+
+select distinct  [UnderConstruction] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+13.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN OpenArea VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set OpenArea ='OpenArea' 
+where [OpenArea] = '1' ;
+
+select distinct  [OpenArea] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+14.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN Bush VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set Bush ='Bush' 
+where [Bush] = '1' ;
+
+select distinct  [Bush] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+15.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN LatrineOthers VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set LatrineOthers ='Latrine_others' 
+where [LatrineOthers] = '1' ;
+
+select distinct  [LatrineOthers] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+16.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN LowerMiddleClass VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set LowerMiddleClass ='always_hand_to_mouth' 
+where [LowerMiddleClass] = '1' ;
+
+select distinct  [LowerMiddleClass] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+17.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN MiddleClass VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set MiddleClass ='Somtimes_hand_to_mouth' 
+where [MiddleClass] = '1' ;
+
+select distinct  [MiddleClass] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+18.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN UpperMiddleClass VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set UpperMiddleClass ='Income_and_expenditure_equal' 
+where [UpperMiddleClass] = '1' ;
+
+select distinct  [UpperMiddleClass] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+19.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN Solvent VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set Solvent ='Solvent' 
+where [Solvent] = '1' ;
+
+select distinct  [Solvent] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+20.
+ALTER TABLE [DHAKA_Norshingdi_new].[dbo].[hh_info] ALTER COLUMN Rich VARCHAR (50);
+
+update   [DHAKA_Norshingdi_new].[dbo].[hh_info] set Rich ='Can_save' 
+where [Rich] = '1' ;
+
+select distinct  [Rich] from  [DHAKA_Norshingdi_new].[dbo].[hh_info] ;
+
+-- end: household fields--
+
+-- mobile number--
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[hh_info] 
+set MobileNumber1 = '0' 
+where [MobileNumber1] is null ;
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[hh_info] 
+set MobileNumber2 = '0' 
+where [MobileNumber2] is null ;
+
+UPDATE [DHAKA_Norshingdi_new].[dbo].[hh_info] 
+set MobileNumber3 = '0' 
+where [MobileNumber3] is null ;
+
+select count(*)
+from [DHAKA_Norshingdi_new].[dbo].[hh_info]
+where [MobileNumber1] is null
+
+-- end: mobile number--
+
+
+SELECT HH.*, MEM.[FullName_English]
+  FROM [DHAKA_Norshingdi_new].[dbo].[hh_info] HH, 
+  [DHAKA_Norshingdi_new].[dbo].[mem_info] MEM
+  where HH.[THANA_NAME] = 'SHIBPUR'
+  and HH.[ROW_INDEX]= MEM.[HouseHoldInfo_ROW_INDEX]
+  and MEM.[RelationshipWithHH]= 'Household_Head'
+  order by [ROW_INDEX]
