@@ -13,3 +13,7 @@ Your data from Excel is now pasted into your table in SQL Server!
 Remember: Always start with copying and pasting a single row of data from Excel to SQL Server. 
 	  This is to check that there are no mismatches between your data from Excel and the SQL Server table (such as the number of columns) 
 	  and that your data in Excel validates with the data types in the SQL Server table. See the section “Tips and tricks” below for more details.
+
+
+For details go to:
+https://sqlspreads.com/2017/05/04/how-to-insert-data-in-excel-to-sql-server/
