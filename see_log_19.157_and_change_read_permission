@@ -1,0 +1,18 @@
+connect through ssh:
+
+1. ssh root@192.168.19.157
+2. root@mPower@786
+
+show log of openMRS:
+
+1.tail -f /var/log/openmrs/openmrs.log
+
+change read_white permission if 'permission denied occur' in some folder
+example: java.io.FileNotFoundException: /home/bahmni/clinical_forms/___________________________________38.json (Permission denied)
+solution:
+
+1.chmod -R 777 /home/bahmni/clinical_forms
+
+then try again to save and check log
+1.tail -f /var/log/openmrs/openmrs.log
+

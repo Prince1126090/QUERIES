@@ -22,5 +22,7 @@ create .war by running maven command:
 (go to the project forlder where pom.xml exists)
 mvn clean install -Dmaven.test.skip=true
 
-deploy the .war file in tomcat
+
+deploy the .war file in tomcat 
+path: opensrp-server/opensrp-web/target/opensrp.war
 (see document 'to_run_tomcat' for commands to run tomcat)
