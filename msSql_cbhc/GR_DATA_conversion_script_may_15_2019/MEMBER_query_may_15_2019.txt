@@ -190,58 +190,93 @@ where [RelationshipWithHH] ='4';
 --for : educationCode (member)--
 
 SELECT *
-  FROM [barishal_Div2804].[dbo].[education_code]
+  FROM [barishal_Div2804].[dbo].[education_code];
 
-  
+  SELECT distinct education_code
+  FROM [barishal_Div2804].[dbo].[education_code]
+  order by education_code;
+
+
   ALTER TABLE [barishal_Div2804].[dbo].[education_code]
   ADD education_name_english NVARCHAR (255);
 
+   SELECT distinct education_name_english
+  FROM [barishal_Div2804].[dbo].[education_code]
+  order by education_name_english;
+
 update [barishal_Div2804].[dbo].[education_code]
 set education_name_english = 'Class 1'
-where [education_code]='0'
+where [education_code]='0';
 
 update [barishal_Div2804].[dbo].[education_code]
 set education_name_english = concat('Class ',education_code)
-where [education_code] in( '1', '2', '3', '4', '5', '6', '7', '8', '9')
+where [education_code] in( '1', '2', '3', '4', '5', '6', '7', '8', '9');
 
 update [barishal_Div2804].[dbo].[education_code]
 set education_name_english = 'SSC or equivalent'
-where [education_code]='10'
+where [education_code]='10';
 
 update [barishal_Div2804].[dbo].[education_code]
 set education_name_english = 'HSC or equivalent'
-where [education_code]='11'
+where [education_code]='11';
 
 update [barishal_Div2804].[dbo].[education_code]
 set education_name_english = 'Hons. or equivalent'
-where [education_code]='12'
+where [education_code]='12';
 
 update [barishal_Div2804].[dbo].[education_code]
 set education_name_english = 'Masters or equivalent'
-where [education_code]='13'
+where [education_code]='13';
 
 update [barishal_Div2804].[dbo].[education_code]
 set education_name_english = 'Doctor'
-where [education_code]='14'
+where [education_code]='14';
 
 update [barishal_Div2804].[dbo].[education_code]
 set education_name_english = 'Technical'
-where [education_code]='15'
+where [education_code]='15';
 
 update [barishal_Div2804].[dbo].[education_code]
 set education_name_english = 'Vocational'
-where [education_code]='16'
+where [education_code]='16';
 
 update [barishal_Div2804].[dbo].[education_code]
 set education_name_english = 'Others Education'
-where [education_code]='99'
+where [education_code]='99';
 
 --end: educationCode--
 
---procedure for educationCode--
+-- for educationCode MM-- may 16, 2019
+
+  SELECT distinct [EduQualification]
+  FROM [barishal_Div2804].[dbo].[mem_info]
+  order by [EduQualification];
+
+    SELECT distinct [EduQualification]
+  FROM [barishal_Div2804].[dbo].[mem_info]
+  where LEN(EduQualification) = '3'
+  order by [EduQualification];
+
+update [barishal_Div2804].[dbo].[mem_info]
+set EduQualification = '9'
+where [EduQualification]='09' or [EduQualification]= '009';
+
+
+  --procedure for educationCode--
 --need to change column type from int to varchar-- 
 
 ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN EduQualification NVARCHAR (255);
+
+ update [barishal_Div2804].[dbo].[mem_info]
+	set EduQualification = 'CLASS 1'
+	where [EduQualification] not in (
+		SELECT distinct [education_code]
+	    FROM [barishal_Div2804].[dbo].[education_code]
+	);
+
+	 update [barishal_Div2804].[dbo].[mem_info]
+	set EduQualification = 'CLASS 1'
+	where [EduQualification] is NULL;
 --end: need to change column type from int to varchar-- 
 
 USE [barishal_Div2804]
@@ -288,11 +323,11 @@ GO
 
  EXEC [dbo].[MEM_EDU];
  
- update [barishal_Div2804].[dbo].[mem_info]
-	set EduQualification = 'CLASS 1'
-	where [EduQualification] is NULL
+
 	
 --end: procedure for educationCode--
+
+--end:  for educationCode MM--
 
 
 
