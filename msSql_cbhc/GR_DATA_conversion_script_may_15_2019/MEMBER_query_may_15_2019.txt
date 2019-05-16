@@ -334,8 +334,7 @@ GO
 -- for: Gender (member) --
 SELECT distinct([Gender])
   FROM [barishal_Div2804].[dbo].[mem_info]
-  where [UPZA] = 'SHIBPUR'
-  and [FullName_English] is not NULL
+  where [FullName_English] is not NULL
    and [Gender] is not null
    
  update   [barishal_Div2804].[dbo].[mem_info] set Gender='M'
@@ -346,6 +345,9 @@ SELECT distinct([Gender])
 -- end: Gender (member) --
 
 --for: occupation (member)--
+SELECT distinct [Occupation]
+FROM [barishal_Div2804].[dbo].[mem_info];
+
 ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN Occupation VARCHAR (50) ;
 
 update   [barishal_Div2804].[dbo].[mem_info] set Occupation='Others (Occupation)';
@@ -369,8 +371,7 @@ update   [barishal_Div2804].[dbo].[mem_info] set  Religion='Muslim'
 
  SELECT distinct([Religion])
   FROM [barishal_Div2804].[dbo].[mem_info]
-  where [UPZA] = 'SHIBPUR'
-  and [Gender] is null
+  where [Gender] is null
   and [FullName_English] is not NULL
 -- end: Religion (member) --
 
@@ -393,8 +394,7 @@ update   [barishal_Div2804].[dbo].[mem_info] set  MaritalStatus='Married'
 
  SELECT distinct([MaritalStatus])
   FROM [barishal_Div2804].[dbo].[mem_info]
-  where [UPZA] = 'SHIBPUR'
-  and [Gender] is not null
+  where [Gender] is not null
   and [FullName_English] is not NULL
 -- end: maritalStatus (member) --
 
@@ -436,14 +436,12 @@ where [Obesity] = '1' ;
 
 SELECT *
   FROM [barishal_Div2804].[dbo].[mem_info]
-  where [UPZA] = 'SHIBPUR'
-  and [Gender] is not null
+  where [Gender] is not null
   and [FullName_English] is not null
 
 SELECT distinct([Obesity])
   FROM [barishal_Div2804].[dbo].[mem_info]
-  where [UPZA] = 'SHIBPUR'
-  and [Gender] is not null
+  where [Gender] is not null
   and [FullName_English] is not null
   
 -- end: disease--
@@ -452,19 +450,17 @@ SELECT distinct([Obesity])
 
 SELECT *
   FROM [barishal_Div2804].[dbo].[mem_info]
-  where [UPZA] = 'SHIBPUR'
-  and [DOB] is null
+  where [DOB] is null
   and [Gender] is not null
   and [FullName_English] is not null
-  order by [HouseHoldInfo_ROW_INDEX]
+  order by [HouseHoldInfo_ROW_INDEX];
 
 
 
 SELECT *
   FROM [barishal_Div2804].[dbo].[mem_info]
-  where [UPZA] = 'SHIBPUR'
-  and [DOB] is not null
+  where [DOB] is not null
   and [Gender] is not null
   and [FullName_English] is not null
-  order by [HouseHoldInfo_ROW_INDEX]
+  order by [HouseHoldInfo_ROW_INDEX];
 

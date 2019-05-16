@@ -291,7 +291,7 @@ where [MobileNumber3] is null ;
 
 select count(*)
 from [barishal_Div2804].[dbo].[hh_info]
-where [MobileNumber1] is null
+where [MobileNumber1] is null;
 
 -- end: mobile number--
 
@@ -302,4 +302,4 @@ SELECT HH.*, MEM.[FullName_English]
   [barishal_Div2804].[dbo].[mem_info] MEM
   where HH.[ROW_INDEX]= MEM.[HouseHoldInfo_ROW_INDEX]
   and MEM.[RelationshipWithHH]= 'Household_Head'
-  order by [ROW_INDEX]
+  order by [ROW_INDEX;
