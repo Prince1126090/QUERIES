@@ -59,6 +59,25 @@ where json->> 'baseEntityId' = '42aeee48-c6da-4cbc-a1dd-fed471e29694';
 
 -- end: how to use the function--
 
+-- to find members from client (who has relationships is a member)--
 
+select distinct json->> 'relationships'
+from core.client c
+where c.json ->> 'relationships'  != 'null' and c.json ->> 'relationships'  != '{}'
+order by json->> 'relationships' ;
+
+-- end: to find members form client --
+
+-- final query to empty identifiers of members -- may 19, 2019
+
+update core.client c
+set json =  core.json_object_update_key(json::json, 'identifiers'::text, ''::text):: jsonb
+where c.json ->> 'relationships'  != 'null' and c.json ->> 'relationships'  != '{}'
+
+-- end --
+
+select distinct json->> 'identifiers'
+from core.client c
+where c.json ->> 'relationships'  != 'null' and c.json ->> 'relationships'  != '{}'
 
 
