@@ -1,0 +1,19 @@
+How to insert data from Excel to SQL Server – step-by-step instructions
+
+1. Open SQL Server Management Studio and connect to your SQL Server database.
+2. Expand the Databases and the Tables folders for the table where you would like to insert your data from Excel.
+3. Right-click the table and select the fourth option – Edit Top 200 Rows.
+4. The data will be loaded and you will see the first 200 rows of data in the table.
+5. Switch to Excel and select the rows and columns to insert from Excel to SQL Server.
+   Right-click the selected cells and select Copy.
+6. Switch back to SQL Server Management Studio and scroll down to the last row at the bottom and locate the row with a star in the left-most column.
+   Right click the star in the column header and select Paste.
+
+Your data from Excel is now pasted into your table in SQL Server!
+Remember: Always start with copying and pasting a single row of data from Excel to SQL Server. 
+	  This is to check that there are no mismatches between your data from Excel and the SQL Server table (such as the number of columns) 
+	  and that your data in Excel validates with the data types in the SQL Server table. See the section “Tips and tricks” below for more details.
+
+
+For details go to:
+https://sqlspreads.com/2017/05/04/how-to-insert-data-in-excel-to-sql-server/

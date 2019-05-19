@@ -1,0 +1,466 @@
+
+SELECT count(*)
+  FROM [barishal_Div2804].[dbo].[mem_info]
+
+
+
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN DIVN VARCHAR (50) NOT NULL;
+
+update   [barishal_Div2804].[dbo].[mem_info] set DIVN ='BARISHAL' where DIVN='3';
+
+SELECT distinct [ZILA]
+  FROM [barishal_Div2804].[dbo].[mem_info];
+
+
+
+ ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN ZILA VARCHAR (50) NOT NULL;
+
+update   [barishal_Div2804].[dbo].[mem_info] set ZILA ='PATUAKHALI' 
+ where [ZILA] = '35';
+
+ select *
+FROM [barishal_Div2804].[dbo].[mem_info]
+
+
+
+select distinct [UPZA]
+FROM [barishal_Div2804].[dbo].[mem_info];
+
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN UPZA VARCHAR (50) NOT NULL;
+
+update   [barishal_Div2804].[dbo].[mem_info] set UPZA ='PATUAKHALI SADAR' 
+ where [UPZA] = '253';
+ 
+--for: thana/upazila (member) --
+-- union_procedure should be run before thana otherwise union_procedure won't work --
+
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN UPZA VARCHAR (50) NOT NULL;
+
+USE [barishal_Div2804]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[MEM_THANA]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @LocName nvarchar(100); 
+ 
+  declare @_id varchar(100); 
+  DECLARE @UpazilaCursor as CURSOR;
+  SET @UpazilaCursor =  CURSOR FOR SELECT than_id,UPPER(name) FROM [barishal_Div2804].[dbo].[tbl_thana];
+  OPEN @UpazilaCursor;
+  FETCH NEXT FROM @UpazilaCursor INTO @_id, @LocName  
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+  IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [barishal_Div2804].[dbo].[mem_info] set UPZA =@LocName  where UPZA=@_id
+	 and UPZA= '112'
+      FETCH NEXT FROM @UpazilaCursor INTO @_id, @LocName   
+  END 
+  CLOSE @UpazilaCursor;  
+
+END
+ 
+ EXEC [dbo].[MEM_THANA];
+--end: thana/upazila (member) --
+
+
+
+
+
+--for union (member)--
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN UN VARCHAR (50) NOT NULL;
+
+SELECT distinct [UN]
+FROM [barishal_Div2804].[dbo].[mem_info]
+where [UPZA] = 'PATUAKHALI SADAR'
+order by UN
+
+
+update   [barishal_Div2804].[dbo].[mem_info] set UN ='LAUKATI' 
+where [UPZA] = 'PATUAKHALI SADAR'
+and [UN]='1';
+
+update   [barishal_Div2804].[dbo].[mem_info] set UN ='BADARPUR' 
+where [UPZA] = 'PATUAKHALI SADAR'
+and [UN]='2';
+
+update   [barishal_Div2804].[dbo].[mem_info] set UN ='ITABARIA' 
+where [UPZA] = 'PATUAKHALI SADAR'
+and [UN]='3';
+
+update   [barishal_Div2804].[dbo].[mem_info] set UN ='LOHALIA' 
+where [UPZA] = 'PATUAKHALI SADAR'
+and [UN]='4';
+
+update   [barishal_Div2804].[dbo].[mem_info] set UN ='KAMALAPUR' 
+where [UPZA] = 'PATUAKHALI SADAR'
+and [UN]='5';
+
+update   [barishal_Div2804].[dbo].[mem_info] set UN ='JAINKATI' 
+where [UPZA] = 'PATUAKHALI SADAR'
+and [UN]='6';
+
+
+
+--end: union (member)--
+
+
+ --for ward (member)--
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN WRD_CB VARCHAR (50) NOT NULL;
+
+UPDATE [barishal_Div2804].[dbo].[mem_info] 
+set WRD_CB = '5'
+where [WRD_CB] = '05'
+
+
+UPDATE [barishal_Div2804].[dbo].[mem_info] 
+set WRD_CB = concat(UPPER(UN),':WARD ',WRD_CB)
+where [UPZA] = 'PATUAKHALI SADAR'
+and [WRD_CB] in ('1','2','3','4','5','6','7','8','9')
+
+
+UPDATE [barishal_Div2804].[dbo].[mem_info] 
+set WRD_CB = UPPER([WRD_CB])
+where [UPZA] = 'PATUAKHALI SADAR'
+
+
+
+SELECT distinct [WRD_CB]
+      FROM [barishal_Div2804].[dbo].[mem_info]
+	  order by WRD_CB;
+
+--end: ward(member)--
+
+
+--select--
+select distinct([RelationshipWithHH])
+FROM [barishal_Div2804].[dbo].[mem_info]
+where [FullName_English] is not NULL
+order by RelationshipWithHH;
+--end: select--
+
+--for: relationship with HH(member) , may 16, 2019--
+
+select distinct [RelationshipWithHH]
+ FROM [barishal_Div2804].[dbo].[mem_info];
+
+ ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN RelationshipWithHH VARCHAR (50);
+
+ update [barishal_Div2804].[dbo].[mem_info]
+set RelationshipWithHH = 'Others_Relative'
+where [RelationshipWithHH] not in ('1', '2', '3', '4');
+
+update [barishal_Div2804].[dbo].[mem_info]
+set RelationshipWithHH = 'Others_Relative'
+where [RelationshipWithHH] is NULL;
+
+update [barishal_Div2804].[dbo].[mem_info]
+set RelationshipWithHH = 'Household_Head'
+where [RelationshipWithHH] ='1';
+
+update [barishal_Div2804].[dbo].[mem_info]
+set RelationshipWithHH = 'Husband_or_Wife'
+where [RelationshipWithHH] ='2';
+
+update [barishal_Div2804].[dbo].[mem_info]
+set RelationshipWithHH = 'Son'
+where [RelationshipWithHH] ='3';
+
+update [barishal_Div2804].[dbo].[mem_info]
+set RelationshipWithHH = 'father'
+where [RelationshipWithHH] ='4';
+
+-- end : RelationshipWithHH
+
+--for : educationCode (member)--
+
+SELECT *
+  FROM [barishal_Div2804].[dbo].[education_code];
+
+  SELECT distinct education_code
+  FROM [barishal_Div2804].[dbo].[education_code]
+  order by education_code;
+
+
+  ALTER TABLE [barishal_Div2804].[dbo].[education_code]
+  ADD education_name_english NVARCHAR (255);
+
+   SELECT distinct education_name_english
+  FROM [barishal_Div2804].[dbo].[education_code]
+  order by education_name_english;
+
+update [barishal_Div2804].[dbo].[education_code]
+set education_name_english = 'Class 1'
+where [education_code]='0';
+
+update [barishal_Div2804].[dbo].[education_code]
+set education_name_english = concat('Class ',education_code)
+where [education_code] in( '1', '2', '3', '4', '5', '6', '7', '8', '9');
+
+update [barishal_Div2804].[dbo].[education_code]
+set education_name_english = 'SSC or equivalent'
+where [education_code]='10';
+
+update [barishal_Div2804].[dbo].[education_code]
+set education_name_english = 'HSC or equivalent'
+where [education_code]='11';
+
+update [barishal_Div2804].[dbo].[education_code]
+set education_name_english = 'Hons. or equivalent'
+where [education_code]='12';
+
+update [barishal_Div2804].[dbo].[education_code]
+set education_name_english = 'Masters or equivalent'
+where [education_code]='13';
+
+update [barishal_Div2804].[dbo].[education_code]
+set education_name_english = 'Doctor'
+where [education_code]='14';
+
+update [barishal_Div2804].[dbo].[education_code]
+set education_name_english = 'Technical'
+where [education_code]='15';
+
+update [barishal_Div2804].[dbo].[education_code]
+set education_name_english = 'Vocational'
+where [education_code]='16';
+
+update [barishal_Div2804].[dbo].[education_code]
+set education_name_english = 'Others Education'
+where [education_code]='99';
+
+--end: educationCode--
+
+-- for educationCode MM-- may 16, 2019
+
+  SELECT distinct [EduQualification]
+  FROM [barishal_Div2804].[dbo].[mem_info]
+  order by [EduQualification];
+
+    SELECT distinct [EduQualification]
+  FROM [barishal_Div2804].[dbo].[mem_info]
+  where LEN(EduQualification) = '3'
+  order by [EduQualification];
+
+update [barishal_Div2804].[dbo].[mem_info]
+set EduQualification = '9'
+where [EduQualification]='09' or [EduQualification]= '009';
+
+
+  --procedure for educationCode--
+--need to change column type from int to varchar-- 
+
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN EduQualification NVARCHAR (255);
+
+ update [barishal_Div2804].[dbo].[mem_info]
+	set EduQualification = 'CLASS 1'
+	where [EduQualification] not in (
+		SELECT distinct [education_code]
+	    FROM [barishal_Div2804].[dbo].[education_code]
+	);
+
+	 update [barishal_Div2804].[dbo].[mem_info]
+	set EduQualification = 'CLASS 1'
+	where [EduQualification] is NULL;
+--end: need to change column type from int to varchar-- 
+
+USE [barishal_Div2804]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[MEM_EDU]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+  declare @eduClass nvarchar(100); 
+ 
+  declare @eduCode varchar(100); 
+  DECLARE @educationCursor as CURSOR;
+  SET @educationCursor =  CURSOR FOR SELECT education_code,UPPER(education_name_english) FROM [barishal_Div2804].[dbo].[education_code];
+
+  OPEN @educationCursor;
+
+  FETCH NEXT FROM @educationCursor INTO @eduCode, @eduClass 
+
+  WHILE @@FETCH_STATUS = 0  
+  BEGIN  
+
+IF TRIGGER_NESTLEVEL() > 1
+     RETURN
+     update   [barishal_Div2804].[dbo].[mem_info] set EduQualification =@eduClass  where EduQualification=@eduCode
+
+      FETCH NEXT FROM @educationCursor INTO @eduCode, @eduClass   
+  END 
+  CLOSE @educationCursor;
+
+END
+GO
+
+ EXEC [dbo].[MEM_EDU];
+ 
+
+	
+--end: procedure for educationCode--
+
+--end:  for educationCode MM--
+
+
+
+-- for: Gender (member) --
+SELECT distinct([Gender])
+  FROM [barishal_Div2804].[dbo].[mem_info]
+  where [FullName_English] is not NULL
+   and [Gender] is not null
+   
+ update   [barishal_Div2804].[dbo].[mem_info] set Gender='M'
+ where Gender='1';
+ 
+ update   [barishal_Div2804].[dbo].[mem_info] set Gender='F'
+ where Gender='2';
+-- end: Gender (member) --
+
+--for: occupation (member)--
+SELECT distinct [Occupation]
+FROM [barishal_Div2804].[dbo].[mem_info];
+
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN Occupation VARCHAR (50) ;
+
+update   [barishal_Div2804].[dbo].[mem_info] set Occupation='Others (Occupation)';
+--end: occupation (member)--
+
+-- for: Religion (member) --
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN Religion VARCHAR (50) ;
+
+update   [barishal_Div2804].[dbo].[mem_info] set  Religion='Muslim'
+ where Religion='1';
+
+ update   [barishal_Div2804].[dbo].[mem_info] set  Religion='Hindu'
+ where Religion='2';
+
+ update   [barishal_Div2804].[dbo].[mem_info] set  Religion='Others (Religion)'
+ where Religion in ('0', '4');
+
+ update   [barishal_Div2804].[dbo].[mem_info] set  Religion='Others (Religion)'
+ where Religion is NULL;
+
+
+ SELECT distinct([Religion])
+  FROM [barishal_Div2804].[dbo].[mem_info]
+  where [Gender] is null
+  and [FullName_English] is not NULL
+-- end: Religion (member) --
+
+
+  -- for: maritalStatus (member) --
+update   [barishal_Div2804].[dbo].[mem_info] set  MaritalStatus='Unmarried'
+ where MaritalStatus is null;
+
+update   [barishal_Div2804].[dbo].[mem_info] set  MaritalStatus='Unmarried'
+ where MaritalStatus='1';
+
+update   [barishal_Div2804].[dbo].[mem_info] set  MaritalStatus='Married'
+ where MaritalStatus='2';
+
+ update   [barishal_Div2804].[dbo].[mem_info] set  MaritalStatus='Divorced'
+ where MaritalStatus='3';
+
+ update   [barishal_Div2804].[dbo].[mem_info] set  MaritalStatus='Widow'
+ where MaritalStatus='5';
+
+ SELECT distinct([MaritalStatus])
+  FROM [barishal_Div2804].[dbo].[mem_info]
+  where [Gender] is not null
+  and [FullName_English] is not NULL
+-- end: maritalStatus (member) --
+
+-- Disease --
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN Diabetes VARCHAR (50);
+
+update   [barishal_Div2804].[dbo].[mem_info] set Diabetes ='Diabetes' 
+where [Diabetes] = '1' ;
+
+
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN Hypertension VARCHAR (50);
+
+update   [barishal_Div2804].[dbo].[mem_info] set Hypertension ='High Blood Pressure' 
+where [Hypertension] = '1' ;
+
+
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN Cancer VARCHAR (50);
+
+update   [barishal_Div2804].[dbo].[mem_info] set Cancer ='Others (Family Disease)' 
+where [Cancer] = '1' ;
+
+
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN RespiratoryDisease VARCHAR (50);
+
+update   [barishal_Div2804].[dbo].[mem_info] set RespiratoryDisease ='Respiratory Disease' 
+where [RespiratoryDisease] = '1' ;
+
+
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN PhycologicalDisease VARCHAR (50);
+
+update   [barishal_Div2804].[dbo].[mem_info] set PhycologicalDisease ='Psychological Disease' 
+where [PhycologicalDisease] = '1' ;
+
+
+ALTER TABLE [barishal_Div2804].[dbo].[mem_info] ALTER COLUMN Obesity VARCHAR (50);
+
+update   [barishal_Div2804].[dbo].[mem_info] set Obesity ='Obesity' 
+where [Obesity] = '1' ;
+
+SELECT *
+  FROM [barishal_Div2804].[dbo].[mem_info]
+  where [Gender] is not null
+  and [FullName_English] is not null
+
+SELECT distinct([Obesity])
+  FROM [barishal_Div2804].[dbo].[mem_info]
+  where [Gender] is not null
+  and [FullName_English] is not null
+  
+-- end: disease--
+
+
+
+SELECT *
+  FROM [barishal_Div2804].[dbo].[mem_info]
+  where [DOB] is null
+  and [Gender] is not null
+  and [FullName_English] is not null
+  order by [HouseHoldInfo_ROW_INDEX];
+
+
+
+SELECT *
+  FROM [barishal_Div2804].[dbo].[mem_info]
+  where [DOB] is not null
+  and [Gender] is not null
+  and [FullName_English] is not null
+  order by [HouseHoldInfo_ROW_INDEX];
+
