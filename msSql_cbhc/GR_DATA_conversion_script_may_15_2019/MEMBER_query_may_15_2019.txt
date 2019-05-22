@@ -456,11 +456,42 @@ SELECT *
   order by [HouseHoldInfo_ROW_INDEX];
 
 
+-- use this query for exporting result to member.csv--
+--after exporting make the column-type of DOB - shortdate (mm/dd/yyyy)--
 
-SELECT *
+SELECT [HouseHoldInfo_ROW_INDEX_old]
+      ,[DIVN]
+      ,[ZILA]
+      ,[UPZA]
+      ,[UN]
+      ,[WRD_CB]
+      ,[PaermanentHouseholdNo]
+      ,[Serial]
+      ,[DOB]
+      ,[Gender]
+      ,[MaritalStatus]
+      ,[Religion]
+      ,[Citizen_NID]
+      ,[Diabetes]
+      ,[Hypertension]
+      ,[Cancer]
+      ,[RespiratoryDisease]
+      ,[PhycologicalDisease]
+      ,[Obesity]
+      ,[DOD]
+      ,[EduQualification]
+      ,[Occupation]
+      ,[CauseOfDeath]
+      ,[FullName_English]
+      ,[ID]
+      ,[RelationshipWithHH]
+      ,[HouseHoldInfo_ROW_INDEX]
   FROM [barishal_Div2804].[dbo].[mem_info]
   where [DOB] is not null
   and [Gender] is not null
   and [FullName_English] is not null
   order by [HouseHoldInfo_ROW_INDEX];
+  
+  
+  
 
