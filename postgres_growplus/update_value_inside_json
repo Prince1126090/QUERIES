@@ -1,10 +1,83 @@
+-- to check version of postgres --
+
+SELECT version();
+
+--end --
+
+
+
 select id,E.*  from core.event E
 where json->> 'entityType' ='mother'
 
+--works on PostgreSQL 9.5.14 --
+--doesn't work on PostgreSQL 9.4.15 --
 update core.event E
 set json = json::jsonb - 'providerId' || '{"providerId":""}'::jsonb
 where json->> 'entityType' ='mother'
 
+
 update core.event E 
 set "json" = jsonb_set("json", '{"providerId"}', '""'::jsonb) 
 where json->> 'entityType' ='mother'
+
+--end --
+
+-- for postgres 9.4 -- (may 19, 2019)
+
+--function to update value in json --
+CREATE OR REPLACE FUNCTION  core."json_object_update_key"(
+  "json"          json,
+  "key_to_set"    TEXT,
+  "value_to_set"  anyelement
+)
+  RETURNS json
+  LANGUAGE sql
+  IMMUTABLE
+  STRICT
+AS $function$
+SELECT CASE
+  WHEN ("json" -> "key_to_set") IS NULL THEN "json"
+  ELSE (SELECT concat('{', string_agg(to_json("key") || ':' || "value", ','), '}')
+          FROM (SELECT *
+                  FROM json_each("json")
+                 WHERE "key" <> "key_to_set"
+                 UNION ALL
+                SELECT "key_to_set", to_json("value_to_set")) AS "fields")::json
+END
+$function$;
+-- end : function--
+
+--how to use the function--
+
+update core.client
+set json =  core.json_object_update_key(json::json, 'gender'::text, ''::text):: jsonb
+where json->> 'baseEntityId' = '42aeee48-c6da-4cbc-a1dd-fed471e29694';
+
+select *
+from core.client
+where json->> 'baseEntityId' = '42aeee48-c6da-4cbc-a1dd-fed471e29694';
+
+-- end: how to use the function--
+
+-- to find members from client (who has relationships is a member)--
+
+select distinct json->> 'relationships'
+from core.client c
+where c.json ->> 'relationships'  != 'null' and c.json ->> 'relationships'  != '{}'
+order by json->> 'relationships' ;
+
+-- end: to find members form client --
+
+-- final query to empty identifiers of members -- may 19, 2019
+
+update core.client c
+set json =  core.json_object_update_key(json::json, 'identifiers'::text, ''::text):: jsonb
+where c.json ->> 'relationships'  != 'null' and c.json ->> 'relationships'  != '{}'
+
+-- end --
+
+select distinct json->> 'identifiers'
+from core.client c
+where c.json ->> 'relationships'  != 'null' and c.json ->> 'relationships'  != '{}'
+
+
