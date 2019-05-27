@@ -81,3 +81,19 @@ from core.client c
 where c.json ->> 'relationships'  != 'null' and c.json ->> 'relationships'  != '{}'
 
 
+
+-- may 26, 2019 (in live(37) database) --
+update core.client c
+set json =  core.json_object_update_key(json::json, 'identifiers'::text, ''::text):: jsonb
+
+select  DISTINCT json->> 'identifiers'
+from core.client
+
+--set empty json inside jsonb --
+update core.client c
+set json =  core.json_object_update_key(json::json, 'identifiers'::text, '{}'::text::json):: jsonb
+-- end: set empty json inside jsonb --
+
+--end --
+
+
