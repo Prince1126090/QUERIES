@@ -1,0 +1,103 @@
+
+SELECT distinct [UN]
+  FROM [ctg_Div2804].[dbo].[hh_info]
+   where [THANA_NAME] = 'LAMA'
+   order by UN;
+   
+   
+   --for ward (HH)--
+ SELECT distinct [WRD_CB]
+  FROM [ctg_Div2804].[dbo].[hh_info]
+   where [THANA_NAME] = 'LAMA'
+  order by WRD_CB;
+
+ALTER TABLE [ctg_Div2804].[dbo].[hh_info] ALTER COLUMN WRD_CB VARCHAR (50) NOT NULL;
+
+UPDATE [ctg_Div2804].[dbo].[hh_info] 
+set WRD_CB = '3'
+where [WRD_CB] = '03'
+and [THANA_NAME] = 'LAMA'
+and [UN] != '0';
+
+UPDATE [ctg_Div2804].[dbo].[hh_info] 
+set WRD_CB = concat(UPPER(UN),':WARD ',WRD_CB)
+where [WRD_CB] in ('1','2','3','4','5','6','7','8','9')
+and [THANA_NAME] = 'LAMA';
+
+
+SELECT distinct [WRD_CB]
+  FROM [ctg_Div2804].[dbo].[hh_info]
+   where [THANA_NAME] = 'LAMA'
+  order by WRD_CB;
+
+--end: ward(HH)--
+
+
+
+
+ -- convert data of mem-info table then run the query --
+  -- use this query for exporting result to hh.csv--
+    SELECT HH.[ROW_INDEX]
+      ,HH.[DIVN]
+      ,HH.[ZILA]
+      ,HH.[UPZA]
+      ,HH.[UN]
+      ,HH.[WRD_CB]
+      ,HH.[PaermanentHouseholdNo]
+      ,HH.[Date]
+      ,HH.[TubewellRed]
+      ,HH.[TubewellGreen]
+      ,HH.[TubewellNotTested]
+      ,HH.[RainWater]
+      ,HH.[RiverCanal]
+      ,HH.[Tap]
+      ,HH.[Well]
+      ,HH.[Pond]
+      ,HH.[WaterOthers]
+      ,HH.[Sanitary]
+      ,HH.[Construction]
+      ,HH.[UnderConstruction]
+      ,HH.[OpenArea]
+      ,HH.[Bush]
+      ,HH.[LatrineOthers]
+      ,HH.[LowerMiddleClass]
+      ,HH.[UpperMiddleClass]
+      ,HH.[MiddleClass]
+      ,HH.[Solvent]
+      ,HH.[Rich]
+      ,HH.[MonthlyIncome]
+      ,HH.[MobileNumber1]
+      ,HH.[MobileNumber2]
+      ,HH.[MobileNumber3]
+      ,HH.[NoOfMembers]
+      ,HH.[AdditionalPages]
+      ,HH.[PageNo]
+      ,HH.[Batch]
+      ,HH.[DocNo]
+      ,HH.[ImageSource]
+      ,HH.[UncertainSymbolsCount]
+      ,HH.[Uploader]
+      ,HH.[ProcessDate]
+      ,HH.[PAGE_IMAGES]
+      ,HH.[DIVN]
+      ,HH.[ZILA]
+      ,HH.[UPZA]
+      ,HH.[UPZA]
+      ,HH.[ROW_INDEX2]
+      ,HH.[UPZA]
+      ,HH.[Batch_temp]
+      ,HH.[image_name_jpg]
+      ,HH.[UPZA]
+      ,HH.[SL_NO]
+      ,HH.[DIV_NAME]
+      ,HH.[DIST_NAME]
+      ,HH.[THANA_NAME]
+	  , MEM.[FullName_English]
+  FROM [ctg_Div2804].[dbo].[hh_info] HH, 
+  [ctg_Div2804].[dbo].[mem_info] MEM
+  where HH.[THANA_NAME] = 'LAMA'
+  and HH.[UN] != '0'
+  and HH.[ROW_INDEX]= MEM.[HouseHoldInfo_ROW_INDEX]
+  and MEM.[RelationshipWithHH]= 'Household_Head'
+  order by [ROW_INDEX];
+   

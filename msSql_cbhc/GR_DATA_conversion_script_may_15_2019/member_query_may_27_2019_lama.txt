@@ -1,0 +1,76 @@
+--for union (member)--
+SELECT distinct [UN]
+FROM [ctg_Div2804].[dbo].[mem_info]
+where [UPZA] in ('CAKARIYA', 'LAMA', 'MATLAB')
+order by UN;
+
+SELECT distinct [UN]
+FROM [ctg_Div2804].[dbo].[mem_info]
+where [UPZA] = 'LAMA'
+order by UN;
+
+--end: union (member)--
+
+
+ --for ward (member)--
+SELECT distinct [WRD_CB]
+      FROM [ctg_Div2804].[dbo].[mem_info]
+	  order by WRD_CB;
+
+UPDATE [ctg_Div2804].[dbo].[mem_info] 
+set WRD_CB = '9'
+where [WRD_CB] = '09';
+
+
+SELECT distinct [WRD_CB]
+      FROM [ctg_Div2804].[dbo].[mem_info]
+	  where [UPZA] = 'LAMA'
+	  order by WRD_CB;
+
+
+UPDATE [ctg_Div2804].[dbo].[mem_info] 
+set WRD_CB = concat(UPPER(UN),':WARD ',WRD_CB)
+where [UPZA] = 'LAMA'
+and [UN]!= '0'
+and [WRD_CB] in ('1','2','3','4','5','6','7','8','9');
+
+--end: ward(member)--
+
+
+-- use this query for exporting result to member.csv--
+--after exporting make the column-type of DOB - shortdate (mm/dd/yyyy)--
+
+
+SELECT [HouseHoldInfo_ROW_INDEX_old]
+      ,[DIVN]
+      ,[ZILA]
+      ,[UPZA]
+      ,[UN]
+      ,[WRD_CB]
+      ,[PaermanentHouseholdNo]
+      ,[Serial]
+      ,[DOB]
+      ,[Gender]
+      ,[MaritalStatus]
+      ,[Religion]
+      ,[Citizen_NID]
+      ,[Diabetes]
+      ,[Hypertension]
+      ,[Cancer]
+      ,[RespiratoryDisease]
+      ,[PhycologicalDisease]
+      ,[Obesity]
+      ,[DOD]
+      ,[EduQualification]
+      ,[Occupation]
+      ,[CauseOfDeath]
+      ,[FullName_English]
+      ,[ID]
+      ,[RelationshipWithHH]
+      ,[HouseHoldInfo_ROW_INDEX]
+  FROM [ctg_Div2804].[dbo].[mem_info]
+  where [UPZA] = 'LAMA'
+  and [DOB] is not null
+  and [Gender] is not null
+  and [FullName_English] is not null
+  order by [HouseHoldInfo_ROW_INDEX];
