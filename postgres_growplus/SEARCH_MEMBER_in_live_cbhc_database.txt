@@ -1,0 +1,4 @@
+select c.id, c.json->>'firstName' as Name, c.json->>'addresses' as Address
+from core.client c
+where json->>'firstName' = 'KAMAL HOSSEN'
+order by id desc
