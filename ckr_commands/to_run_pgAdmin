@@ -1,0 +1,24 @@
+
+
+
+cd ~/pgadmin4
+source bin/activate
+python lib/python2.7/site-packages/pgadmin4/pgAdmin4.py
+
+
+Make a shortcut
+
+touch ~/pgadmin4/pgadmin4
+chmod +x ~/pgadmin4/pgadmin4
+nano ~/pgadmin4/pgadmin4
+
+Write:
+
+#!/bin/bash
+cd ~/pgadmin4
+source bin/activate
+python lib/python2.7/site-packages/pgadmin4/pgAdmin4.py
+
+Now you can just run it with a simpler command:
+
+~/pgadmin4/pgadmin4

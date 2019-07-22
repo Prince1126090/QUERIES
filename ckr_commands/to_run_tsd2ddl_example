@@ -1,0 +1,12 @@
+
+
+ssh cokreate@54.36.166.57
+yes
+enterPassword: password given in skype by Sabbir vai
+
+cd test-repo/inventory/tsd-to-ddl/postgres
+
+
+python3 sql-script-generator.py dev
+
+flyway clean migrate
