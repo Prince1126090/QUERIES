@@ -4,7 +4,6 @@
 
 1.clreate database(opensrp) through pg_admin
 2. sudo su postgres
-
 3.psql (enter passoword if needed, password for postgres is 'password')
 4. create user opensrp_admin with encrypted password 'admin';
 5. grant all privileges on database opensrp to opensrp_admin;
