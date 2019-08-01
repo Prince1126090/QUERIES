@@ -1,0 +1,32 @@
+
+1. run security .jar in /Documents/GRP
+
+cd ~/Documents/GRP
+java -jar sec-master-service-1.0.jar &
+
+2. run gradle clean from terminal in directories where build.gradle file exists
+   build.gradle exixts in multiple directories.
+   e.g. /home/prince/Documents/GRP/prc-service/services/prc-app-service/java
+
+cd ~/Documents/GRP/prc-service/services/prc-app-service/java
+gradle clean cleanEclipse eclipse
+
+3. set ip in application.properties file
+server.address=ip address of local pc (192.168.5.145)
+
+4. run spring-boot application
+
+5. in insomnia get access_tocken by posting necessary credential to http://localhost:9011/oauth/token 
+
+6. set access_tocken in insomnia-> environment
+
+7. check the application is running by fetching data 
+
+   e.g. POST to http://192.168.5.145:9031/app-requisition/declaration/v1/get-list
+   with required json
+   will fetch list of declarations.
+
+
+
+
+
