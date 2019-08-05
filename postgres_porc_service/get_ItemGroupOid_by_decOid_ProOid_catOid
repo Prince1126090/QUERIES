@@ -1,0 +1,32 @@
+select
+		count (distinct item_group_oid)
+	from
+		prc.requisition_detail rd
+	inner join prc.requisition_information ri on
+		rd.requisition_oid = ri.oid
+	where
+		1 = 1
+		and ri.status = 'Final'
+		and ri.requisition_declaration_oid = 'Declaration-Jan-01'
+		and ri.project_oid = '1'
+		and rd.item_category_oid = '2'
+	group by requisition_declaration_oid, project_oid, item_category_oid
+	
+	
+	
+select
+	ri.requisition_declaration_oid as declarationOid,
+	ri.project_oid as projectOid,
+	rd.item_category_oid as itemCategoryOid,
+	rd.item_group_oid as itemGroupOid
+from
+	prc.requisition_detail rd
+inner join prc.requisition_information ri on
+	rd.requisition_oid = ri.oid
+where
+	1 = 1
+	and ri.status = 'Final'
+	and ri.requisition_declaration_oid = 'Declaration-Jan-01'
+	and ri.project_oid = '1'
+	and rd.item_category_oid = '2'
+group by requisition_declaration_oid, project_oid, item_category_oid, item_group_oid
