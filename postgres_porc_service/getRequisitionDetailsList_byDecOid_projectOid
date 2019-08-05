@@ -1,0 +1,22 @@
+select
+	rd.oid as oid,
+	rd.remarks as remarks,
+	rd.unit as unit,
+	rd.quantity as quantity,
+	rd.item_oid as itemOid,
+	rd.item_group_oid as itemGroupOid,
+	rd.item_category_oid as itemCategoryOid,
+	rd.requisition_oid as requisitionOid,
+	ri.created_by as createdBy,
+	ri.status as status,
+	ri.requisition_declaration_oid as declarationOid,
+	ri.project_oid as projectOid
+from
+	prc.requisition_detail rd
+inner join prc.requisition_information ri on
+	rd.requisition_oid = ri.oid
+where
+	1 = 1
+	and ri.status = 'Final'
+	and ri.requisition_declaration_oid = 'Declaration-Jan-01'
+	and ri.project_oid = '1'
