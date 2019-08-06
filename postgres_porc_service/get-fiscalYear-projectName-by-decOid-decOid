@@ -1,0 +1,45 @@
+select
+	requisition_declaration_oid, 
+	project_oid
+from
+	prc.requisition_information
+where
+	1 = 1
+	and status = 'Final'
+	and requisition_declaration_oid = 'Declaration-Jan-01'
+	and project_oid = '1'
+group by requisition_declaration_oid, project_oid
+
+
+
+
+select
+	rd.oid,
+	rd.fiscal_year_oid as fiscalYearOid,
+	fy.name_en as fiscalYearEn,
+	fy.name_bn as fiscalYearBn,
+	pp.oid as projectOid,
+	pp.name_en as projectNameEn,
+	pp.name_bn  as projectNameBn
+from
+	prc.requisition_declaration rd,
+	cmn.fiscal_year  fy,
+	prc.procurement_project pp,
+	(
+		select
+			requisition_declaration_oid, 
+			project_oid
+		from
+			prc.requisition_information
+		where
+			1 = 1
+			and status = 'Final'
+			and requisition_declaration_oid = 'Declaration-Jan-01'
+			and project_oid = '1'
+		group by requisition_declaration_oid, project_oid
+	) ri
+where
+	1 = 1
+	and rd.fiscal_year_oid = fy.oid
+	and rd.oid = ri.requisition_declaration_oid
+	and pp.oid = ri.project_oid
