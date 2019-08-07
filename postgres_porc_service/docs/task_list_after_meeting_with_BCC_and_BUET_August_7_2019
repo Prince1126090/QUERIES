@@ -1,0 +1,49 @@
+August 7, 2019
+Task List (Prepared based on the meeting with BCC and BUET )
+
+
+--Declaration--
+
+-High priority-
+1. Show list of users who have submitted requisition-form.
+2. Show lsit of users who haven't submitted requisition-form, add option to notify/remind them.
+3. Add confirmation window before closing declaration(manually).
+4. Generate report after closing declaration.
+	The hard-copy of the report will reviewed by the higher authorities.
+	Consolidation will be based on the approved hard-copy of the report.
+	Reports will be of two types - (i) Requisition summery  (ii) User wise requisition details
+
+-Low priority -
+1. Add option to configure maximum number of declaration per fiscal year.
+2. Send notification to users about new declarations.
+3. Add edit option to extend end-date of a declaration. 
+	Edit can be done while the declaration is still open. 
+	Once the declaration is closed (manually/ automatically), then it cannot be modified.
+4. Automatically close declaration after end date.
+5. Fix bengali date formats.
+
+
+--Requisition Form--
+
+-High priority-
+1. Change label from 'add item' to 'add items needed outside of entitlement'.
+	Items in entitlement will be automatically added in consolidation form.
+	In requisition-form users will add needed items that are not included in their entitlement.
+
+
+--Consolidation--
+
+-High priority-
+1.  Make two sections in consolidation form. 
+	(i) Entitlement-requisitions
+		Items in entitlement will be automatically added in consolidation form.
+	(ii) Other-requisitions
+2. Add preview 'Requisition-Details'
+
+-Low priority-
+1. Integrate role 'Head of Procurement Entity' for approval.
+
+
+
+
+
