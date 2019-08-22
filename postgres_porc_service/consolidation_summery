@@ -1,0 +1,35 @@
+-- August 22, 2019 --
+
+select 
+	sum(rd.quantity) as requiredQuantity, 
+	rd.item_group_oid as itemGroupOid, 
+	rd.unit as unit, 
+	ri.requisition_declaration_oid as declarationOid, 
+	ic.oid as itemCategoryOid, 
+	i.name_en as itemGroupNameEn, 
+	i.name_bn as itemGroupNameBn, 
+	ic.name_en as itemCategoryNameEn, 
+	ic.name_bn as itemCategoryNameBn 
+from 
+	prc.requisition_information ri 
+join prc.requisition_detail rd on 
+	rd.requisition_oid = ri.oid 
+join cmn.item_group i on 
+	rd.item_group_oid = i.oid 
+join cmn.item_category ic on 
+	rd.item_category_oid = ic.oid 
+where 
+	1 = 1 
+	and ri.requisition_declaration_oid = 'Declaration-Jan-01' 
+	and ri.status = 'Final' 
+group by 
+	ri.requisition_declaration_oid , 
+	rd.item_group_oid, 
+	ic.oid, 
+	rd.unit, 
+	i.name_en, 
+	i.name_bn, 
+	ic.name_en, 
+	ic.name_bn 
+order by 
+	ic.name_en asc
