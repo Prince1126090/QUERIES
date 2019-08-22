@@ -1,0 +1,42 @@
+August 22, 2019
+
+-- To run --
+go inside project folder
+source venv/bin/activate
+pip3 freeze
+./manage.py runserver
+
+-- Details --
+
+1. Install virtual-environment-
+sudo pip3 install virtualenv
+
+
+2. Create a virtual-environment
+   -go inside the project folder
+virtualenv -p python3 venv(name of the virtual-environment)
+
+
+3. Activate virtual-environment
+source venv(name of the virtual-environment)/bin/activate
+
+to deactivate-
+deactivate
+
+
+4. To check what is installed in virtual-environment
+pip3 freeze
+
+
+5. To install dependencies in virtual-environment
+pip install -r requirements.txt
+(All the dependencies are declared in requirements.txt)
+
+
+6. To run Django
+./manage.py runserver
+
+project will run on 127.0.0.1:8000 or localhost:8000
+
+
+
