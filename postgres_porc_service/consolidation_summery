@@ -1,15 +1,15 @@
 -- August 22, 2019 --
 
 select 
-	sum(rd.quantity) as requiredQuantity, 
-	rd.item_group_oid as itemGroupOid, 
-	rd.unit as unit, 
 	ri.requisition_declaration_oid as declarationOid, 
-	ic.oid as itemCategoryOid, 
+	ic.oid as itemCategoryOid,
+	ic.name_en as itemCategoryNameEn, 
+	ic.name_bn as itemCategoryNameBn ,
+	rd.item_group_oid as itemGroupOid, 
 	i.name_en as itemGroupNameEn, 
 	i.name_bn as itemGroupNameBn, 
-	ic.name_en as itemCategoryNameEn, 
-	ic.name_bn as itemCategoryNameBn 
+	rd.unit as unit,
+	sum(rd.quantity) as requiredQuantity
 from 
 	prc.requisition_information ri 
 join prc.requisition_detail rd on 

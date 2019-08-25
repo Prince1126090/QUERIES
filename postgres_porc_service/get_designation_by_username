@@ -1,0 +1,29 @@
+select 
+	emi.oid,
+	emi.grp_username,
+	emi.name_en,
+	emi.name_bn,
+	p.name_en,
+	p.name_bn
+from 
+	cmn.post p,
+	cmn.office_unit_post oup,
+	hrm.employee_office eo,
+	hrm.employee_master_info emi,
+	prc.requisition_information ri
+where
+	emi.oid = eo.employee_oid
+	and oup.oid = eo.office_unit_post_id
+	and p.oid = oup.post_oid
+	and eo.is_default_profile = 'Yes'
+	and eo.status = 'Active'
+	and emi.grp_username = ri.created_by
+group by 
+	emi.oid,
+	emi.grp_username,
+	emi.name_en,
+	emi.name_bn,
+	p.name_en,
+	p.name_bn
+
+	

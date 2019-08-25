@@ -1,0 +1,72 @@
+select 
+	a.*,
+	b.*
+from 
+	(
+		select 
+		ri.requisition_declaration_oid as declarationOid, 
+		ic.oid as itemCategoryOid,
+		ic.name_en as itemCategoryNameEn, 
+		ic.name_bn as itemCategoryNameBn ,
+		rd.item_group_oid as itemGroupOid, 
+		i.name_en as itemGroupNameEn, 
+		i.name_bn as itemGroupNameBn, 
+		ri.created_by as createdBy,
+		rd.unit as unit,
+		sum(rd.quantity) as requiredQuantity
+	from 
+		prc.requisition_information ri 
+	join prc.requisition_detail rd on 
+		rd.requisition_oid = ri.oid 
+	join cmn.item_group i on 
+		rd.item_group_oid = i.oid 
+	join cmn.item_category ic on 
+		rd.item_category_oid = ic.oid 
+	where 
+		1 = 1 
+		and ri.requisition_declaration_oid = 'Declaration-Jan-01' 
+		and ri.status = 'Final' 
+		and ri.office_oid = '4'
+		and ri.requisition_for = '5'
+	group by 
+		ri.requisition_declaration_oid , 
+		ic.oid, 
+		ic.name_en, 
+		ic.name_bn, 
+		rd.item_group_oid, 
+		i.name_en, 
+		i.name_bn, 
+		rd.unit, 
+		ri.created_by) a,
+	(
+		select 
+			emi.oid as employeeMasterInfoOid,
+			emi.grp_username as grpUsername,
+			emi.name_en as employeeNameEn,
+			emi.name_bn as employeeNameBn,
+			p.name_en as postNameEn, 
+			p.name_bn as postNameBn
+		from 
+			cmn.post p,
+			cmn.office_unit_post oup,
+			hrm.employee_office eo,
+			hrm.employee_master_info emi,
+			prc.requisition_information ri
+		where
+			emi.oid = eo.employee_oid
+			and oup.oid = eo.office_unit_post_id
+			and p.oid = oup.post_oid
+			and eo.is_default_profile = 'Yes'
+			and eo.status = 'Active'
+			and emi.grp_username = ri.created_by
+		group by 
+			emi.oid,
+			emi.grp_username,
+			emi.name_en,
+			emi.name_bn,
+			p.name_en,
+			p.name_bn) b
+where
+	a.createdBy = b.grpUsername
+order by
+	a.itemCategoryNameEn Asc
