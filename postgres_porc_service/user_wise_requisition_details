@@ -4,40 +4,40 @@ select
 from 
 	(
 		select 
-		ri.requisition_declaration_oid as declarationOid, 
-		ic.oid as itemCategoryOid,
-		ic.name_en as itemCategoryNameEn, 
-		ic.name_bn as itemCategoryNameBn ,
-		rd.item_group_oid as itemGroupOid, 
-		i.name_en as itemGroupNameEn, 
-		i.name_bn as itemGroupNameBn, 
-		ri.created_by as createdBy,
-		rd.unit as unit,
-		sum(rd.quantity) as requiredQuantity
-	from 
-		prc.requisition_information ri 
-	join prc.requisition_detail rd on 
-		rd.requisition_oid = ri.oid 
-	join cmn.item_group i on 
-		rd.item_group_oid = i.oid 
-	join cmn.item_category ic on 
-		rd.item_category_oid = ic.oid 
-	where 
-		1 = 1 
-		and ri.requisition_declaration_oid = 'Declaration-Jan-01' 
-		and ri.status = 'Final' 
-		and ri.office_oid = '4'
-		and ri.requisition_for = '5'
-	group by 
-		ri.requisition_declaration_oid , 
-		ic.oid, 
-		ic.name_en, 
-		ic.name_bn, 
-		rd.item_group_oid, 
-		i.name_en, 
-		i.name_bn, 
-		rd.unit, 
-		ri.created_by) a,
+			ri.requisition_declaration_oid as declarationOid, 
+			ic.oid as itemCategoryOid,
+			ic.name_en as itemCategoryNameEn, 
+			ic.name_bn as itemCategoryNameBn ,
+			rd.item_group_oid as itemGroupOid, 
+			i.name_en as itemGroupNameEn, 
+			i.name_bn as itemGroupNameBn, 
+			ri.created_by as createdBy,
+			rd.unit as unit,
+			sum(rd.quantity) as requiredQuantity
+		from 
+			prc.requisition_information ri 
+		join prc.requisition_detail rd on 
+			rd.requisition_oid = ri.oid 
+		join cmn.item_group i on 
+			rd.item_group_oid = i.oid 
+		join cmn.item_category ic on 
+			rd.item_category_oid = ic.oid 
+		where 
+			1 = 1 
+			and ri.requisition_declaration_oid = 'Declaration-Jan-01' 
+			and ri.status = 'Final' 
+			and ri.office_oid = '4'
+			and ri.requisition_for = '5'
+		group by 
+			ri.requisition_declaration_oid , 
+			ic.oid, 
+			ic.name_en, 
+			ic.name_bn, 
+			rd.item_group_oid, 
+			i.name_en, 
+			i.name_bn, 
+			rd.unit, 
+			ri.created_by) a,
 	(
 		select 
 			emi.oid as employeeMasterInfoOid,
