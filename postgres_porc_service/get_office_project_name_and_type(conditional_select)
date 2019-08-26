@@ -1,0 +1,11 @@
+-- August 26, 2019 --
+
+select
+	oid,
+	name_en,
+	case
+		when office_layer_oid = '17' then 'Project'
+		else 'Office'
+	end
+from
+	cmn.office
