@@ -1,11 +1,12 @@
 -- August 26, 2019 --
 
 select
-	oid,
-	name_en,
+	oid as officeOid,
+	name_en officeNameEn,
+	name_bn officeNamebn,
 	case
 		when office_layer_oid = '17' then 'Project'
 		else 'Office'
-	end
+	end as officeType
 from
 	cmn.office
