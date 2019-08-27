@@ -1,0 +1,35 @@
+-- August 27, 2019 --
+
+-- To kill process running on a port --
+sudo kill -9 $(sudo lsof -t -i:8080)
+
+-- Details --
+
+1.  First need to find the 8080 port process identification number(PID) and then kill it
+sudo lsof -t -i:8080
+
+Here,
+sudo - command to ask admin privilege(user id and password).
+lsof - list of files(Also used for to list related processes)
+-t - show only process ID
+-i - show only internet connections related process
+:8080 - show only processes in this port number
+
+2. kill your PID using following command:
+sudo kill -9 <PID>
+
+
+-- Another solution --
+
+1. sudo netstat -plten |grep java
+
+It will show the list of processes with port number and process id
+tcp6       0      0 :::8080                 :::*                    LISTEN      
+1000       30070621    16085/java
+
+2. The number before /java is a process id. Now use kill command to kill the process
+
+kill -9 16085
+
+-9 implies the process will be killed forcefully.
+

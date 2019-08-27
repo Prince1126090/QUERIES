@@ -1,0 +1,13 @@
+-- August 26, 2019 --
+
+select
+	rd.oid as declarationOid,
+	rd.description as description,
+	fy.name_en as fiscalYearNameEn,
+	fy.name_bn as fiscalYearNameBn
+from
+	prc.requisition_declaration rd,
+	cmn.fiscal_year fy
+where
+	rd.fiscal_year_oid = fy.oid
+	and rd.oid = 'Declaration-Apr-04'
