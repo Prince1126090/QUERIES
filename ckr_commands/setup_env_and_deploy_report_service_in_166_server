@@ -1,0 +1,60 @@
+-- August 27, 2019 --
+
+1. connect with server through ssh
+ssh cokreates@192.168.0.166
+enter password
+
+2. install texlive 
+sudo apt-get install texlive-full
+
+3. check texlive
+tex --version
+
+4. check fonts
+fc-list
+fc-list | grep kal
+fc-list | grep kalpurush
+
+5. install all bangla fonts
+wget --no-check-certificate https://raw.githubusercontent.com/fahadahammed/linux-bangla-fonts/master/font.sh -O font.sh;chmod +x font.sh;bash font.sh;rm font.sh
+
+6. go to /opt/repo
+go to user specific folder
+clone/pull repository inside that folder
+
+7. go to report_service folder 
+cd  /opt/repo/humayan/cmn-service/services/reporting-service/python/report_service
+
+8. Install virtual-environment (if not already installed)-
+sudo pip3 install virtualenv
+sudo apt-get install libpq-dev
+
+9. Create a virtual-environment
+   -go inside the report_service folder
+virtualenv -p python3 venv
+   venv is the name of the virtual-environment
+
+10. Activate virtual-environment
+source venv(name of the virtual-environment)/bin/activate
+
+to deactivate-
+deactivate
+
+
+11. To check what is installed in virtual-environment
+pip3 freeze
+
+
+12. To install dependencies in virtual-environment
+pip install -r requirements.txt
+(All the dependencies are declared in requirements.txt)
+
+13. To run Django
+./manage.py runserver 192.168.0.166:8000 &
+
+14. To disown process from terminal
+disown -h %1
+
+
+
+

@@ -1,6 +1,11 @@
 -- August 27, 2019 --
 
 -- To kill process running on a port --
+1. To view non-attach process
+ps aux
+ps aux | grep report_service
+
+2. To kill service running on a specific port
 sudo kill -9 $(sudo lsof -t -i:8080)
 
 -- Details --
