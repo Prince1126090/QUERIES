@@ -1,0 +1,46 @@
+-- August 28, 2019 --
+
+1.
+ssh cokreates@192.168.0.166
+enter password
+
+2. 
+ps aux | grep report_service
+sudo kill -9 $(sudo lsof -t -i:8000)
+
+3. 
+cd /opt/services
+rm -rf report_service/
+
+4.
+cd /opt/repo/humayan
+rm -rf cmn-service/
+
+5.
+git clone https://Humayun620@bitbucket.org/grp-bd/cmn-service.git
+
+6.
+cp -R /opt/repo/humayan/cmn-service/services/reporting-service/python/report_service /opt/services/
+
+7. 
+cd /opt/services/report_service
+virtualenv -p python3 venv
+
+8.
+source venv/bin/activate
+
+9.
+pip3 freeze
+
+10.
+pip install -r requirements.txt
+
+11.
+pip3 freeze
+
+12.
+./manage.py runserver 192.168.0.166:8000 &
+
+13.
+^c
+disown -h %1
