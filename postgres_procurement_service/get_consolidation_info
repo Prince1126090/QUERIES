@@ -12,7 +12,10 @@ SELECT
 	fy.name_en AS fyNameEn,
 	fy.name_bn AS fyNameBn,
 	o.name_en AS requisitionForNameEn,
-	o.name_bn AS requisitionForNameBn
+	o.name_bn AS requisitionForNameBn,
+	ol.oid as officeLayerOid,
+	ol.name_en as requisitionForTypeEn,
+	ol.name_bn as requisitionForTypeBn
 FROM
 	prc.consolidate_requisition cr
 JOIN prc.requisition_declaration rd ON
@@ -21,6 +24,8 @@ JOIN cmn.fiscal_year fy ON
 	cr.fiscal_year_oid = fy.oid
 JOIN cmn.office o ON
 	cr.requisition_for = o.oid
+join cmn.office_layer ol on
+	o.office_layer_oid = ol.oid
 WHERE
 	1 = 1
 	AND cr.requisition_declaration_oid = 'Declaration-Jan-01'
