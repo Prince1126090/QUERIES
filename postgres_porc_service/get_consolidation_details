@@ -1,0 +1,25 @@
+-- August 03, 2019 --
+
+select
+	crd.oid as oid,
+	crd.remarks as remarks,
+	crd.unit as unit,
+	crd.required_quantity as requiredQuantity,
+	crd.approved_quantity as approvedQuantity,
+	crd.item_group_oid as itemGroupOid,
+	crd.consolidate_requisition_oid as consolidateRequisitionOid,
+	ig.name_en as itemGroupNameEn,
+	ig.name_bn as itemGroupNameBn,
+	ic.name_en as categoryNameEn,
+	crd.item_category_oid as itemCategoryOid,
+	ic.name_bn as categoryNameBn
+from
+	prc.consolidate_requisition_detail crd
+left join cmn.item_group ig on
+	crd.item_group_oid = ig.oid
+left join cmn.item_category ic on
+	crd.item_category_oid = ic.oid
+where
+	1 = 1
+	and crd.consolidate_requisition_oid = 'Consolidated-001'
+	order by categoryNameBn asc

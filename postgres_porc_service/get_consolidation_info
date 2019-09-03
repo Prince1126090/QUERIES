@@ -1,0 +1,27 @@
+-- September 03, 2019 --
+
+
+SELECT
+	cr.oid AS crOid,
+	cr.status AS crStatus,
+	cr.created_by AS crCreatedBy,
+	rd.start_date AS startDate,
+	rd.end_date AS endDate,
+	cr.requisition_declaration_oid AS declarationOid,
+	cr.office_oid AS crOfficeOid,
+	fy.name_en AS fyNameEn,
+	fy.name_bn AS fyNameBn,
+	o.name_en AS requisitionForNameEn,
+	o.name_bn AS requisitionForNameBn
+FROM
+	prc.consolidate_requisition cr
+JOIN prc.requisition_declaration rd ON
+	cr.requisition_declaration_oid = rd.oid
+JOIN cmn.fiscal_year fy ON
+	cr.fiscal_year_oid = fy.oid
+JOIN cmn.office o ON
+	cr.requisition_for = o.oid
+WHERE
+	1 = 1
+	AND cr.requisition_declaration_oid = 'Declaration-Jan-01'
+	AND cr.oid = 'Consolidated-001'

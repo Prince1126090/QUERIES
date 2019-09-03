@@ -1,0 +1,27 @@
+-- August 29, 2019 --
+
+select
+	a.oid as oid,
+	a.app_code as appCode,
+	a.status as status,
+	f.name_en as fiscalYearNameEN,
+	b.name_en as budgetTypeNameEn,
+	o.name_en as officeNameEn,
+	o.name_bn as officeNamebn,
+	case
+		when o.office_layer_oid = '17' then 'Project'
+		else 'Office'
+	end as officeType,
+	a.created_by as createdBy,
+	to_char(a.created_on, 'YYYY-MM-DD') as createdOn
+from
+	prc.annual_procurement_plan a,
+	cmn.fiscal_year f,
+	cmn.office o,
+	prc.budget_type b
+where
+	1 = 1
+	and a.fiscal_year_oid = f.oid
+	and a.app_for = o.oid
+	and a.budget_type_oid = b.oid
+	and a.oid = '20190829-123607-FOpznhxy6iwBsja'
