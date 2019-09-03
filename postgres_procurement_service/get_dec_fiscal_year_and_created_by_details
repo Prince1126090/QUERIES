@@ -1,0 +1,47 @@
+-- September 03, 2019 --
+
+
+select
+	decFy.*,
+	empNamePost.*
+from
+	(
+		select rd.oid as declarationOid,
+		rd.description as description,
+		fy.name_en as fiscalYearNameEn,
+		fy.name_bn as fiscalYearNameBn,
+		rd.created_by as createdBy
+	from
+		prc.requisition_declaration rd,
+		cmn.fiscal_year fy
+	where
+		rd.fiscal_year_oid = fy.oid
+		and rd.oid = 'Declaration-Apr-04') decFy,
+	(
+	select
+		emi.oid as employeeMasterInfoOid,
+		emi.grp_username as grpUsername,
+		emi.name_en as employeeNameEn,
+		emi.name_bn as employeeNameBn,
+		p.name_en as postNameEn,
+		p.name_bn as postNameBn
+	from
+		cmn.post p,
+		cmn.office_unit_post oup,
+		hrm.employee_office eo,
+		hrm.employee_master_info emi
+	where
+		emi.oid = eo.employee_oid
+		and oup.oid = eo.office_unit_post_id
+		and p.oid = oup.post_oid
+		and eo.is_default_profile = 'Yes'
+		and eo.status = 'Active'
+	group by
+		emi.oid,
+		emi.grp_username,
+		emi.name_en,
+		emi.name_bn,
+		p.name_en,
+		p.name_bn) empNamePost
+where
+	decFy.createdBy = empNamePost.grpUsername
