@@ -6,8 +6,11 @@ select
 	empNamePost.*
 from
 	(
-		select rd.oid as declarationOid,
+	select
+		rd.oid as declarationOid,
 		rd.description as description,
+		rd.start_date as startDate,
+		rd.end_date as endDate,
 		fy.name_en as fiscalYearNameEn,
 		fy.name_bn as fiscalYearNameBn,
 		rd.created_by as createdBy
