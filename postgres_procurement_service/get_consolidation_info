@@ -30,3 +30,41 @@ WHERE
 	1 = 1
 	AND cr.requisition_declaration_oid = 'Declaration-Jan-01'
 	AND cr.oid = 'Consolidated-001'
+
+
+
+-- with emp name --
+
+select
+	cr.oid as crOid,
+	cr.status as crStatus,
+	cr.created_by as crCreatedBy,
+	emi.name_en as empNameEn,
+	emi.name_bn as empNameBn,
+	rd.start_date as startDate,
+	rd.end_date as endDate,
+	cr.requisition_declaration_oid as declarationOid,
+	cr.office_oid as crOfficeOid,
+	fy.name_en as fyNameEn,
+	fy.name_bn as fyNameBn,
+	o.name_en as requisitionForNameEn,
+	o.name_bn as requisitionForNameBn,
+	ol.oid as officeLayerOid,
+	ol.name_en as requisitionForTypeEn,
+	ol.name_bn as requisitionForTypeBn
+from
+	prc.consolidate_requisition cr
+join prc.requisition_declaration rd on
+	cr.requisition_declaration_oid = rd.oid
+join cmn.fiscal_year fy on
+	cr.fiscal_year_oid = fy.oid
+join cmn.office o on
+	cr.requisition_for = o.oid
+join cmn.office_layer ol on
+	o.office_layer_oid = ol.oid
+join hrm.employee_master_info emi on
+	cr.created_by = emi.grp_username
+where
+	1 = 1
+	and cr.requisition_declaration_oid = 'Declaration-Jan-01'
+	and cr.oid = 'Consolidated-001'
