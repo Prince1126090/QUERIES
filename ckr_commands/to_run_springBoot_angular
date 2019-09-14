@@ -1,24 +1,38 @@
 -- September 14, 2019 --
 
---Backend--
+Backend
+=======
 
 1. Free the ports
 
 sudo lsof -t -i:<port_number>
 sudo kill -9 <process_id>
 
-2. create .jar
+2. Go to src/main/resources/application.properties 
+	i. put DB credentials
+	ii. create a schema 'test' in DB
+	iii. run and check if everything works properly
+
+3. create .jar
 
 mvn package
 
-3. run .jar
+4. run .jar
 
 java -jar <jar_name> &
 
-4. check in browser
+5. check in browser
 
---Frontend--
 
-5. ng build --prod
+Frontend
+========
+
+6. Go to angularDemo/src/app/config.service.ts
+	i. put proper URL for backend service
+
+7. Go to angularDemo/src/app/config/config.component.html
+	i. put thr URL of other angular-appliation in href
+
+8. ng build --prod
 
 copy contents of the generated dist folder and paste it into a folder in server.
