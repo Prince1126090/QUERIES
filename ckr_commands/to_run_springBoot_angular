@@ -1,0 +1,24 @@
+-- September 14, 2019 --
+
+--Backend--
+
+1. Free the ports
+
+sudo lsof -t -i:<port_number>
+sudo kill -9 <process_id>
+
+2. create .jar
+
+mvn package
+
+3. run .jar
+
+java -jar <jar_name> &
+
+4. check in browser
+
+--Frontend--
+
+5. ng build --prod
+
+copy contents of the generated dist folder and paste it into a folder in server.
