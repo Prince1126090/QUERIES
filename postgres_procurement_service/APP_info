@@ -1,0 +1,33 @@
+-- September 15, 2019 --
+
+select
+	a.oid as oid,
+	a.app_code as appCode,
+	a.status as status,
+	f.name_en as fiscalYearNameEN,
+	b.name_en as budgetTypeNameEn,
+	o.oid as officeOid,
+	o.name_en as officeNameEn,
+	o.name_bn as officeNameBn,
+	ol.oid as officeLayerOid,
+	ol.name_en as requisitionForTypeEn,
+	ol.name_bn as requisitionForTypeBn,
+	a.created_by as createdBy,
+	emi.name_en as empNameEn,
+	emi.name_bn as empNameBn,
+	to_char(a.created_on, 'YYYY-MM-DD') as createdOn
+from
+	prc.annual_procurement_plan a,
+	cmn.fiscal_year f,
+	cmn.office o,
+	cmn.office_layer ol,
+	hrm.employee_master_info emi,
+	prc.budget_type b
+where
+	1 = 1
+	and a.fiscal_year_oid = f.oid
+	and a.app_for = o.oid
+	and o.office_layer_oid = ol.oid
+	and a.created_by = emi.grp_username
+	and a.budget_type_oid = b.oid
+	and a.oid = 'APP1920Jun06-004'

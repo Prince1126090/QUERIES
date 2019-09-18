@@ -1,0 +1,42 @@
+-- September 15, 2019 --
+
+select
+	p.oid as oid,
+	pat.name_en as packageTypeNameEn,
+	pat.name_bn as packageTypeNameBn,
+	p.package_no as packageNo,
+	p.package_description as packageDescription,
+	p.package_unit as packageUnit,
+	p.package_quantity as packageQuantity,
+	pm.name_en as procurementMethodNameEn,
+	pm.name_bn as procurementMethodNameBn,
+	p.procurement_nature_oid as procurementNatureOid,
+	p.procurement_type_oid as procurementTypeOid,
+	aa.name_en as approvingAuthorityNameEn,
+	aa.name_bn as approvingAuthorityNameBn,
+	p.source_of_fund as sourceOfFund,
+	round(p.estimate_cost, 2) as estimateCost,
+	to_char(p.tender_advertise_date, 'YYYY-MM-DD') as tenderAdvertiseDate,
+	to_char(p.tender_opening_date, 'YYYY-MM-DD') as tenderOpeningDate,
+	to_char(p.tender_evaluation_date, 'YYYY-MM-DD') as tenderEvaluationDate,
+	to_char(p.approval_to_award_date, 'YYYY-MM-DD') as approvalToAwardDate,
+	to_char(p.notification_of_award_date, 'YYYY-MM-DD') as notificationOfAwardDate,
+	to_char(p.signing_of_contract_date, 'YYYY-MM-DD') as signingOfContractDate,
+	p.contract_signing_day as contractSignatureDay,
+	p.contract_completion_date as contractCompletionDay,
+	ic.name_en as itemCategoryNameEn,
+	ic.name_bn as itemCategoryNameBn,
+	p.annual_procurement_plan_oid as appOid
+from
+	prc.app_package p
+left join prc.package_type pat on
+	p.package_type_oid = pat.oid
+left join prc.procurement_method pm on
+	p.procurement_method_oid = pm.oid
+left join cmn.item_category ic on
+	p.item_category_oid = ic.oid
+left join prc.approving_authority aa on
+	p.contract_approving_authority_oid = aa.oid
+where
+	1 = 1
+	and p.annual_procurement_plan_oid = 'APP1920Jan01-001'

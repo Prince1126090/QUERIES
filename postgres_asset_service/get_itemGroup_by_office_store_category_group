@@ -1,0 +1,30 @@
+-- September 18, 2019 --
+
+select
+	s.office_oid as officeOid,
+	sis.store_oid as storeOid,
+	s.name_en as storeNameEn,
+	s.name_bn as sotreNameBn,
+	ig.item_category_oid as itemCategoryOid,
+	ic.name_en as itemCategoryNameEn,
+	ic.name_bn as itemCategoryNameBn,
+	sis.item_group_oid as itemGroupOid,
+	ig.name_en as itemGroupNameEn,
+	ig.name_bn as itemGroupNameBn
+from
+	cmn.store_item_setup_mapping sis,
+	cmn.store s,
+	cmn.item_category ic,
+	cmn.item_group ig
+where
+	sis.store_oid = s.oid
+	and sis.item_group_oid = ig.oid
+	and ig.item_category_oid = ic.oid
+	and s.office_oid = '4'
+	and s.oid = '04'
+	and ic.oid = '2'
+	and ig.name_en like '%in%'
+order by
+	storeNameEn,
+	itemCategoryNameEn,
+	itemGroupNameEn asc
