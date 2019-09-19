@@ -2,7 +2,7 @@
 
 1.
 ssh cokreates@192.168.0.166
-enter password
+Asdf@1234
 
 2. 
 ps aux | grep report_service
@@ -13,14 +13,14 @@ cd /opt/services
 rm -rf report_service/
 
 4.
-cd /opt/repo/humayan
+cd /opt/repo/prince
 rm -rf cmn-service/
 
 5.
-git clone https://Humayun620@bitbucket.org/grp-bd/cmn-service.git
+git clone https://prince1126090@bitbucket.org/grp-bd/cmn-service.git
 
 6.
-cp -R /opt/repo/humayan/cmn-service/services/reporting-service/python/report_service /opt/services/
+cp -R /opt/repo/prince/cmn-service/services/reporting-service/python/report_service /opt/services/
 
 7. 
 cd /opt/services/report_service
