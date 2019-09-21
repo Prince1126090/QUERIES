@@ -1,0 +1,11 @@
+-- September 21, 2019 --
+
+select
+	oid as reviewActionTypeOid,
+	name_en as reviewActionTypeNameEn,
+	name_bn as reviewActionTypeNameBn,
+	priority as reviewActionTypePriority
+from
+	cmn.review_action_type
+order by
+	priority asc

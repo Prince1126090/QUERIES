@@ -1,0 +1,46 @@
+-- September 21, 2019 --
+
+select
+	s.oid as storeOid,
+	s.store_code as storeCode,
+	s.name_en as storeNameEn,
+	s.name_bn as storeNameBn,
+	s.location as storeLocation,
+	s.contact_number as storeContactNumber,
+	s.office_oid as officeOid,
+	o.name_en as officeNameEn,
+	o.name_bn as officeNameBn,
+	s.store_keeper_oid as storeKeeperOid,
+	sk.empNameEn as storeKeeperNameEN,
+	sk.empNameBn as storeKeeperNameBn,
+	s.store_in_charge_oid as storeInchargeOid,
+	si.empNameEn as storeInchargeNameEn,
+	si.empNameBn as storeInchargeNameBn
+from
+	cmn.store s,
+	cmn.office o,
+	(
+	select
+		distinct emi.oid as storeKeeperOid,
+		emi.name_en as empNameEn,
+		emi.name_bn as empNameBn
+	from
+		hrm.employee_master_info emi,
+		cmn.store
+	where
+		store.store_keeper_oid = emi.oid) sk,
+	(
+	select
+		distinct emi.oid as storeInchargeOid,
+		emi.name_en as empNameEn,
+		emi.name_bn as empNameBn
+	from
+		hrm.employee_master_info emi,
+		cmn.store
+	where
+		store.store_in_charge_oid = emi.oid) si
+where
+	s.office_oid = o.oid
+	and s.store_keeper_oid = sk.storeKeeperOid
+	and s.store_in_charge_oid = si.storeInchargeOid
+	and s.office_oid = '4'
