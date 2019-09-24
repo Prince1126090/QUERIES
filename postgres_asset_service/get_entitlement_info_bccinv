@@ -1,0 +1,34 @@
+-- September 24, 2019 --
+
+select
+	e.org_id as officeOid,
+	o.org_name as officeNameEn,
+	o.bn_org_name as officeNameBn,
+	e.post_id as postOid,
+	p.post_name as postNameEn,
+	p.bn_post_name as postNameBn,
+	e.entitlement_item_id as entitlementItem,
+	its.item_name as itemGroupNameEn,
+	its.bn_item_name as itemGroupNameBn,
+	eq.amount as amount,
+	u.abbreviation as unitEn,
+	u.bn_uom_id as unitBn,
+	e.type_id as entitlementType,
+	et.name as entitlementTypeNameEn
+from
+	inventory.entitlements e,
+	inventory.entitlement_types et,
+	general_setup.tbl_organogram o,
+	general_setup.tbl_post p,
+	inventory.entitlement_items ei,
+	inventory.item_setup its,
+	inventory.entitlement_quantities eq,
+	inventory.uom u
+where
+	e.org_id = o.org_id
+	and e.type_id = et.id
+	and e.post_id = p.post_id
+	and e.entitlement_item_id = ei.id
+	and ei.item_setup_id = its.id
+	and e.id = eq.entitlement_id
+	and eq.uom_id = u.id
