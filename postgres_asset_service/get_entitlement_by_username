@@ -1,0 +1,29 @@
+select
+	e.oid as entitlementOid,
+	e.entitlement_type_oid as entitlementTypeOid,
+	e.item_group_oid as itemGroupOid,
+	e.uom_oid as uomOid,
+	e.quantity as quantity
+from
+	cmn.entitlement e,
+	(
+	select
+		emi.grp_username as grpUserName,
+		eo.office_id as officeOid,
+		oup.post_oid as postOid
+	from
+		hrm.employee_master_info emi,
+		hrm.employee_office eo,
+		cmn.office_unit_post oup
+	where
+		emi.oid = eo.employee_oid
+		and eo.is_default_profile = 'Yes'
+		and eo.status = 'Active'
+		and eo.office_unit_post_id = oup.oid
+		and emi.grp_username = 'jakir') emp
+where
+	e.office_oid = emp.officeOid
+	and e.post_oid = emp.postOid
+order by
+	e.entitlement_type_oid,
+	e.item_group_oid asc

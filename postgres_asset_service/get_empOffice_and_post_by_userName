@@ -31,3 +31,21 @@ where
 	and eo.office_unit_post_id = oup.oid
 	and oup.post_oid = p.oid
 	and emi.grp_username = 'jakir'
+
+
+-- September 25, 2019 --
+
+select
+	emi.grp_username as grpUserName,
+	eo.office_id as officeOid,
+	oup.post_oid as postOid
+from
+	hrm.employee_master_info emi,
+	hrm.employee_office eo,
+	cmn.office_unit_post oup
+where
+	emi.oid = eo.employee_oid
+	and eo.is_default_profile = 'Yes'
+	and eo.status = 'Active'
+	and eo.office_unit_post_id = oup.oid
+	and emi.grp_username = 'jakir'
