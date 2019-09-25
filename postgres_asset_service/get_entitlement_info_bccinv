@@ -32,3 +32,131 @@ where
 	and ei.item_setup_id = its.id
 	and e.id = eq.entitlement_id
 	and eq.uom_id = u.id
+
+
+export data into a csv
+and import it in the entitlement table of cmn
+
+
+-- September 25, 2019 --
+
+#to update entitlement_type_oid
+
+update
+	cmn.entitlement e 
+set
+	entitlement_type_oid = et.oid
+from
+	cmn.entitlement_type et
+where
+	e.entitlement_type_oid = upper(et.name_en);
+
+# update office_oid
+
+update
+	cmn.entitlement e 
+set
+	office_oid = o.oid
+from
+	cmn.office o
+where
+	e.office_oid = o.name_en;
+
+# update post_oid
+
+update
+	cmn.entitlement e 
+set
+	post_oid = p.oid
+from
+	cmn.post p
+where
+	e.post_oid = p.name_en;
+
+select
+	distinct post_oid
+from
+	cmn.entitlement
+order by
+	post_oid asc;
+
+
+delete
+from
+	cmn.entitlement e
+where
+	e.post_oid not in ('1',
+	'13',
+	'14',
+	'20',
+	'21',
+	'4',
+	'6',
+	'8',
+	'9');
+
+update
+	cmn.entitlement e 
+set
+	created_by = 'prince';
+
+# update item_group_oid
+
+update
+	cmn.entitlement e 
+set
+	item_group_oid = ig.oid
+from
+	cmn.item_group ig
+where
+	trim(e.item_group_oid) = trim(ig.name_en);
+
+
+update
+	cmn.entitlement e 
+set
+	item_group_oid = '13'
+where
+	item_group_oid = trim('bodna');
+
+update
+	cmn.entitlement e 
+set
+	item_group_oid = '1'
+where
+	item_group_oid = 'Full Plate ';
+
+delete
+from
+	cmn.entitlement e
+where
+	e.item_group_oid in ('paper shader',
+	'Tea-set',
+	'Tea-Set');
+
+
+select
+	distinct item_group_oid
+from
+	cmn.entitlement
+order by
+	item_group_oid asc;
+
+# to update uomOid
+
+update
+	cmn.entitlement e 
+set
+	uom_oid = u.oid
+from
+	cmn.uom u
+where
+	trim(e.uom_oid) = trim(u.name_en);
+
+
+select
+	distinct uom_oid
+from
+	cmn.entitlement
+order by
+	uom_oid asc;
