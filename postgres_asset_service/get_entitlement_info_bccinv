@@ -160,3 +160,23 @@ from
 	cmn.entitlement
 order by
 	uom_oid asc;
+
+
+select
+	e.post_oid, e.item_group_oid
+from
+	cmn.entitlement e
+where
+	entitlement_type_oid = '03'
+group by 
+	post_oid, item_group_oid
+order by
+	post_oid, item_group_oid asc;
+
+# change office_oid
+update
+	cmn.entitlement
+set
+	office_oid = '4'
+where
+	office_oid = '7';
