@@ -1,0 +1,69 @@
+-- September 26, 2019 --
+
+select
+	e.oid as entitlementOid,
+	e.entitlement_type_oid as entitlementTypeOid,
+	et.name_en as entitlementTypeNameEn,
+	et.name_bn as entitlementTypeNameBn,
+	storeIg.itemCategoryOid as itemCategoryOid,
+	e.item_group_oid as itemGroupOid,
+	storeIg.itemGroupNameEn as itemGroupNameEn,
+	storeIg.itemGroupNameBn as itemGroupNameBn,
+	e.uom_oid as uomOid,
+	e.quantity as quantity
+from
+	cmn.entitlement e,
+	cmn.entitlement_type et,
+	(
+	select
+		emi.grp_username as grpUserName,
+		eo.office_id as officeOid,
+		oup.post_oid as postOid
+	from
+		hrm.employee_master_info emi,
+		hrm.employee_office eo,
+		cmn.office_unit_post oup
+	where
+		emi.oid = eo.employee_oid
+		and eo.is_default_profile = 'Yes'
+		and eo.status = 'Active'
+		and eo.office_unit_post_id = oup.oid
+		and emi.grp_username = 'jakir') emp,
+	(
+		select s.office_oid as officeOid,
+		sis.store_oid as storeOid,
+		s.name_en as storeNameEn,
+		s.name_bn as sotreNameBn,
+		ig.item_category_oid as itemCategoryOid,
+		ic.name_en as itemCategoryNameEn,
+		ic.name_bn as itemCategoryNameBn,
+		sis.item_group_oid as itemGroupOid,
+		ig.name_en as itemGroupNameEn,
+		ig.name_bn as itemGroupNameBn,
+		ig.uom_oid as uomOid,
+		u.name_en uomNameEn,
+		u.name_bn uomNameBn
+	from
+		cmn.store_item_setup_mapping sis,
+		cmn.store s,
+		cmn.item_category ic,
+		cmn.item_group ig,
+		cmn.uom u
+	where
+		sis.store_oid = s.oid
+		and sis.item_group_oid = ig.oid
+		and ig.item_category_oid = ic.oid
+		and ig.uom_oid = u.oid
+		and s.oid = '04'
+		and ig.item_category_oid = '2'
+		and ig.name_en like '%e%') storeIg
+where
+	e.office_oid = emp.officeOid
+	and e.post_oid = emp.postOid
+	and e.office_oid = storeIg.officeOid
+	and e.item_group_oid = storeIg.itemGroupOid
+	and e.entitlement_type_oid = et.oid
+	and e.entitlement_type_oid = '1'
+order by
+	e.entitlement_type_oid,
+	e.item_group_oid desc
