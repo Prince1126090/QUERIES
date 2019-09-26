@@ -6,10 +6,14 @@ select
 	et.name_en as entitlementTypeNameEn,
 	et.name_bn as entitlementTypeNameBn,
 	storeIg.itemCategoryOid as itemCategoryOid,
+	storeIg.itemCategoryNameEn as itemCategoryNameEn,
+	storeIg.itemCategoryNameBn as itemCategoryNameBn,
 	e.item_group_oid as itemGroupOid,
 	storeIg.itemGroupNameEn as itemGroupNameEn,
 	storeIg.itemGroupNameBn as itemGroupNameBn,
 	e.uom_oid as uomOid,
+	storeIg.uomNameEn as uomNameEn,
+	storeIg.uomNameBn as uomNameBn,
 	e.quantity as quantity
 from
 	cmn.entitlement e,
@@ -30,7 +34,8 @@ from
 		and eo.office_unit_post_id = oup.oid
 		and emi.grp_username = 'jakir') emp,
 	(
-		select s.office_oid as officeOid,
+	select
+		s.office_oid as officeOid,
 		sis.store_oid as storeOid,
 		s.name_en as storeNameEn,
 		s.name_bn as sotreNameBn,
