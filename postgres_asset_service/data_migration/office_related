@@ -1,0 +1,48 @@
+-- October 6, 2019 --
+
+-- org list --
+select
+	*
+from
+	general_setup.tbl_organogram
+where
+	org_name like '%ICT%';
+
+
+-- department and organization --
+select
+	o.org_id,
+	o.org_name,
+	o.bn_org_name,
+	d.dept_id,
+	d.dept_name,
+	d.bn_dept_name
+from
+	general_setup.tbl_departments d,
+	general_setup.tbl_organogram o
+where
+	d.org_id = o.org_id
+	and o.org_name like '%ICT%'
+	and d.dept_name = 'BCC';
+
+-- org, dept,  post --
+
+select
+	o.org_id,
+	o.org_name,
+	o.bn_org_name,
+	d.dept_id,
+	d.dept_name,
+	d.bn_dept_name,
+	p.post_id,
+	p.post_name,
+	p.bn_post_name
+from
+	general_setup.tbl_departments d,
+	general_setup.tbl_organogram o,
+	general_setup.tbl_post p
+where
+	d.org_id = o.org_id
+	and o.org_name like '%ICT%'
+	and d.dept_name = 'BCC'
+	and p.dept_id = d.dept_id;
