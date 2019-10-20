@@ -1,0 +1,33 @@
+-- October 20, 2019 --
+
+select
+	sum(rd.quantity) as requiredQuantity,
+	rd.item_category_oid as itemCategoryOid,
+	rd.item_group_oid as itemGroupOid,
+	rd.unit as unit,
+	ic.name_en as itemCategoryNameEn,
+	ic.name_bn as itemCategoryNameBn,
+	i.name_en as itemGroupNameEn,
+	i.name_bn as itemGroupNameBn
+from
+	prc.requisition_information ri
+join prc.requisition_detail rd on
+	rd.requisition_oid = ri.oid
+join cmn.item_category ic on
+	rd.item_category_oid = ic.oid
+join cmn.item_group i on
+	rd.item_group_oid = i.oid
+where
+	1 = 1
+	and ri.requisition_declaration_oid = '3fb5469c-ed9a-11e9-81b4-2a2ae2dbcce4'
+	and ri.office_oid = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+	and ri.status = 'Final'
+	and ri.requisition_for = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+group by
+	rd.item_category_oid,
+	rd.item_group_oid,
+	rd.unit,
+	ic.name_en,
+	ic.name_bn,
+	i.name_en,
+	i.name_bn
