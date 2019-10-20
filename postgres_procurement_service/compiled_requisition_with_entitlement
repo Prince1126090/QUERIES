@@ -1,0 +1,113 @@
+-- October 20, 2019 --
+-- user info --
+select
+		emi.grp_username as grpUserName,
+		eo.office_id as officeOid,
+		o.name_en as officeNameEn,
+		oup.post_oid as postOid,
+		p.name_en as postNameEn
+	from
+		hrm.employee_master_info emi,
+		hrm.employee_office eo,
+		cmn.office_unit_post oup,
+		cmn.office o,
+		cmn.post p
+	where
+		emi.oid = eo.employee_oid
+		and eo.is_default_profile = 'Yes'
+		and eo.status = 'Active'
+		and eo.office_unit_post_id = oup.oid
+		and eo.office_id = o.oid 
+		and oup.post_oid = p.oid 
+		and emi.grp_username = 'jakir'
+
+-- entitlement --
+
+select
+	--e.oid as entitlementOid,
+	--e.entitlement_type_oid as entitlementTypeOid,
+ emp.officeNameEn as officeNameEn,
+	emp.postNameEn as postNameEn,
+	--e.item_group_oid as itemGroupOid,
+ itm.itemGroupNameEn as itemGroupNameEn,
+	--e.uom_oid as uomOid,
+ e.quantity as quantity
+from
+	cmn.entitlement e,
+	(
+	select
+		emi.grp_username as grpUserName,
+		eo.office_id as officeOid,
+		o.name_en as officeNameEn,
+		oup.post_oid as postOid,
+		p.name_en as postNameEn
+	from
+		hrm.employee_master_info emi,
+		hrm.employee_office eo,
+		cmn.office_unit_post oup,
+		cmn.office o,
+		cmn.post p
+	where
+		emi.oid = eo.employee_oid
+		and eo.is_default_profile = 'Yes'
+		and eo.status = 'Active'
+		and eo.office_unit_post_id = oup.oid
+		and eo.office_id = o.oid
+		and oup.post_oid = p.oid
+		and emi.grp_username = 'jakir') emp,
+	(
+	select
+		ig.item_category_oid as itemCategoryOid,
+		ic.name_en as itemCategoryNameEn,
+		ic.name_bn as itemCategoryNameBn,
+		ig.oid as itemGroupOid,
+		ig.name_en as itemGroupNameEn,
+		ig.name_bn as itemGroupNameBn,
+		ig.uom_oid as uomOid,
+		u.name_en uomNameEn,
+		u.name_bn uomNameBn
+	from
+		cmn.item_category ic,
+		cmn.item_group ig,
+		cmn.uom u
+	where
+		ig.item_category_oid = ic.oid
+		and ig.uom_oid = u.oid) itm
+where
+	e.office_oid = emp.officeOid
+	and e.post_oid = emp.postOid
+order by
+	itemGroupNameEn asc
+
+
+-----------
+
+
+select
+	emi.grp_username as grpUserName,
+	eo.office_id as officeOid,
+	o.name_en as officeNameEn,
+	oup.post_oid as postOid,
+	p.name_en as postNameEn,
+	count(emi.*) as empCount
+from
+	hrm.employee_master_info emi,
+	hrm.employee_office eo,
+	cmn.office_unit_post oup,
+	cmn.office o,
+	cmn.post p
+where
+	emi.oid = eo.employee_oid
+	and eo.is_default_profile = 'Yes'
+	and eo.status = 'Active'
+	and eo.office_unit_post_id = oup.oid
+	and eo.office_id = o.oid
+	and oup.post_oid = p.oid
+	and o.oid = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+	and p.oid = '710c3d47-63a6-469d-90a6-f2c33c81f020'
+group by
+	emi.grp_username,
+	eo.office_id ,
+	o.name_en ,
+	oup.post_oid ,
+	p.name_en

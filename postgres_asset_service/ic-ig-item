@@ -1,0 +1,19 @@
+-- October 20, 2019 --
+
+select
+		ig.item_category_oid as itemCategoryOid,
+		ic.name_en as itemCategoryNameEn,
+		ic.name_bn as itemCategoryNameBn,
+		ig.oid as itemGroupOid,
+		ig.name_en as itemGroupNameEn,
+		ig.name_bn as itemGroupNameBn,
+		ig.uom_oid as uomOid,
+		u.name_en uomNameEn,
+		u.name_bn uomNameBn
+	from
+		cmn.item_category ic,
+		cmn.item_group ig,
+		cmn.uom u
+	where
+		ig.item_category_oid = ic.oid
+		and ig.uom_oid = u.oid
