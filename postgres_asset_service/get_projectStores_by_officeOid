@@ -1,0 +1,43 @@
+select
+	o.oid as officeOid,
+	o.name_en as officeNameEn,
+	o.name_bn as officeNameBn,
+	s.oid as storeOid,
+	s.name_en as storeNameEn,
+	s.name_bn as storeNameBn,
+	s.store_keeper_oid as storeKeeperOid,
+	sk.empNameEn as storeKeeperNameEN,
+	sk.empNameBn as storeKeeperNameBn,
+	s.store_in_charge_oid as storeInchargeOid,
+	si.empNameEn as storeInchargeNameEn,
+	si.empNameBn as storeInchargeNameBn
+from
+	cmn.office o,
+	cmn.store s,
+	(
+	select
+		distinct emi.oid as storeKeeperOid,
+		emi.name_en as empNameEn,
+		emi.name_bn as empNameBn
+	from
+		hrm.employee_master_info emi,
+		cmn.store
+	where
+		store.store_keeper_oid = emi.oid) sk,
+	(
+	select
+		distinct emi.oid as storeInchargeOid,
+		emi.name_en as empNameEn,
+		emi.name_bn as empNameBn
+	from
+		hrm.employee_master_info emi,
+		cmn.store
+	where
+		store.store_in_charge_oid = emi.oid) si
+where
+	1 = 1
+	and s.office_oid = o.oid
+	and s.store_keeper_oid = sk.storeKeeperOid
+	and s.store_in_charge_oid = si.storeInchargeOid
+	and o.office_layer_oid = '710c3d47-63a6-469d-90a6-f2c33c81f055'
+	and o.parent_oid = '710c3d47-63a6-469d-90a6-f2c33c81f080'
