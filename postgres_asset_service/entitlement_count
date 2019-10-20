@@ -1,0 +1,16 @@
+-- October 20, 2019 --
+
+select
+	o.name_en as officeNameEn,
+	p.name_en as postNameEn,
+	count(e.*) as entitlementCount
+from
+	cmn.entitlement e,
+	cmn.office o,
+	cmn.post p
+where
+	e.office_oid = o.oid
+	and e.post_oid = p.oid
+group by
+	o.name_en,
+	p.name_en
