@@ -1,0 +1,22 @@
+-- October 21, 2019 --
+
+select
+		o.oid as officeOid,
+		p.oid as postOid,
+		ig.oid itemGroupOid,
+		count(e.quantity) as entitlementCount
+	from
+		cmn.entitlement e,
+		cmn.office o,
+		cmn.post p,
+		cmn.item_group ig
+	where
+		e.office_oid = o.oid
+		and e.post_oid = p.oid
+		and e.item_group_oid = ig.oid
+		and e.office_oid = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+		and e.post_oid = '710c3d47-63a6-469d-90a6-f2c33c81f020'
+	group by
+		o.oid,
+		p.oid,
+		ig.oid
