@@ -1,0 +1,11 @@
+-- October 21, 2019 --
+
+DELETE FROM cmn.entitlement a USING (
+      SELECT MIN(ctid) as ctid, b.office_oid,  b.post_oid, b.item_group_oid
+        FROM cmn.entitlement b 
+        GROUP BY  b.office_oid,  b.post_oid, b.item_group_oid HAVING COUNT(*) > 1
+      ) b
+      WHERE a.office_oid = b.office_oid
+      and a.post_oid = b.post_oid
+      and a.item_group_oid = b.item_group_oid
+      AND a.ctid <> b.ctid

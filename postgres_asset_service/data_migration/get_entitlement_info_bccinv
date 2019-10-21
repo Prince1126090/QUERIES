@@ -35,7 +35,26 @@ where
 
 
 export data into a csv
-and import it in the entitlement table of cmn
+--
+CREATE TABLE cmn.entitlement_temp (
+	"oid" varchar(128) NOT NULL,
+	quantity numeric(20,2) NULL,
+	started_from varchar(128) NULL,
+	is_deleted varchar(32) NULL,
+	created_by varchar(128) NULL DEFAULT 'System'::character varying,
+	created_on timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_by varchar(128) NULL,
+	updated_on timestamp NULL,
+	entitlement_type_oid varchar(128) NULL,
+	office_oid varchar(128) NULL,
+	post_oid varchar(128) NULL,
+	item_group_oid varchar(128) NULL,
+	uom_oid varchar(128) NULL,
+	CONSTRAINT ck_is_deleted_entitlement CHECK ((((is_deleted)::text = 'Yes'::text) OR ((is_deleted)::text = 'No'::text))),
+	CONSTRAINT pk_entitlement_temp PRIMARY KEY (oid)
+);
+--
+and import it in the entitlement_temp table of cmn
 
 
 -- September 25, 2019 --
@@ -43,7 +62,7 @@ and import it in the entitlement table of cmn
 #to update entitlement_type_oid
 
 update
-	cmn.entitlement e 
+	cmn.entitlement_temp e 
 set
 	entitlement_type_oid = et.oid
 from
@@ -54,7 +73,7 @@ where
 # update office_oid
 
 update
-	cmn.entitlement e 
+	cmn.entitlement_temp e 
 set
 	office_oid = o.oid
 from
@@ -65,7 +84,7 @@ where
 # update post_oid
 
 update
-	cmn.entitlement e 
+	cmn.entitlement_temp e 
 set
 	post_oid = p.oid
 from
@@ -76,34 +95,36 @@ where
 select
 	distinct post_oid
 from
-	cmn.entitlement
+	cmn.entitlement_temp
 order by
 	post_oid asc;
 
 
 delete
 from
-	cmn.entitlement e
+	cmn.entitlement_temp e
 where
-	e.post_oid not in ('1',
-	'13',
-	'14',
-	'20',
-	'21',
-	'4',
-	'6',
-	'8',
-	'9');
+	e.post_oid not in (
+'710c3d47-63a6-469d-90a6-f2c33c81f005',
+'710c3d47-63a6-469d-90a6-f2c33c81f008',
+'710c3d47-63a6-469d-90a6-f2c33c81f010',
+'710c3d47-63a6-469d-90a6-f2c33c81f012',
+'710c3d47-63a6-469d-90a6-f2c33c81f013',
+'710c3d47-63a6-469d-90a6-f2c33c81f017',
+'710c3d47-63a6-469d-90a6-f2c33c81f018',
+'710c3d47-63a6-469d-90a6-f2c33c81f024',
+'710c3d47-63a6-469d-90a6-f2c33c81f025',
+'710c3d47-63a6-469d-90a6-f2c33c81f034');
 
 update
-	cmn.entitlement e 
+	cmn.entitlement_temp e 
 set
 	created_by = 'prince';
 
 # update item_group_oid
 
 update
-	cmn.entitlement e 
+	cmn.entitlement_temp e 
 set
 	item_group_oid = ig.oid
 from
@@ -128,9 +149,12 @@ where
 
 delete
 from
-	cmn.entitlement e
+	cmn.entitlement_temp e
 where
-	e.item_group_oid in ('paper shader',
+	e.item_group_oid in (
+	'bodna',
+	'Full Plate ',
+	'paper shader',
 	'Tea-set',
 	'Tea-Set');
 
@@ -138,14 +162,14 @@ where
 select
 	distinct item_group_oid
 from
-	cmn.entitlement
+	cmn.entitlement_temp
 order by
 	item_group_oid asc;
 
 # to update uomOid
 
 update
-	cmn.entitlement e 
+	cmn.entitlement_temp e 
 set
 	uom_oid = u.oid
 from
@@ -161,11 +185,22 @@ from
 order by
 	uom_oid asc;
 
+# to update quantity
+
+update
+	cmn.entitlement_temp e 
+set
+	quantity = 1
+from
+	cmn.uom u
+where
+	e.quantity is null;
+
 
 select
 	e.post_oid, e.item_group_oid
 from
-	cmn.entitlement e
+	cmn.entitlement_temp e
 where
 	entitlement_type_oid = '03'
 group by 
