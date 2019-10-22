@@ -1,0 +1,320 @@
+-- october 22, 2019 --
+
+select
+	entitl.itemGroupOid,
+	entitl.itemGroupNameEn,
+	entitl.totalCount,
+	creq.itemGroupNameEn,
+	creq.requiredQuantity
+from
+	(
+	select
+		sum(rd.quantity) as requiredQuantity,
+		rd.item_category_oid as itemCategoryOid,
+		rd.item_group_oid as itemGroupOid,
+		rd.unit as unit,
+		ic.name_en as itemCategoryNameEn,
+		ic.name_bn as itemCategoryNameBn,
+		i.name_en as itemGroupNameEn,
+		i.name_bn as itemGroupNameBn
+	from
+		prc.requisition_information ri
+	join prc.requisition_detail rd on
+		rd.requisition_oid = ri.oid
+	join cmn.item_category ic on
+		rd.item_category_oid = ic.oid
+	join cmn.item_group i on
+		rd.item_group_oid = i.oid
+	where
+		1 = 1
+		and ri.requisition_declaration_oid = '3fb5469c-ed9a-11e9-81b4-2a2ae2dbcce4'
+		and ri.office_oid = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+		and ri.status = 'Final'
+		and ri.requisition_for = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+	group by
+		rd.item_category_oid,
+		rd.item_group_oid,
+		rd.unit,
+		ic.name_en,
+		ic.name_bn,
+		i.name_en,
+		i.name_bn) creq
+full join (
+	select
+		entl.itemGroupOid as itemGroupOid,
+		ig.name_en as itemGroupNameEn,
+		entl.totalcount as totalCount
+	from
+		cmn.item_group ig,
+		(
+		select
+			entInfo.itemGroupOid as itemGroupOid,
+			entInfo.entitlementCount*officePost.empCount as totalCount
+		from
+			(
+			select
+				eo.office_id as officeOid,
+				oup.post_oid as postOid,
+				count(emi.*) as empCount
+			from
+				hrm.employee_master_info emi,
+				hrm.employee_office eo,
+				cmn.office_unit_post oup,
+				cmn.office o,
+				cmn.post p
+			where
+				emi.oid = eo.employee_oid
+				and eo.is_default_profile = 'Yes'
+				and eo.status = 'Active'
+				and eo.office_unit_post_id = oup.oid
+				and eo.office_id = o.oid
+				and oup.post_oid = p.oid
+				and o.oid = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+			group by
+				eo.office_id ,
+				oup.post_oid) officePost,
+			(
+			select
+				o.oid as officeOid,
+				p.oid as postOid,
+				ig.oid itemGroupOid,
+				sum(e.quantity) as entitlementCount
+			from
+				cmn.entitlement e,
+				cmn.office o,
+				cmn.post p,
+				cmn.item_group ig
+			where
+				e.office_oid = o.oid
+				and e.post_oid = p.oid
+				and e.item_group_oid = ig.oid
+			group by
+				o.oid,
+				p.oid,
+				ig.oid) entInfo
+		where
+			entInfo.officeOid = officePost.officeOid
+			and entInfo.postOid = officePost.postOid) entl
+	where
+		entl.itemGroupOid = ig.oid) entitl on
+	creq.itemGroupOid = entitl.itemGroupOid
+
+-- v2 --
+
+select
+	itmG.oid as itemGroupOid,
+	itmG.name_en as itemGroupNameEn,
+	itmG.name_bn as itemGroupNameBn,
+	entitl.totalCount,
+	creq.requiredQuantity
+from
+	cmn.item_group itmG,
+	(
+	select
+		sum(rd.quantity) as requiredQuantity,
+		rd.item_category_oid as itemCategoryOid,
+		rd.item_group_oid as itemGroupOid,
+		rd.unit as unit,
+		ic.name_en as itemCategoryNameEn,
+		ic.name_bn as itemCategoryNameBn,
+		i.name_en as itemGroupNameEn,
+		i.name_bn as itemGroupNameBn
+	from
+		prc.requisition_information ri
+	join prc.requisition_detail rd on
+		rd.requisition_oid = ri.oid
+	join cmn.item_category ic on
+		rd.item_category_oid = ic.oid
+	join cmn.item_group i on
+		rd.item_group_oid = i.oid
+	where
+		1 = 1
+		and ri.requisition_declaration_oid = '3fb5469c-ed9a-11e9-81b4-2a2ae2dbcce4'
+		and ri.office_oid = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+		and ri.status = 'Final'
+		and ri.requisition_for = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+	group by
+		rd.item_category_oid,
+		rd.item_group_oid,
+		rd.unit,
+		ic.name_en,
+		ic.name_bn,
+		i.name_en,
+		i.name_bn) creq
+full join (
+	select
+		entl.itemGroupOid as itemGroupOid,
+		ig.name_en as itemGroupNameEn,
+		entl.totalcount as totalCount
+	from
+		cmn.item_group ig,
+		(
+		select
+			entInfo.itemGroupOid as itemGroupOid,
+			entInfo.entitlementCount*officePost.empCount as totalCount
+		from
+			(
+			select
+				eo.office_id as officeOid,
+				oup.post_oid as postOid,
+				count(emi.*) as empCount
+			from
+				hrm.employee_master_info emi,
+				hrm.employee_office eo,
+				cmn.office_unit_post oup,
+				cmn.office o,
+				cmn.post p
+			where
+				emi.oid = eo.employee_oid
+				and eo.is_default_profile = 'Yes'
+				and eo.status = 'Active'
+				and eo.office_unit_post_id = oup.oid
+				and eo.office_id = o.oid
+				and oup.post_oid = p.oid
+				and o.oid = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+			group by
+				eo.office_id ,
+				oup.post_oid) officePost,
+			(
+			select
+				o.oid as officeOid,
+				p.oid as postOid,
+				ig.oid itemGroupOid,
+				sum(e.quantity) as entitlementCount
+			from
+				cmn.entitlement e,
+				cmn.office o,
+				cmn.post p,
+				cmn.item_group ig
+			where
+				e.office_oid = o.oid
+				and e.post_oid = p.oid
+				and e.item_group_oid = ig.oid
+			group by
+				o.oid,
+				p.oid,
+				ig.oid) entInfo
+		where
+			entInfo.officeOid = officePost.officeOid
+			and entInfo.postOid = officePost.postOid) entl
+	where
+		entl.itemGroupOid = ig.oid) entitl on
+	creq.itemGroupOid = entitl.itemGroupOid
+where 
+	(itmG.oid = entitl.itemGroupOid or itmG.oid = creq.itemGroupOid)
+	
+
+
+-- final (V3) --
+
+select
+	itmC.oid as itemCategoryOid,
+	itmC.name_en as itemCategoryNameEn,
+	itmC.name_bn as itemCategoryNameBn,
+	itmG.oid as itemGroupOid,
+	itmG.name_en as itemGroupNameEn,
+	itmG.name_bn as itemGroupNameBn,
+	creq.requiredQuantity as  reqCount,
+	entitl.totalCount as entitlementCount
+from
+	cmn.item_category itmc,
+	cmn.item_group itmG,
+	(
+	select
+		sum(rd.quantity) as requiredQuantity,
+		rd.item_category_oid as itemCategoryOid,
+		rd.item_group_oid as itemGroupOid,
+		rd.unit as unit,
+		ic.name_en as itemCategoryNameEn,
+		ic.name_bn as itemCategoryNameBn,
+		i.name_en as itemGroupNameEn,
+		i.name_bn as itemGroupNameBn
+	from
+		prc.requisition_information ri
+	join prc.requisition_detail rd on
+		rd.requisition_oid = ri.oid
+	join cmn.item_category ic on
+		rd.item_category_oid = ic.oid
+	join cmn.item_group i on
+		rd.item_group_oid = i.oid
+	where
+		1 = 1
+		and ri.requisition_declaration_oid = '3fb5469c-ed9a-11e9-81b4-2a2ae2dbcce4'
+		and ri.office_oid = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+		and ri.status = 'Final'
+		and ri.requisition_for = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+	group by
+		rd.item_category_oid,
+		rd.item_group_oid,
+		rd.unit,
+		ic.name_en,
+		ic.name_bn,
+		i.name_en,
+		i.name_bn) creq
+full join (
+	select
+		ic.oid as itemCategoryOid,
+		ic.name_en as itemCategoryNameEn,
+		entl.itemGroupOid as itemGroupOid,
+		ig.name_en as itemGroupNameEn,
+		entl.totalcount as totalCount
+	from
+		cmn.item_category ic,
+		cmn.item_group ig,
+		(
+		select
+			entInfo.itemGroupOid as itemGroupOid,
+			entInfo.entitlementCount*officePost.empCount as totalCount
+		from
+			(
+			select
+				eo.office_id as officeOid,
+				oup.post_oid as postOid,
+				count(emi.*) as empCount
+			from
+				hrm.employee_master_info emi,
+				hrm.employee_office eo,
+				cmn.office_unit_post oup,
+				cmn.office o,
+				cmn.post p
+			where
+				emi.oid = eo.employee_oid
+				and eo.is_default_profile = 'Yes'
+				and eo.status = 'Active'
+				and eo.office_unit_post_id = oup.oid
+				and eo.office_id = o.oid
+				and oup.post_oid = p.oid
+				and o.oid = '710c3d47-63a6-469d-90a6-f2c33c81f080'
+			group by
+				eo.office_id ,
+				oup.post_oid) officePost,
+			(
+			select
+				o.oid as officeOid,
+				p.oid as postOid,
+				ig.oid itemGroupOid,
+				sum(e.quantity) as entitlementCount
+			from
+				cmn.entitlement e,
+				cmn.office o,
+				cmn.post p,
+				cmn.item_group ig
+			where
+				e.office_oid = o.oid
+				and e.post_oid = p.oid
+				and e.item_group_oid = ig.oid
+			group by
+				o.oid,
+				p.oid,
+				ig.oid) entInfo
+		where
+			entInfo.officeOid = officePost.officeOid
+			and entInfo.postOid = officePost.postOid) entl
+	where
+		entl.itemGroupOid = ig.oid
+		and ig.item_category_oid = ic.oid) entitl on
+	creq.itemGroupOid = entitl.itemGroupOid
+where
+	(itmG.oid = entitl.itemGroupOid
+	or itmG.oid = creq.itemGroupOid)
+	and itmC.oid = itmG.item_category_oid
