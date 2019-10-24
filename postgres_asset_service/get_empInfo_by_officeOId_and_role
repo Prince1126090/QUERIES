@@ -1,0 +1,36 @@
+-- October 24, 2019 --
+
+select
+	distinct(emi.oid) as employeeOid,
+	emi.grp_username as grpUserName,
+	emi.name_en as employeeNameEn,
+	emi.name_bn as employeeNameBn,
+	eo.office_id as officeOid,
+	o.name_en as officeNameEn,
+	o.name_bn as officeNameBn,
+	eo.office_unit_id as officeUnitOid,
+	ou.name_en as officeUnitNameEn,
+	ou.name_bn as officeUnitNameBn,
+	eo.office_unit_post_id as officeUnitPostOid,
+	p.oid as postOid,
+	p.name_en as postNameEn,
+	p.name_bn as postNameBn
+from
+	hrm.employee_master_info emi,
+	hrm.employee_office eo,
+	cmn.office o,
+	cmn.office_unit ou,
+	cmn.office_unit_post oup,
+	cmn.post p,
+	sec.grp_user_role gur
+where
+	emi.oid = eo.employee_oid
+	and eo.is_default_profile = 'Yes'
+	and eo.status = 'Active'
+	and eo.office_id = o.oid
+	and eo.office_unit_id = ou.oid
+	and eo.office_unit_post_id = oup.oid
+	and oup.post_oid = p.oid
+	and emi.grp_username = gur.grp_user_oid
+	and gur.grp_role_oid = 'PRC.Officer'
+	and o.oid = '710c3d47-63a6-469d-90a6-f2c33c81f080'

@@ -1,0 +1,39 @@
+-- october 23, 2019 --
+
+-- not used --
+pgdump -U dbUsername -p dbPassword -d dbName -n schemaName > dumpName.dmp
+--
+
+get the backup from DBeaver, type should be plainText
+
+restore backup into db -
+
+psql -h localhost -d grp -U grp -f inv.backup 
+psql -h 118.67.221.75 -d grp -U grp -f inv.backup
+
+
+Delete schema - inv & inventory from DB using DBeaver
+
+psql -h localhost -d grp -U grp -f inv2.backup
+psql -h 118.67.221.75 -d grp -U grp -f inv2.backup
+
+
+-- table_count_of_a_schema --
+
+select
+	count(*)
+from
+	information_schema.tables
+where
+	table_schema in ('inv');
+
+Result should be : 70
+	
+
+select
+	count(*)
+from
+	information_schema.tables
+where
+	table_schema in ('inventory');
+
