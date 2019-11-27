@@ -1,8 +1,7 @@
 -- August 27, 2019 --
 
 1. connect with server through ssh
-ssh cokreates@192.168.0.166
-enter password
+
 
 2. install texlive 
 sudo apt-get install texlive-full

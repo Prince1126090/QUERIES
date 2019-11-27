@@ -1,0 +1,25 @@
+select
+	wod.oid as oid,
+	wod.quantity as quantity,
+	wod.delivery_date as deliveryDate,
+	wod.status as status,
+	wod.unit as uomNameBn,
+	wod.unit_rate as unitRate,
+	wod.total_amount as totalAmount,
+	wod.remarks as remarks,
+	wod.item_group_oid as itemGroupOid,
+	wod.work_order_oid as workOrderOid,
+	ic.category_id as itemCategoryOid,
+	ic.cat_name as itemCategoryNameEn,
+	ic.bn_cat_name as itemCategoryNameBn,
+	ig.item_name as itemGroupNameEn,
+	ig.bn_item_name as itemGroupNameBn
+from
+	prc.work_order_detail wod
+left join inv.category ic on
+	wod.item_category_oid = ic.category_id::varchar
+left join inv.item_setup ig on
+	wod.item_group_oid = ig.id::varchar
+where
+	1 = 1
+	and wod.oid = '20191117-102237-pscHgcCuscDtV5r'

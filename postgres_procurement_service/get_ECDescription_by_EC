@@ -1,0 +1,10 @@
+select
+	ec.name_en,
+	ecd.name_en,
+	ecd.name_bn
+from
+	cmn.economic_code ec,
+	cmn.economic_code_description ecd
+where
+	ec.description_oid = ecd.oid
+	and ec.name_en like '%3255104%'; 

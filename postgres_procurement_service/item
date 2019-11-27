@@ -1,0 +1,37 @@
+select invItem.*
+from
+(
+	select
+	cc.id as oid,
+	cc.item_code as code,
+	concat(iset.item_name, ' ', (
+		select string_agg(iss.name || ': ' || i.value, ' ' )
+		from
+			inv.item c
+		left join inv.item_feature i on
+			c.id = i.item_id
+		left join inv.item_setup_feature iss on
+			iss.id = i.item_setup_feature_id
+		where
+			c.id = cc.id)
+	) as itemNameEn,
+	concat(iset.bn_item_name,' ',(
+		select string_agg(iss.bn_name || ': ' || i.bn_value, ' ' )
+		from
+			inv.item c
+		left join inv.item_feature i on
+			c.id = i.item_id
+		left join inv.item_setup_feature iss on
+			iss.id = i.item_setup_feature_id
+		where
+			c.id = cc.id)
+	) as itemNameBn,
+	cc.item_setup_id as itemGroupOid
+from
+	inv.item cc
+left join inv.item_setup iset on
+	cc.item_setup_id = iset.id) invItem
+where
+1 = 1
+and invItem.oid = '3240048a-f5b2-4eb6-9179-94678450d7bc'
+

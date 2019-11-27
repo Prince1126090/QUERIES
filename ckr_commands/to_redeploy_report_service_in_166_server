@@ -1,8 +1,7 @@
 -- August 28, 2019 --
 
 1.
-ssh cokreates@192.168.0.166
-Asdf@1234
+connect to server
 
 2. 
 ps aux | grep report_service
