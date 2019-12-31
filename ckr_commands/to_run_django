@@ -3,6 +3,14 @@ August 22, 2019
 -- To run --
 go inside project folder
 cd ~/Documents/report_service
+or
+
+cd ~/Documents/GRP/cmn-service/services/reporting-service/python/report_service
+source venv/bin/activate
+pip3 freeze
+./manage.py runserver
+
+cd ~/Documents/GRP/astprc-report-service/python/report_service
 source venv/bin/activate
 pip3 freeze
 ./manage.py runserver
