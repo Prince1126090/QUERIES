@@ -1,0 +1,38 @@
+-- January 19, 2020 --
+
+-- To run --
+
+cd ~/Documents/GRP/data-service
+source venv/bin/activate
+pip3 freeze
+python rest_api.py
+
+-- Details --
+
+1. Install virtual-environment-
+sudo pip3 install virtualenv
+
+2. Go inside the project folder
+cd ~/Documents/GRP/data-service
+
+3. Create a virtual-environment
+virtualenv -p python3 venv(name of the virtual-environment)
+
+4. Activate virtual-environment
+source venv(name of the virtual-environment)/bin/activate
+
+to deactivate-
+deactivate
+
+5. To check what is installed in virtual-environment
+pip3 freeze
+
+6. To install dependencies in virtual-environment
+pip install -r src/requirements.txt
+(All the dependencies are declared in src/requirements.txt)
+
+7. To run Flask
+python src/rest_api.py 
+
+project will run on http://127.0.0.1:5000/
+
