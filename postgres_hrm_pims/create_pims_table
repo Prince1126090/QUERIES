@@ -6,3 +6,23 @@ CREATE TABLE hrm.pims (
 	history jsonb,
 	CONSTRAINT pk_pims PRIMARY KEY (oid)
 );
+
+-- insert skeleton --
+
+insert
+	into
+		hrm.pims (oid,
+		employee,
+		history)
+	values ('1',
+	'{"employee":{"pmis":{"main":{"personal":{"general":{},"bank":[],"travel":[],"health":{},"file":[],"address":[],"emergencyContact":{},"familyInfo":[],"childEducation":[],"education":[]},"professional":{"general":{},"promotion":[],"posting":[],"leave":[],"jobHistory":[],"serviceHistory":[],"disciplinaryAction":[]},"qualification":{"education":[],"language":[],"award":[],"trainingAndProfessionalCertification":{"training":[],"professionalCertification":[]},"publication":[],"professionalQualification":[]}},"history":[]}}}',
+	null)
+
+-- check size of each column --
+
+select
+	pg_column_size(oid) as bytes_oid,
+	pg_column_size(employee) as bytes_emp,
+	pg_column_size(history) as bytes_history
+from
+	hrm.pims;
