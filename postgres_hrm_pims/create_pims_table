@@ -1,0 +1,8 @@
+-- February 17, 2020 --
+
+CREATE TABLE hrm.pims (
+	oid varchar(128) NOT NULL,
+	employee jsonb NOT NULL,
+	history jsonb,
+	CONSTRAINT pk_pims PRIMARY KEY (oid)
+);
